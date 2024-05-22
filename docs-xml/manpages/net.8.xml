@@ -596,7 +596,7 @@
                 <!-- Options for net ads dns register (and ads join) -->
 <!-- Samba-4.19.0
                 <varlistentry>
-                <term>--dns-ttl TTL-IN-SECONDS</term>
+                <term>- -dns-ttl TTL-IN-SECONDS</term>
                 <listitem><para>
                 Specify the Time to Live (TTL) of DNS records.
                 DNS records will be created or updated with the given TTL.

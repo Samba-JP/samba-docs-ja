@@ -1124,13 +1124,13 @@
         <para>List authentication policies on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 View authentication policies as JSON instead of a list.
                         </para></listitem>
@@ -1143,13 +1143,13 @@
         <para>View an authentication policy on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of the authentication policy to view (required).
                         </para></listitem>
@@ -1201,69 +1201,69 @@
         <para>Create authentication policies on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of the authentication policy (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--description</term>
+                        <term>- -description</term>
                         <listitem><para>
                                 Optional description for the authentication policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--protect</term>
+                        <term>- -protect</term>
                         <listitem>
                                 <para>
                                         Protect authentication policy from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --unprotect.
+                                        Cannot be used together with - -unprotect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--unprotect</term>
+                        <term>- -unprotect</term>
                         <listitem>
                                 <para>
                                         Unprotect authentication policy from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --protect.
+                                        Cannot be used together with - -protect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--audit</term>
+                        <term>- -audit</term>
                         <listitem>
                                 <para>
                                         Only audit authentication policy.
                                 </para>
                                 <para>
-                                        Cannot be used together with --enforce.
+                                        Cannot be used together with - -enforce.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--enforce</term>
+                        <term>- -enforce</term>
                         <listitem>
                                 <para>
                                         Enforce authentication policy.
                                 </para>
                                 <para>
-                                        Cannot be used together with --audit.
+                                        Cannot be used together with - -audit.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--strong-ntlm-policy</term>
+                        <term>- -strong-ntlm-policy</term>
                         <listitem>
                                 <para>
                                         Strong NTLM Policy (Disabled, Optional, Required).
@@ -1271,7 +1271,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-tgt-lifetime</term>
+                        <term>- -user-tgt-lifetime</term>
                         <listitem>
                                 <para>
                                         Ticket-Granting-Ticket lifetime for user accounts.
@@ -1279,7 +1279,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-allow-ntlm-auth</term>
+                        <term>- -user-allow-ntlm-auth</term>
                         <listitem>
                                 <para>
                                         Allow NTLM network authentication when user
@@ -1288,7 +1288,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-tgt-lifetime</term>
+                        <term>- -service-tgt-lifetime</term>
                         <listitem>
                                 <para>
                                         Ticket-Granting-Ticket lifetime for service accounts.
@@ -1296,7 +1296,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-allow-ntlm-auth</term>
+                        <term>- -service-allow-ntlm-auth</term>
                         <listitem>
                                 <para>
                                         Allow NTLM network authentication when service
@@ -1305,7 +1305,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--computer-tgt-lifetime</term>
+                        <term>- -computer-tgt-lifetime</term>
                         <listitem>
                                 <para>
                                         Ticket-Granting-Ticket lifetime for computer accounts.
@@ -1439,69 +1439,69 @@
         <para>Modify authentication policies on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of the authentication policy (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--description</term>
+                        <term>- -description</term>
                         <listitem><para>
                                 Optional description for the authentication policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--protect</term>
+                        <term>- -protect</term>
                         <listitem>
                                 <para>
                                         Protect authentication policy from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --unprotect.
+                                        Cannot be used together with - -unprotect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--unprotect</term>
+                        <term>- -unprotect</term>
                         <listitem>
                                 <para>
                                         Unprotect authentication policy from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --protect.
+                                        Cannot be used together with - -protect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--audit</term>
+                        <term>- -audit</term>
                         <listitem>
                                 <para>
                                         Only audit authentication policy.
                                 </para>
                                 <para>
-                                        Cannot be used together with --enforce.
+                                        Cannot be used together with - -enforce.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--enforce</term>
+                        <term>- -enforce</term>
                         <listitem>
                                 <para>
                                         Enforce authentication policy.
                                 </para>
                                 <para>
-                                        Cannot be used together with --audit.
+                                        Cannot be used together with - -audit.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--strong-ntlm-policy</term>
+                        <term>- -strong-ntlm-policy</term>
                         <listitem>
                                 <para>
                                         Strong NTLM Policy (Disabled, Optional, Required).
@@ -1509,7 +1509,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-tgt-lifetime</term>
+                        <term>- -user-tgt-lifetime</term>
                         <listitem>
                                 <para>
                                         Ticket-Granting-Ticket lifetime for user accounts.
@@ -1517,7 +1517,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-allow-ntlm-auth</term>
+                        <term>- -user-allow-ntlm-auth</term>
                         <listitem>
                                 <para>
                                         Allow NTLM network authentication when user
@@ -1526,7 +1526,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-tgt-lifetime</term>
+                        <term>- -service-tgt-lifetime</term>
                         <listitem>
                                 <para>
                                         Ticket-Granting-Ticket lifetime for service accounts.
@@ -1534,7 +1534,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-allow-ntlm-auth</term>
+                        <term>- -service-allow-ntlm-auth</term>
                         <listitem>
                                 <para>
                                         Allow NTLM network authentication when service
@@ -1543,7 +1543,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--computer-tgt-lifetime</term>
+                        <term>- -computer-tgt-lifetime</term>
                         <listitem>
                                 <para>
                                         Ticket-Granting-Ticket lifetime for computer accounts.
@@ -1677,19 +1677,19 @@
         <para>Delete authentication policies on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of authentication policy to delete (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--force</term>
+                        <term>- -force</term>
                         <listitem><para>
                                 Force authentication policy delete even if it is protected.
                         </para></listitem>
@@ -1728,13 +1728,13 @@
         <para>List authentication silos on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 View authentication silos as JSON instead of a list.
                         </para></listitem>
@@ -1766,13 +1766,13 @@
         <para>View an authentication silo on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of the authentication silo to view (required).
                         </para></listitem>
@@ -1805,88 +1805,88 @@
         <para>Create authentication silos on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of the authentication silo (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--description</term>
+                        <term>- -description</term>
                         <listitem><para>
                                 Optional description for the authentication silo.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--policy</term>
+                        <term>- -policy</term>
                         <listitem><para>
                                 Use single policy for all principals in this silo.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-policy</term>
+                        <term>- -user-policy</term>
                         <listitem><para>
                                 User account policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-policy</term>
+                        <term>- -service-policy</term>
                         <listitem><para>
                                 Managed Service Account policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--computer-policy</term>
+                        <term>- -computer-policy</term>
                         <listitem><para>
                                 Computer Account policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--protect</term>
+                        <term>- -protect</term>
                         <listitem>
                                 <para>
                                         Protect authentication silo from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --unprotect.
+                                        Cannot be used together with - -unprotect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--unprotect</term>
+                        <term>- -unprotect</term>
                         <listitem>
                                 <para>
                                         Unprotect authentication silo from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --protect.
+                                        Cannot be used together with - -protect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--audit</term>
+                        <term>- -audit</term>
                         <listitem>
                                 <para>
                                         Only audit silo policies.
                                 </para>
                                 <para>
-                                        Cannot be used together with --enforce.
+                                        Cannot be used together with - -enforce.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--enforce</term>
+                        <term>- -enforce</term>
                         <listitem>
                                 <para>
                                         Enforce silo policies.
                                 </para>
                                 <para>
-                                        Cannot be used together with --audit.
+                                        Cannot be used together with - -audit.
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -1991,88 +1991,88 @@
         <para>Modify authentication silos on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of the authentication silo (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--description</term>
+                        <term>- -description</term>
                         <listitem><para>
                                 Optional description for the authentication silo.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--policy</term>
+                        <term>- -policy</term>
                         <listitem><para>
                                 Use single policy for all principals in this silo.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-policy</term>
+                        <term>- -user-policy</term>
                         <listitem><para>
                                 User account policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-policy</term>
+                        <term>- -service-policy</term>
                         <listitem><para>
                                 Managed Service Account policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--computer-policy</term>
+                        <term>- -computer-policy</term>
                         <listitem><para>
                                 Computer Account policy.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--protect</term>
+                        <term>- -protect</term>
                         <listitem>
                                 <para>
                                         Protect authentication silo from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --unprotect.
+                                        Cannot be used together with - -unprotect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--unprotect</term>
+                        <term>- -unprotect</term>
                         <listitem>
                                 <para>
                                         Unprotect authentication silo from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --protect.
+                                        Cannot be used together with - -protect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--audit</term>
+                        <term>- -audit</term>
                         <listitem>
                                 <para>
                                         Only audit silo policies.
                                 </para>
                                 <para>
-                                        Cannot be used together with --enforce.
+                                        Cannot be used together with - -enforce.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--enforce</term>
+                        <term>- -enforce</term>
                         <listitem>
                                 <para>
                                         Enforce silo policies.
                                 </para>
                                 <para>
-                                        Cannot be used together with --audit.
+                                        Cannot be used together with - -audit.
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -2177,19 +2177,19 @@
         <para>Delete authentication silos on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of authentication silo to delete (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--force</term>
+                        <term>- -force</term>
                         <listitem><para>
                                 Force authentication silo delete even if it is protected.
                         </para></listitem>
@@ -2227,19 +2227,19 @@
         <para>Add a member to an authentication silo.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of authentication silo (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--member</term>
+                        <term>- -member</term>
                         <listitem><para>
                                 Member to add to the silo (DN or account name).
                         </para></listitem>
@@ -2277,19 +2277,19 @@
         <para>List members in an authentication silo.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of authentication silo (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 View members as JSON instead of a list.
                         </para></listitem>
@@ -2327,19 +2327,19 @@
         <para>Remove a member from an authentication silo.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Name of authentication silo (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--member</term>
+                        <term>- -member</term>
                         <listitem><para>
                                 Member to remove from the silo (DN or account name).
                         </para></listitem>
@@ -2377,13 +2377,13 @@
         <para>List claim types on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 View claim types as JSON instead of a list.
                         </para></listitem>
@@ -2415,13 +2415,13 @@
         <para>View a single claim type on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Display name of claim type to view (required).
                         </para></listitem>
@@ -2445,88 +2445,88 @@
                         </para></listitem>
                 </varlistentry>
         </variablelist>
-
+</refsect3>
 <!-- samba-4.19.0
 <refsect3>
         <title>domain claim claim-type create</title>
         <para>Create claim types on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--attribute</term>
+                        <term>- -attribute</term>
                         <listitem><para>
                                 Attribute of claim type to create (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--class</term>
+                        <term>- -class</term>
                         <listitem>
                                 <para>
                                         Object classes to set claim type to.
                                 </para>
                                 <para>
-                                        Example: --class=user --class=computer
+                                        Example: - -class=user - -class=computer
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Optional display name or use attribute name.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--description</term>
+                        <term>- -description</term>
                         <listitem><para>
                                 Optional description or use from attribute.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--enable</term>
+                        <term>- -enable</term>
                         <listitem>
                                 <para>
                                         Enable claim type.
                                 </para>
                                 <para>
-                                        Cannot be used together with --disable.
+                                        Cannot be used together with - -disable.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--disable</term>
+                        <term>- -disable</term>
                         <listitem>
                                 <para>
                                         Disable claim type.
                                 </para>
                                 <para>
-                                        Cannot be used together with --enable.
+                                        Cannot be used together with - -enable.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--protect</term>
+                        <term>- -protect</term>
                         <listitem>
                                 <para>
                                         Protect claim type from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --unprotect.
+                                        Cannot be used together with - -unprotect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--unprotect</term>
+                        <term>- -unprotect</term>
                         <listitem>
                                 <para>
                                         Unprotect claim type from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --protect.
+                                        Cannot be used together with - -protect.
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -2625,75 +2625,75 @@
         <para>Modify claim types on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Display name of claim type to modify (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--class</term>
+                        <term>- -class</term>
                         <listitem>
                                 <para>
                                         Object classes to set claim type to.
                                 </para>
                                 <para>
-                                        Example: --class=user --class=computer
+                                        Example: - -class=user - -class=computer
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--description</term>
+                        <term>- -description</term>
                         <listitem><para>
                                 Set the claim type description.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--enable</term>
+                        <term>- -enable</term>
                         <listitem>
                                 <para>
                                         Enable claim type.
                                 </para>
                                 <para>
-                                        Cannot be used together with --disable.
+                                        Cannot be used together with - -disable.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--disable</term>
+                        <term>- -disable</term>
                         <listitem>
                                 <para>
                                         Disable claim type.
                                 </para>
                                 <para>
-                                        Cannot be used together with --enable.
+                                        Cannot be used together with - -enable.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--protect</term>
+                        <term>- -protect</term>
                         <listitem>
                                 <para>
                                         Protect claim type from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --unprotect.
+                                        Cannot be used together with - -unprotect.
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--unprotect</term>
+                        <term>- -unprotect</term>
                         <listitem>
                                 <para>
                                         Unprotect claim type from accidental deletion.
                                 </para>
                                 <para>
-                                        Cannot be used together with --protect.
+                                        Cannot be used together with - -protect.
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -2786,19 +2786,19 @@
         <para>Delete claim types on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Display name of claim type to delete (required).
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--force</term>
+                        <term>- -force</term>
                         <listitem><para>
                                 Force claim type delete even if it is protected.
                         </para></listitem>
@@ -2837,13 +2837,13 @@
         <para>List claim value types on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 View claim value types as JSON instead of a list.
                         </para></listitem>
@@ -2876,13 +2876,13 @@
         <para>View a single claim value type on the domain.</para>
         <variablelist>
                 <varlistentry>
-                        <term>-H, --URL</term>
+                        <term>-H, - -URL</term>
                         <listitem><para>
                                 LDB URL for database or target server.
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>- -name</term>
                         <listitem><para>
                                 Display name of claim value type to view (required).
                         </para></listitem>
@@ -4378,7 +4378,7 @@
         <para>List sites.</para>
         <variablelist>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 Output as JSON instead of a list
                         </para></listitem>
@@ -4430,7 +4430,7 @@
         <para>List subnets for a site.</para>
         <variablelist>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>- -json</term>
                         <listitem><para>
                                 Output as JSON instead of a list
                         </para></listitem>
