@@ -106,19 +106,23 @@
 		</varlistentry>
 		<varlistentry>
 		<term>schema_mode = &lt;rfc2307 | sfu | sfu20&gt;</term>
-		<listitem><para>
-<!-- 原文 samba-4.6.7
+		<listitem>
+		<para>
+<!-- 原文 samba-4.20.1
 			Defines the schema that idmap_ad should use when querying
 			Active Directory regarding user and group information.
 			This can be either the RFC2307 schema support included
-			in Windows 2003 R2 or the Service for Unix (SFU) schema.
+			in Windows Server 2003 R2 and newer or the Service for
+			Unix (SFU) schema for versions before Windows Server
+			2003 R2.
 			For SFU 3.0 or 3.5 please choose "sfu", for SFU 2.0
 			please choose "sfu20".
 -->
 			idmap_ad が用いるスキーマを定義するものであり、
 			Active Directory においてユーザー情報やグループ情報を問い合わせる際に利用される。
-			これは、Windows 2003 R2 における RFC2307 スキーマサポートか、
-			あるいは Service for Unix (SFU) のいずれかである。
+			これは、Windows Server 2003 R2 かそれ以降にに含まれる
+			RFC2307 スキーマサポートか Windows Server 2003 R2 より
+			前のバージョン用の Service for Unix (SFU) のいずれかである。
 			SFU 3.0 や 3.5 に対しては "sfu" を、また SFU 2.0 に対しては "sfu20" を選択すること。
 
 <!-- 原文 samba-4.6.7
@@ -127,7 +131,9 @@
 -->
 			プライマルグループメンバーシップの動作は、<emphasis>unix_primary_group</emphasis>
 			オプションによって制御されることに注意。
-		</para></listitem>
+		</para>
+		<para>既定値: rfc2307</para>
+		</listitem>
 		</varlistentry>
                 <varlistentry>
                 <term>unix_primary_group = yes/no</term>
@@ -176,6 +182,16 @@
 		<para>既定値: no</para>
                 </listitem>
                </varlistentry>
+	       <varlistentry>
+	       <term>all_groupmem = yes/no</term>
+	       <listitem><para>
+		 <parameter>yes</parameter> に設定すると、winbind は
+		 uidNumberが欠落しているものも含み、getgrnam(3)、getgrgid(3)、
+		 getgrent(3)呼び出しのすべてのグループメンバーを取得する。
+	       </para>
+	       <para>既定値: no</para>
+	       </listitem>
+	       </varlistentry>
                 <varlistentry>
                 <term>deny ous</term>
 <!-- Samba-4.19.0
