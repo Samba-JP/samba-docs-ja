@@ -640,7 +640,7 @@
                 <term>--witness-net-name=REGEX</term>
                 <listitem><para>
                   これは、クライアントがモニタリングのために登録した
-		  「サーバ名」を指定します。
+		  「サーバ名」を指定する。
                 </para></listitem>
                 </varlistentry>
 
@@ -648,9 +648,9 @@
                 <term>--witness-share-name=REGEX</term>
                 <listitem><para>
 		  これは、クライアントがモニタリングのために登録した
-		  「共有名」を指定します。
-		  共有名は登録時にはオプションであることに注意してください。
-		  それ以外の場合は、空の文字列が一致します。
+		  「共有名」を指定する。
+		  共有名は登録時にはオプションであることに注意。
+		  それ以外の場合は、空の文字列が一致する。
                 </para></listitem>
                 </varlistentry>
 
@@ -658,7 +658,7 @@
                 <term>--witness-ip-address=REGEX</term>
                 <listitem><para>
 		  これは、クライアントがモニタリングのために登録した
-		  IP アドレスを指定します。
+		  IP アドレスを指定する。
                 </para></listitem>
                 </varlistentry>
 
@@ -666,16 +666,16 @@
                 <term>--witness-client-computer-name=REGEX</term>
                 <listitem><para>
 		  これは、登録中にクライアントが指定したコンピュータ名を
-		  指定します。
+		  指定する。
 		  これは単にクライアント自身が選択した文字列であることに
-		  注意してください。
+		  注意。
                 </para></listitem>
                 </varlistentry>
 
                 <varlistentry>
                 <term>--witness-apply-to-all</term>
                 <listitem><para>
-		  これは、全ての登録情報を指定します。
+		  これは、全ての登録情報を指定する。
                 </para></listitem>
                 </varlistentry>
 
@@ -683,9 +683,9 @@
                 <term>--witness-new-node=NODEID</term>
                 <listitem><para>
 		  NODEID を指定することにより、指定されたノード上の
-		  現在有効な全ての IP アドレスが応答中に含まれます。
+		  現在有効な全ての IP アドレスが応答中に含まれる。
 		  NODEID として '-1' を指定した場合、クラスタの
-		  全ての IP アドレスが応答中に含まれます。
+		  全ての IP アドレスが応答中に含まれる。
                 </para></listitem>
                 </varlistentry>
 
@@ -693,7 +693,7 @@
                 <term>--witness-new-ip=IPADDRESS</term>
                 <listitem><para>
 		  IPADDRESS を指定することで、指定された IP
-		  アドレスのみが応答の中に含まれます。
+		  アドレスのみが応答の中に含まれる。
                 </para></listitem>
                 </varlistentry>
 
@@ -701,7 +701,7 @@
                 <term>--witness-forced-response=JSON</term>
                 <listitem><para>
 		  これは、非常に複雑な witness_notifyResponse
-		  構造体の生成を出来るようにします。
+		  構造体の生成を出来るようにする。
                 </para></listitem>
                 </varlistentry>
 
@@ -5128,16 +5128,16 @@ Requests an offline domain join by providing file-based provisioning data. This 
 net witness list             rpcd_witness_registration.tdb から witness 登録状態を一覧表示。
 </member>
 <member>
-net witness client-move      Generate client move notifications for witness registrations to a new ip or node.
+net witness client-move      新しい IP またはノード への witness 登録用の クライアント移動通知を生成。
 </member>
 <member>
-net witness share-move       Generate share move notifications for witness registrations to a new ip or node.
+net witness share-move       新しい IP またはノード への witness 登録用の 共有移動通知を生成。
 </member>
 <member>
-net witness force-unregister Force unregistrations for witness registrations.
+net witness force-unregister witness 登録の登録削除を強制的的に実行。
 </member>
 <member>
-net witness force-response   Force an AsyncNotify response based on json input (mostly for testing).
+net witness force-response   json 入力に基づいて AsyncNotify 応答を強制 (主にテスト用)。
 </member>
 
 </simplelist>
@@ -5146,64 +5146,64 @@ net witness force-response   Force an AsyncNotify response based on json input (
 <refsect3>
 <title>WITNESS LIST</title>
 <para>
-    List witness registrations from rpcd_witness_registration.tdb
+    rpcd_witness_registration.tdb からの witness 登録情報を一覧表示
 </para>
 <para>
-    Note: Only supported with clustering=yes!
+    注意: clustering=yes の時にのみサポート!
 </para>
 <para>
-    Machine readable output can be generated with the following option:
+    機械可読な出力は以下のオプションで生成できる:
 </para>
 <para>
         --json
 </para>
 <para>
-    The selection of registrations can be limited by the following options:
+    登録の選択は以下のオプションで制限できる:
 </para>
 <para>
         --witness-registration=REGISTRATION_UUID
 </para>
 <para>
-          This does a direct lookup for REGISTRATION_UUID
-          instead of doing a database traversal.
+          これは、データベース検索を実行する代わりに
+          REGISTRATION_UUID を直接検索する。
 </para>
 <para>
-    The following options all take a POSIX Extended Regular Expression,
-    which can further filter the selection of registrations.
-    These options are applied as logical AND, but each REGEX
-    allows specifying multiple strings using the pipe symbol.
+    以下のオプションはすべて POSIX 拡張正規表現が使え、
+    登録の選択をさらにフィルタすることができる。
+    これらのオプションは論理和として適用されるが、各 REGEX は
+    パイプ記号を使うことで複数の文字列を指定できる。    
 </para>
 <para>
         --witness-net-name=REGEX
 </para>
 <para>
-          This specifies the 'server name' the client
-          registered for monitoring.
+	  これはモニタリングのためにクライアントが登録した
+	  「サーバ名」を指定する。
 </para>
 <para>
         --witness-share-name=REGEX
 </para>
 <para>
-          This specifies the 'share name' the client
-          registered for monitoring.
-          Note that the share name is optional in the
-          registration, otherwise an empty string is
-          matched.
+	  これはモニタリングのためにクライアントが登録した
+	  「共有名」を指定する。
+	  共有名は登録時にはオプションであることに注意。
+          それ以外の場合は、空の文字列が一致する。  
 </para>
 <para>
         --witness-ip-address=REGEX
 </para>
 <para>
-          This specifies the ip address the client
-          registered for monitoring.
+	  これは、クライアントがモニタリングのために登録した
+          IP アドレスを指定する。
 </para>
 <para>
         --witness-client-computer-name=REGEX
 </para>
 <para>
-          This specifies the client computer name the client
-          specified in the registration.
-          Note it is just a string chosen by the client itself.
+	  これは、登録中にクライアントが指定したコンピュータ名を
+          指定する。
+          これは単にクライアント自身が選択した文字列であることに
+          注意。
 </para>
 
 </refsect3>
@@ -5211,96 +5211,96 @@ net witness force-response   Force an AsyncNotify response based on json input (
 <refsect3>
 <title>WITNESS CLIENT-MOVE</title>
 <para>
-    Generate client move notifications for witness registrations to a new ip or node
+    新しい IP またはノード への witness 登録用の クライアント移動通知を生成
 </para>
 <para>
-    Note: Only supported with clustering=yes!
+    注意: clustering=yes の時にのみサポート!
 </para>
 <para>
-    Machine readable output can be generated with the following option:
+    機械可読な出力は以下のオプションで生成できる:
 </para>
 <para>
         --json
 </para>
 <para>
-    The selection of registrations can be limited by the following options:
+    登録の選択は以下のオプションで制限できる:
 </para>
 <para>
         --witness-registration=REGISTRATION_UUID
 </para>
 <para>
-          This does a direct lookup for REGISTRATION_UUID
-          instead of doing a database traversal.
+	  これは、データベース検索を実行する代わりに
+          REGISTRATION_UUID を直接検索する。
 </para>
 <para>
-    The following options all take a POSIX Extended Regular Expression,
-    which can further filter the selection of registrations.
-    These options are applied as logical AND, but each REGEX
-    allows specifying multiple strings using the pipe symbol.
+    以下のオプションはすべて POSIX 拡張正規表現が使え、
+    登録の選択をさらにフィルタすることができる。
+    これらのオプションは論理和として適用されるが、各 REGEX は
+    パイプ記号を使うことで複数の文字列を指定できる。
 </para>
 <para>
         --witness-net-name=REGEX
 </para>
 <para>
-          This specifies the 'server name' the client
-          registered for monitoring.
+	  これはモニタリングのためにクライアントが登録した
+          「サーバ名」を指定する。
 </para>
 <para>
         --witness-share-name=REGEX
 </para>
 <para>
-          This specifies the 'share name' the client
-          registered for monitoring.
-          Note that the share name is optional in the
-          registration, otherwise an empty string is
-          matched.
+	  これはモニタリングのためにクライアントが登録した
+          「共有名」を指定する。
+          共有名は登録時にはオプションであることに注意。
+          それ以外の場合は、空の文字列が一致する。
 </para>
 <para>
         --witness-ip-address=REGEX
 </para>
 <para>
-          This specifies the ip address the client
-          registered for monitoring.
+	  これは、クライアントがモニタリングのために登録した
+          IP アドレスを指定する。
 </para>
 <para>
         --witness-client-computer-name=REGEX
 </para>
 <para>
-          This specifies the client computer name the client
-          specified in the registration.
-          Note it is just a string chosen by the client itself.
+	  これは、登録中にクライアントが指定したコンピュータ名を
+          指定する。
+          これは単にクライアント自身が選択した文字列であることに
+          注意。
 </para>
 <para>
-    If the update should be applied to all registrations
-    it needs to be explicitly specified:
+    更新を全ての登録に適用する必要がある場合は、以下のように明示的に指定する
+    必要がある:
+    
 </para>
 <para>
         --witness-apply-to-all
 </para>
 <para>
-          This selects all registrations.
-          Note: This is mutual exclusive to the above options.
+	  これは全ての登録を選択する。
+	  注意:これは上記のオプションと相互排他的である。
 </para>
 <para>
-    The content of the CLIENT_MOVE notification contains ip addresses
-    specified by (exactly one) of the following options:
+    CLIENT_MOVE 通知の内容には 以下のオプションで(正確に一つ)で指定された
+    IP アドレスが含まれている:
 </para>
 <para>
         --witness-new-node=NODEID
 </para>
 <para>
-          By specifying a NODEID all ip addresses
-          currently available on the given node are
-          included in the response.
-          By specifying '-1' as NODEID all ip addresses
-          of the cluster are included in the response.
+	  NODEID を指定することで、指定されたノード上で現在
+	  すべての有効な IP アドレスが応答中に含まれる。
+	  NODEID として '-1' を指定すると、クラスタの全ての
+	  IP アドレスが応答中に含まれる。
 </para>
 <para>
         --witness-new-ip=IPADDRESS
 </para>
 <para>
-          By specifying an IPADDRESS only the specified
-          ip address is included in the response.
+	  ある IPADDRESS のみを指定することで、指定された IP アドレスが
+	  応答中に含まれる。
 </para>
 
 </refsect3>
@@ -5308,99 +5308,98 @@ net witness force-response   Force an AsyncNotify response based on json input (
 <refsect3>
 <title>WITNESS SHARE-MOVE</title>
 <para>
-    Generate share move notifications for witness registrations to a new ip or node
+    新しい IP またはノード への witness 登録用の 共有移動通知を生成
 </para>
 <para>
-    Note: Only supported with clustering=yes!
+    注意: clustering=yes の時にのみサポート!
 </para>
 <para>
-    Machine readable output can be generated with the following option:
+    機械可読な出力は以下のオプションで生成できる:
 </para>
 <para>
         --json
 </para>
 <para>
-    The selection of registrations can be limited by the following options:
+    登録の選択は以下のオプションで制限できる:
 </para>
 <para>
         --witness-registration=REGISTRATION_UUID
 </para>
 <para>
-          This does a direct lookup for REGISTRATION_UUID
-          instead of doing a database traversal.
+          これは、データベース検索を実行する代わりに
+          REGISTRATION_UUID を直接検索する。
 </para>
 <para>
-    The following options all take a POSIX Extended Regular Expression,
-    which can further filter the selection of registrations.
-    These options are applied as logical AND, but each REGEX
-    allows specifying multiple strings using the pipe symbol.
+    以下のオプションはすべて POSIX 拡張正規表現が使え、
+    登録の選択をさらにフィルタすることができる。
+    これらのオプションは論理和として適用されるが、各 REGEX は
+    パイプ記号を使うことで複数の文字列を指定できる。
 </para>
 <para>
         --witness-net-name=REGEX
 </para>
 <para>
-          This specifies the 'server name' the client
-          registered for monitoring.
+          これはモニタリングのためにクライアントが登録した
+          「サーバ名」を指定する。
 </para>
 <para>
         --witness-share-name=REGEX
 </para>
 <para>
-          This specifies the 'share name' the client
-          registered for monitoring.
-          Note that the share name is optional in the
-          registration, otherwise an empty string is
-          matched.
+          これはモニタリングのためにクライアントが登録した
+          「共有名」を指定する。
+          共有名は登録時にはオプションであることに注意。
+          それ以外の場合は、空の文字列が一致する。
 </para>
 <para>
         --witness-ip-address=REGEX
 </para>
 <para>
-          This specifies the ip address the client
-          registered for monitoring.
+          これは、クライアントがモニタリングのために登録した
+          IP アドレスを指定する。
 </para>
 <para>
         --witness-client-computer-name=REGEX
 </para>
 <para>
-          This specifies the client computer name the client
-          specified in the registration.
-          Note it is just a string chosen by the client itself.
+          これは、登録中にクライアントが指定したコンピュータ名を
+          指定する。
+          これは単にクライアント自身が選択した文字列であることに
+          注意。
 </para>
 <para>
-    If the update should be applied to all registrations
-    it needs to be explicitly specified:
+    更新を全ての登録に適用する必要がある場合は、以下のように明示的に指定する
+    必要がある:
 </para>
 <para>
         --witness-apply-to-all
 </para>
 <para>
-          This selects all registrations.
-          Note: This is mutual exclusive to the above options.
+          これは全ての登録を選択する。
+          注意:これは上記のオプションと相互排他的である。
 </para>
 <para>
-    Note: This only applies to registrations with a non empty share name!
+    注意: これは空でない共有名で登録の時にのみ適用される!
 </para>
 <para>
-    The content of the SHARE_MOVE notification contains ip addresses
-    specified by (exactly one) of the following options:
+    CLIENT_MOVE 通知の内容には 以下のオプションで(正確に一つ)で指定された
+    IP アドレスが含まれている:
 </para>
 <para>
         --witness-new-node=NODEID
 </para>
 <para>
-          By specifying a NODEID all ip addresses
-          currently available on the given node are
-          included in the response.
-          By specifying '-1' as NODEID all ip addresses
-          of the cluster are included in the response.
+          NODEID を指定することで、指定されたノード上で現在
+          すべての有効な IP アドレスが応答中に含まれる。
+          NODEID として '-1' を指定すると、クラスタの全ての
+          IP アドレスが応答中に含まれる。
 </para>
 <para>
         --witness-new-ip=IPADDRESS
 </para>
 <para>
-          By specifying an IPADDRESS only the specified
-          ip address is included in the response.
+          ある IPADDRESS のみを指定することで、指定された IP アドレスが
+          応答中に含まれる。
 </para>
 
 </refsect3>
@@ -5408,82 +5407,82 @@ net witness force-response   Force an AsyncNotify response based on json input (
 <refsect3>
 <title>WITNESS FORCE-UNREGISTER</title>
 <para>
-    Force unregistrations for witness registrations
+  witness 登録の登録削除を強制的的に実行。
 </para>
 <para>
-    Note: Only supported with clustering=yes!
+  注意: clustering=yes の時にのみサポート!
 </para>
 <para>
-    Machine readable output can be generated with the following option:
+    機械可読な出力は以下のオプションで生成できる:
 </para>
 <para>
         --json
 </para>
 <para>
-    The selection of registrations can be limited by the following options:
+    登録の選択は以下のオプションで制限できる
 </para>
 <para>
         --witness-registration=REGISTRATION_UUID
 </para>
 <para>
-          This does a direct lookup for REGISTRATION_UUID
-          instead of doing a database traversal.
+          これは、データベース検索を実行する代わりに
+          REGISTRATION_UUID を直接検索する。
 </para>
 <para>
-    The following options all take a POSIX Extended Regular Expression,
-    which can further filter the selection of registrations.
-    These options are applied as logical AND, but each REGEX
-    allows specifying multiple strings using the pipe symbol.
+    以下のオプションはすべて POSIX 拡張正規表現が使え、
+    登録の選択をさらにフィルタすることができる。
+    これらのオプションは論理和として適用されるが、各 REGEX は
+    パイプ記号を使うことで複数の文字列を指定できる。
 </para>
 <para>
         --witness-net-name=REGEX
 </para>
 <para>
-          This specifies the 'server name' the client
-          registered for monitoring.
+          これはモニタリングのためにクライアントが登録した
+          「サーバ名」を指定する。
 </para>
 <para>
         --witness-share-name=REGEX
 </para>
 <para>
-          This specifies the 'share name' the client
-          registered for monitoring.
-          Note that the share name is optional in the
-          registration, otherwise an empty string is
-          matched.
+          これはモニタリングのためにクライアントが登録した
+          「共有名」を指定する。
+          共有名は登録時にはオプションであることに注意。
+          それ以外の場合は、空の文字列が一致する。
 </para>
 <para>
         --witness-ip-address=REGEX
 </para>
 <para>
-          This specifies the ip address the client
-          registered for monitoring.
+          これは、クライアントがモニタリングのために登録した
+          IP アドレスを指定する。
 </para>
 <para>
         --witness-client-computer-name=REGEX
 </para>
 <para>
-          This specifies the client computer name the client
-          specified in the registration.
-          Note it is just a string chosen by the client itself.
+          これは、登録中にクライアントが指定したコンピュータ名を
+          指定する。
+          これは単にクライアント自身が選択した文字列であることに
+          注意。
 </para>
 <para>
-    If the update should be applied to all registrations
-    it needs to be explicitly specified:
+    更新を全ての登録に適用する必要がある場合は、以下のように明示的に指定する
+    必要がある:
 </para>
 <para>
         --witness-apply-to-all
 </para>
 <para>
-          This selects all registrations.
-          Note: This is mutual exclusive to the above options.
+          これは全ての登録を選択する。
+          注意:これは上記のオプションと相互排他的である。
 </para>
 <para>
-    The selected registrations are removed on the server and
-    any pending AsyncNotify request will get a NOT_FOUND error.
+    選択された登録はサーバから削除され、保留中の AsyncNotify 要求は
+    NOT_FOUND エラーとなる。
 </para>
 <para>
-    Typically this triggers a clean re-registration on the client.
+    通常これはクライアント上のクリーンな再登録を引き起こす。
 </para>
 
 </refsect3>
@@ -5491,102 +5490,101 @@ net witness force-response   Force an AsyncNotify response based on json input (
 <refsect3>
 <title>WITNESS FORCE-RESPONSE</title>
 <para>
-    Force an AsyncNotify response based on json input (mostly for testing)
+    json 入力に基づいて AsyncNotify 応答を強制 (主にテスト用)
 </para>
 <para>
-    Note: Only supported with clustering=yes!
+    注意: clustering=yes の時にのみサポート!
 </para>
 <para>
-    Machine readable output can be generated with the following option:
+     機械可読な出力は以下のオプションで生成できる:
 </para>
 <para>
         --json
 </para>
 <para>
-    The selection of registrations can be limited by the following options:
+    登録の選択は以下のオプションで制限できる:
 </para>
 <para>
         --witness-registration=REGISTRATION_UUID
 </para>
 <para>
-          This does a direct lookup for REGISTRATION_UUID
-          instead of doing a database traversal.
+          これは、データベース検索を実行する代わりに
+          REGISTRATION_UUID を直接検索する。
 </para>
 <para>
-    The following options all take a POSIX Extended Regular Expression,
-    which can further filter the selection of registrations.
-    These options are applied as logical AND, but each REGEX
-    allows specifying multiple strings using the pipe symbol.
+    以下のオプションはすべて POSIX 拡張正規表現が使え、
+    登録の選択をさらにフィルタすることができる。
+    これらのオプションは論理和として適用されるが、各 REGEX は
+    パイプ記号を使うことで複数の文字列を指定できる。
 </para>
 <para>
         --witness-net-name=REGEX
 </para>
 <para>
-          This specifies the 'server name' the client
-          registered for monitoring.
+          これはモニタリングのためにクライアントが登録した
+          「サーバ名」を指定する。
 </para>
 <para>
         --witness-share-name=REGEX
 </para>
 <para>
-          This specifies the 'share name' the client
-          registered for monitoring.
-          Note that the share name is optional in the
-          registration, otherwise an empty string is
-          matched.
+          これはモニタリングのためにクライアントが登録した
+          「共有名」を指定する。
+          共有名は登録時にはオプションであることに注意。
+          それ以外の場合は、空の文字列が一致する。
 </para>
 <para>
         --witness-ip-address=REGEX
 </para>
 <para>
-          This specifies the ip address the client
-          registered for monitoring.
+          これは、クライアントがモニタリングのために登録した
+          IP アドレスを指定する。
 </para>
 <para>
         --witness-client-computer-name=REGEX
 </para>
 <para>
-          This specifies the client computer name the client
-          specified in the registration.
-          Note it is just a string chosen by the client itself.
+          これは、登録中にクライアントが指定したコンピュータ名を
+          指定する。
+          これは単にクライアント自身が選択した文字列であることに
+          注意。
 </para>
 <para>
-    If the update should be applied to all registrations
-    it needs to be explicitly specified:
+    更新を全ての登録に適用する必要がある場合は、以下のように明示的に指定する
+    必要がある:
 </para>
 <para>
         --witness-apply-to-all
 </para>
 <para>
-          This selects all registrations.
-          Note: This is mutual exclusive to the above options.
+          これは全ての登録を選択する。
+          注意:これは上記のオプションと相互排他的である。
 </para>
 <para>
-    Note this is designed for testing and debugging!
+    これはテストとでバッグのために設計されたものであることに注意!
 </para>
 <para>
-    In short it is not designed to be used by administrators,
-    but developers and automated tests.
+    簡単に言うと、これは管理者が使うものとして設計されたのではなく、
+    開発者と自動テスト用である。
 </para>
 <para>
-    By default an empty response with WERR_OK is generated,
-    but basically any valid response can be specified by a
-    specifying a JSON string:
+    既定では、空の応答とともに WERR_OK が生成されるが、
+    基本的には JSON 文字列を指定することにより、任意の有効な応答を
+    指定することができる:
 </para>
 <para>
         --witness-forced-response=JSON
 </para>
 <para>
-          This allows the generation of very complex
-          witness_notifyResponse structures.
+       これは、非常に複雑な witness_notifyResponse
+       構造体の生成を出来るようにする。
 </para>
 <para>
-    As this is for developers, please read the code
-    in order to understand all possible values
-    of the JSON string format...
+    これは開発者向けなので、JSON 文字列形式のとり得る全ての値を
+    理解するためにはコードを読んで欲しい。
 </para>
 <para>
-    See 'net help witness force-response' for further details.
+    さらなる詳細は 'net help witness force-response' を参照のこと。
 </para>
 
 </refsect3>
