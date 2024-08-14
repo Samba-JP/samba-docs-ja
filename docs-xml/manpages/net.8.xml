@@ -6,9 +6,6 @@
 	<refentrytitle>net</refentrytitle>
 	<manvolnum>8</manvolnum>
 	<refmiscinfo class="source">Samba</refmiscinfo>
-<!-- 原文 samba-4.6.7
-	<refmiscinfo class="manual">System Administration tools</refmiscinfo>
--->
 	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
 	<refmiscinfo class="version">&doc.version;</refmiscinfo>
 </refmeta>
@@ -16,11 +13,6 @@
 
 <refnamediv>
 	<refname>net</refname>
-<!-- 原文 samba-4.6.7
-	<refpurpose>Tool for administration of Samba and remote
-	CIFS servers.
-	</refpurpose>
--->
 	<refpurpose>Samba およびリモート CIFS サーバーの管理ツール
 	</refpurpose>
 </refnamediv>
@@ -81,15 +73,8 @@
 </refsynopsisdiv>
 
 <refsect1>
-<!-- 原文 samba-4.6.7
-	<title>DESCRIPTION</title>
--->
 	<title>説明</title>
 
-<!-- 原文 samba-4.6.7
-	<para>This tool is part of the <citerefentry><refentrytitle>samba</refentrytitle>
-	<manvolnum>7</manvolnum></citerefentry> suite.</para>
--->
 	<para>このツールは、<citerefentry><refentrytitle>samba</refentrytitle>
 	<manvolnum>7</manvolnum></citerefentry> システムの一部である。</para>
 
@@ -115,9 +100,6 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.6.7
-	<title>OPTIONS</title>
--->
 	<title>オプション</title>
 
 	<variablelist>
@@ -172,7 +154,7 @@
 		</varlistentry>
 
 		<varlistentry>
-		<term>-l|--long</term>
+		<term>--long</term>
 		<listitem><para>
 <!-- 原文 samba-4.6.7
 		When listing data, give more information on each item.
@@ -548,6 +530,12 @@
 		</para></listitem>
 		</varlistentry>
 
+                <varlistentry>
+                <term>--keep-account</term>
+                <listitem><para>"net ads leave" の一部としてマシンアカウント削除を防止
+		する。
+                </para></listitem>
+                </varlistentry>
 <!-- Samba-4.11.0
                 <varlistentry>
                 <term>- -json</term>
@@ -592,7 +580,8 @@
  
                 <varlistentry>
                 <term>--continue</term>
-                <listitem><para>ファイル名の大文字小文字変換が失敗しても、再帰検索を継続する。
+                <listitem><para>あるファイルに対してファイル名の大文字小文字
+		変換が失敗しても、再帰検索を継続する。
                 </para></listitem>
                 </varlistentry>
  
@@ -632,7 +621,7 @@
                 <term>--witness-registration=REGISTRATION_UUID</term>
                 <listitem><para>
                   これはデータベースを走査するのではなく、REGISTRATION_UUIDを
-		  直接検索します。
+		  直接検索する。
                 </para></listitem>
                 </varlistentry>
 
@@ -712,9 +701,6 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.6.7
-<title>COMMANDS</title>
--->
 <title>コマンド</title>
 
 <refsect2>
@@ -937,7 +923,7 @@ OLDJOIN オプションを使用すること。
 <!-- 原文 samba-4.6.7
 <para>List the domain groups of the specified user.</para>
 -->
-<para>指定したユーザーの所属するグループ一覧を出力する。</para>
+<para>指定したユーザーの所属するグループを一覧表示する。</para>
 
 </refsect3>
 
@@ -969,7 +955,7 @@ OLDJOIN オプションを使用すること。
 <!-- 原文 samba-4.6.7
 <para>List user groups.</para>
 -->
-<para>グループの一覧を表示する。</para>
+<para>グループを一覧表示する。</para>
 </refsect3>
 
 <refsect3>
@@ -1053,7 +1039,7 @@ share simultaneously.</para>
 <!-- 原文 samba-4.6.7
 <para>List all open files on remote server.</para>
 -->
-<para>リモートサーバー上でオープンされているファイルの一覧を出力する。</para>
+<para>リモートサーバー上でオープンされているファイルを一覧表示する。</para>
 
 </refsect3>
 
@@ -1079,8 +1065,8 @@ Currently listed are: file-id, username, locks, path, permissions.
 </para>
 -->
 <para>
-指定した <replaceable>fileid</replaceable> のファイルの情報を出力する。
-現在表示されるのは、以下の情報である: file-id、username、lock、path、permission
+指定した <replaceable>fileid</replaceable> のファイルの情報を表示する。
+現在表示されるのは、以下の情報である: file-id、username、locks、path、permissions
 </para>
 
 </refsect3>
@@ -1096,7 +1082,7 @@ against Samba servers.
 </para>
 -->
 <para>
-<replaceable>user</replaceable> で指定した、オープンしているファイルを表示する。
+<replaceable>user</replaceable> で指定した、オープンしているファイルを一覧表示する。
 <command>net rap file user</command> は Samba サーバーに対して動作しないことに注意。
 </para>
 
@@ -1135,7 +1121,7 @@ SMB/CIFS セッションの一覧を表示する。</para>
 <!-- 原文 samba-4.6.7
 <para>Give a list with all the open files in specified session.</para>
 -->
-<para>指定したセッションにおいてオープンされているファイルの一覧を表示する （訳注: 実際はオープンされている共有の一覧その他の情報を表示する）。</para>
+<para>指定したセッションにおいてオープンされているファイルを一覧表示する （訳注: 実際はオープンされている共有の一覧その他の情報を表示する）。</para>
 
 </refsect3>
 
@@ -1148,7 +1134,7 @@ SMB/CIFS セッションの一覧を表示する。</para>
 <para>List all servers in specified domain or workgroup. Defaults
 to local domain.</para>
 -->
-<para>ドメインまたはワークグループ内のサーバーの一覧を出力する。
+<para>ドメインまたはワークグループ内のサーバーを一覧表示する。
 デフォルトの対象はローカルドメインである。</para>
 
 </refsect2>
@@ -1160,7 +1146,7 @@ to local domain.</para>
 <para>Lists all domains and workgroups visible on the 
 current network.</para>
 -->
-<para>現在ネットワークで表示されているドメインおよびワークグループの一覧を出力する。</para>
+<para>現在ネットワークで表示されているドメインおよびワークグループを一覧表示する。</para>
 
 </refsect2>
 
@@ -1175,8 +1161,8 @@ current network.</para>
 If the <replaceable>QUEUE_NAME</replaceable> is omitted, all 
 queues are listed.</para>
 -->
-<para>サーバー上の指定された印刷キューおよび印刷ジョブの一覧を出力する。
-<replaceable>QUEUE_NAME</replaceable> が省略された場合、キューの一覧が出力される。
+<para>サーバー上の指定された印刷キューおよび印刷ジョブを一覧表示する。
+<replaceable>QUEUE_NAME</replaceable> が省略された場合、キューの一覧が表示される。
 </para>
 
 </refsect3>
@@ -1221,7 +1207,7 @@ will be prompted.
 <!-- 原文 samba-4.6.7
 <para>List all members of the specified group.</para>
 -->
-<para>指定したグループのメンバー一覧を出力する。</para>
+<para>指定したグループのメンバーを一覧表示する。</para>
 
 </refsect3>
 
@@ -1490,7 +1476,7 @@ List all current items in the cache.
 </para>
 -->
 <para>
-現在キャッシュに格納されているアイテムの一覧を表示する。
+現在キャッシュに格納されているアイテムを一覧表示する。
 </para>
 
 </refsect3>
@@ -1631,7 +1617,7 @@ net groupmap modify {ntgroup=string|sid=SID} [unixgroup=string] \
 <!-- 原文 samba-4.6.7
 <para>List existing group mapping entries.</para>
 -->
-<para>存在しているグループマップのエントリの一覧を表示する。</para>
+<para>存在しているグループマップのエントリを一覧表示する。</para>
 
 <para>net groupmap list [verbose] [ntgroup=string] [sid=SID]</para>
 
@@ -1708,6 +1694,9 @@ expect a appropriate UNIX account.
 <replaceable>DOMAIN</replaceable> のドメイン間信頼アカウントをリモートサーバーに追加する。
 これは実際、アカウントフラグ <constant>'I'</constant>（ドメイン間信頼アカウント）を伴う、
 <replaceable>DOMAIN$</replaceable> と言う名のSambaアカウントである。
+これは、incoming trustsが機能するために必要である。これにより、
+Sambaは外部(信頼する側)ドメインの信頼される側のドメインになる。
+Sambaドメインのユーザーは、外部ドメインで使用可能になる。
 もしも、localhost に対してコマンドが使われるならば、
 <command>smbpasswd -a -i DOMAIN</command> と同じ影響を及ぼす。
 両コマンドとも適切な UNIX アカウントを必要とすることに注意。
@@ -1747,6 +1736,11 @@ appear in your system.
 <para>
 信頼するドメインとの間の信頼関係を締結する。
 ドメイン間信頼アカウントが、リモートの PDC 上にすでに作成されていることが必須である。
+これは、出力方向の信頼が機能するために必要である。これにより、
+Samba は外部(信頼される)ドメインの信頼ドメインになる。
+外部ドメインのユーザーは、このドメインで使用できるようになる。
+これらをシステムに表示するには、winbind と作業用の idmap 設定が必要ある。
+
 </para>
 
 </refsect3>
@@ -1766,7 +1760,7 @@ appear in your system.
 <!-- 原文 samba-4.6.7
 <para>List all interdomain trust relationships.</para>
 -->
-<para>List all interdomain trust relationships.</para>
+<para>すべてのドメイン間信頼関係を一覧表示する。</para>
 
 </refsect3>
 </refsect2>
@@ -1783,8 +1777,8 @@ The can be done on a single server or on two servers at once with the
 possibility to use a random trust password.</para>
 -->
 <para>lsaCreateTrustedDomainEx2を呼び出すことで、trust object を
-作成する。これは、ランダムな trust パスワードを使う可能性がある、1 つまたは
-2 つのサーバー上で同時に行うことが出来る。</para>
+作成する。これは、ランダムな trust パスワードを使う可能性がある、一つまたは
+二つのサーバー上で同時に行うことができる。</para>
 
 <!-- 原文 samba-4.6.7
 <variablelist><title>Options:</title>
@@ -1880,7 +1874,7 @@ net rpc trust create \
 The can be done on a single server or on two servers at once.</para>
 -->
 <para>lsaDeleteTrustedDomain を呼び出すことで、trust object を削除する。
-これは、1 つまたは 2 つのサーバーで同時に行なうことができる。</para>
+これは、一つまたは二つのサーバーで同時に行なうことができる。</para>
 
 <!-- 原文 samba-4.6.7
 <variablelist><title>Options:</title>
@@ -2258,7 +2252,7 @@ EXPRESSION は標準の LDAP 検索表記で行ない、 ATTRIBUTES は結果中
 <!-- 原文 samba-4.6.7
 <para>Example: <userinput>net ads search '(objectCategory=group)' sAMAccountName</userinput>
 -->
-<para>設定例: <userinput>net ads search '(objectCategory=group)' sAMAccountName</userinput>
+<para>例: <userinput>net ads search '(objectCategory=group)' sAMAccountName</userinput>
 </para>
 
 </refsect2>
@@ -2279,7 +2273,7 @@ DN は標準の LDAP DN であり、 attributes は結果中に表示する LDAP
 <!-- 原文 samba-4.6.7
 <para>Example: <userinput>net ads dn 'CN=administrator,CN=Users,DC=my,DC=domain' SAMAccountName</userinput></para>
 -->
-<para>設定例: <userinput>net ads dn 'CN=administrator,CN=Users,DC=my,DC=domain' SAMAccountName</userinput></para>
+<para>例: <userinput>net ads dn 'CN=administrator,CN=Users,DC=my,DC=domain' SAMAccountName</userinput></para>
 
 </refsect2>
 
@@ -2538,7 +2532,7 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
 </para>
 -->
 <para>
-        与えられたアカウントの "msDS-SupportedEncryptionTypes" 属性値を表示する。
+        与えられたアカウントの "msDS-SupportedEncryptionTypes" 属性値を一覧表示する。
 </para>
 
 <!-- 原文 samba-4.6.7
@@ -2717,7 +2711,7 @@ List Local group members. The group must be specified by name.
 </para>
 -->
 <para>
-ローカルグループメンバーを表示する。グループは名前で指定しなければならない。
+ローカルグループメンバーを一覧表示する。グループは名前で指定しなければならない。
 </para>
 
 </refsect2>
@@ -2732,7 +2726,7 @@ the rid and description is also provided for each account.
 </para>
 -->
 <para>
-名前によるひとまとまりのアカウントを表示する。もしも verbose が指定されていたら、
+名前によるひとまとまりのアカウントを一覧表示する。もしも verbose が指定されていたら、
 rid と description も各々のアカウントに対して提供される。
 </para>
 
@@ -2747,7 +2741,7 @@ List all available privileges.
 </para>
 -->
 <para>
-すべての有効な権限を表示する。
+すべての有効な権限を一覧表示する。
 </para>
 
 </refsect2>
@@ -2761,7 +2755,7 @@ Grant one or more privileges to a user.
 </para>
 -->
 <para>
-ユーザーに対し、1 つまたはそれ以上の権限を許可する。
+ユーザーに対し、一つつまたはそれ以上の権限を許可する。
 </para>
 
 </refsect2>
@@ -2775,7 +2769,7 @@ Revoke one or more privileges from a user.
 </para>
 -->
 <para>
-ユーザーに対し、1 つまたはそれ以上の権限を取り去る。
+ユーザーに対し、一つつまたはそれ以上の権限を取り去る。
 </para>
 
 </refsect2>
@@ -2971,7 +2965,7 @@ List the available account policies.
 </para>
 -->
 <para>
-有効なアカウントポリシーを表示する。
+有効なアカウントポリシーを一覧表示する。
 </para>
 
 </refsect2>
@@ -3121,7 +3115,7 @@ Get ranges for all domains or for one identified by given SID.
 </para>
 -->
 <para>
-与えられた SID で識別される 1 個、あるいはすべてのドメインのレンジを得る。
+与えられた SID で識別される一つ、あるいはすべてのドメインのレンジを得る。
 </para>
 
 </refsect2>
@@ -3216,7 +3210,7 @@ SID で識別されるドメインの、すべてのドメインレンジマッ�
 <para>
   IDMAP データベースの検査と修復を行う。もしも、オプションが何も指定されないと、
   データベースに対するリードオンリーのチェックが行われる。とりわけ、対話的または
-  自動修復モードでは以下のオプションの 1 つを選んでも良い。
+  自動修復モードでは以下のオプションの一つを選んでも良い。
 
   <variablelist>
     <varlistentry><term>-r|--repair</term>
@@ -3390,7 +3384,7 @@ can create user defined shares on demand using the commands below.
 
 usershare path = /usr/local/samba/lib/usershares
 
-ついで /usr/local/samba/lib/usershares ディレクトリを作成し、所有者を root に、
+次に /usr/local/samba/lib/usershares ディレクトリを作成し、所有者を root に、
 所有グループをユーザー定義共有の作成を許可したい UNIX グループ、例えば "serverops" とする。
 
 /usr/local/samba/lib/usershares のパーミッションは 01770 に設定する。
@@ -3424,7 +3418,7 @@ usershare max shares = 100
 <member>net usershare add sharename path [comment [acl] [guest_ok=[y|n]]] - ユーザー定義の共有の追加または変更</member>
 <member>net usershare delete sharename - ユーザー定義の共有の削除</member>
 <member>net usershare info [-l|--long] [wildcard sharename] - ユーザー定義の共有の情報の出力</member>
-<member>net usershare list [-l|--long] [wildcard sharename] - ユーザー定義の共有の一覧出力</member>
+<member>net usershare list [-l|--long] [wildcard sharename] - ユーザー定義の共有の一覧表示</member>
 </simplelist>
 
 </para>
@@ -3483,7 +3477,7 @@ share (no creation of new files or directories or writing to files).
 <para>
 オプションの "acl" フィールドは、共有単位でどのユーザーに読み取りや書き
 込みのアクセス許可を与えるかを指定する。ゲストアクセスは、 &smb.conf; の
-"usershare allow guests" パラメーターを有効にしない限り行なえない。
+"usershare allow guests" パラメーターを有効にしない限り行なえないことに注意。
 ユーザー定義共有の ACL の指定は "user:permission" という形式で行なわれる。
 user はシステムで有効なユーザー名であり、permission は "F"、"R"、"D" の
 いずれかである。"F" は「フルコントロール」、すなわち読み取りと書き込み
@@ -3572,7 +3566,7 @@ shares created by other users.
 -->
 <para>
 net usershare info は、実行したユーザーが作成したユーザー定義共有の詳細情報を表示するが、ワイルドカード情報 ("*" は1文字以上の文字にマッチし、"?" は1文字のみにマッチする) が指定されている場合は、それにマッチした共有のみを表示する。
-"-l" または "--long" オプションが指定されていた場合、他のユーザーが作成したユーザー定義共有の情報も表示する。
+"--long" オプションが指定されていた場合、他のユーザーが作成したユーザー定義共有の情報も表示する。
 </para>
 
 <!-- 原文 samba-4.6.7
@@ -3606,7 +3600,8 @@ List all the user defined shares owned by the current user matching the given pa
 </para>
 -->
 <para>
-実行したユーザーが所有し、指定されたワイルドカードにマッチする、またはすべてのユーザーのユーザー定義共有の一覧を表示する。
+実行したユーザーが所有し、指定されたワイルドカードにマッチする、またはすべての
+ユーザーのユーザー定義共有を一覧表示する。
 </para>
 
 <!-- 原文 samba-4.6.7: Changed two hyphens to '\-\-' because of not allowed to write in comment.
@@ -3621,7 +3616,7 @@ shares created by other users.
 <para>
 net usershare list は、実行したユーザーが作成したユーザー定義共有の一覧を表示するが、ワイルドカード情報 ("*" は1文字以上の文字にマッチし、"?" は1文字のみにマッチする) が指定されている場合は、それにマッチした共有のみを表示する。
 
-"-l" または "--long" オプションが指定されていた場合、他のユーザーが作成したユーザー定義共有の情報も表示する。
+"--long" オプションが指定されていた場合、他のユーザーが作成したユーザー定義共有の情報も表示する。
 </para>
 
 </refsect3>
@@ -3639,7 +3634,7 @@ by enabling the RPC conf mode and specifying the address of the remote server.
 </para>
 -->
 <para>バージョン 3.2.0から、Sambaサーバーはレジストリにデータを格納することにより
-設定する事が出来るようになった。この設定データは新しい"net conf"コマンドで編集できる。
+設定する事ができるようになった。この設定データは新しい"net conf"コマンドで編集できる。
 また、RPC confモードを有効にすることと、リモートサーバーのアドレスを指定することによって、
 リモートのSambaサーバーを設定することもできる。
 </para>
@@ -3693,7 +3688,7 @@ registry.</member>
 <simplelist>
 <member>net [rpc] conf list - smb.conf風の形式で完全な設定をダンプ</member>
 <member>net [rpc] conf import - smb.conf形式で設定をインポート</member>
-<member>net [rpc] conf listshares - レジストリ共有のリスト</member>
+<member>net [rpc] conf listshares - レジストリ共有を一覧表示</member>
 <member>net [rpc] conf drop - レジストリから全部の設定を削除</member>
 <member>net [rpc] conf showshare - レジストリ共有の定義を表示</member>
 <member>net [rpc] conf addshare - 新しいレジストリ共有を作成</member>
@@ -3758,7 +3753,7 @@ List the names of the shares defined in registry.
 </para>
 -->
 <para>
-レジストリ中で定義された共有名の一覧を表示する。
+レジストリ中で定義された共有名を一覧表示する。
 </para>
 </refsect3>
 
@@ -3889,13 +3884,14 @@ per share, and this list is evaluated after all the parameters of the share.
 </para>
 -->
 <para>
-データベースとincludeディレクティブの種類により、includeは特別の扱いが必要である。パラメーター名が値の名前として、パラメーターがレジストリに格納されるので、
+データベースとinclude ディレクティブの種類により、include は特別の扱いが必要で
+あることに注意。パラメーター名が値の名前として、パラメーターがレジストリに格納されるので、
 共有ごとにパラメーターのインスタンスは1つだけである。
 また、テキストファイル中の指定したような順番は認められない。すべての真の
-パラメーターに対して、これは完全に問題がないが、includeディレクティブは
-smb.confテキストファイル中では、むしろメタパラメーターであるので、他のパラメーター
-との間での場所の指定はとても重要である。これは単純なsmbconfデータモデルによって
-は実現できないので、共有後とに1つの順番のリストがあり、このリストはすべての
+パラメーターに対して、これは完全に問題がないが、include ディレクティブは
+smb.conf テキストファイル中では、むしろメタパラメーターであるので、他のパラメーター
+との間での場所の指定はとても重要である。これは単純な smbconf データモデルによって
+は実現できないので、共有後とに一つの順番のリストがあり、このリストはすべての
 共有パラメーターの後に評価される。
 </para>
 
@@ -3907,8 +3903,8 @@ data from other registry keys.
 </para>
 -->
 <para>
-さらに、現在、レジストリ構成からファイルのみインクルード出来る。将来は、
-他のレジストリキーから設定データをインクルード出来る予定である。
+さらに、現在、レジストリ構成からファイルのみインクルードできる。将来は、
+他のレジストリキーから設定データをインクルードできる予定である。
 </para>
 </refsect3>
 
@@ -4037,7 +4033,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
 <!-- 原文 samba-4.6.7
   <para>Create a new <emphasis>key</emphasis> if not yet existing.
 -->
-  <para><emphasis>key</emphasis>がない場合、新しくを作成する。
+  <para><emphasis>key</emphasis>がない場合、新しく作成する。
   </para>
 </refsect3>
 
@@ -4061,9 +4057,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   subkeys and values from the registry.
   </para>
 -->
-  <para>Delete the given <emphasis>key</emphasis> and all of its
-  subkeys and values from the registry.
-  与えられた<emphasis>key</emphasis>とそのサブキーとその値をレジストリから削除する。
+  <para>与えられた<emphasis>key</emphasis>とそのサブキーとその値をレジストリから削除する。
   </para>
 </refsect3>
 
@@ -4076,9 +4070,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   of the given <emphasis>key</emphasis>.
   </para>
 -->
-  <para>Output type and actual value of the value <emphasis>name</emphasis>
-  of the given <emphasis>key</emphasis>.
-  </para><para>
+  <para>
   与えられた<emphasis>key</emphasis>に対する<emphasis>name</emphasis>の、
   タイプと実際の値を出力する。
   </para>
@@ -4092,8 +4084,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   of the given <emphasis>key</emphasis>.
   </para>
 -->
-  <para>Output the actual value of the value <emphasis>name</emphasis>
-  of the given <emphasis>key</emphasis>.</para><para>
+<para>
   与えられた<emphasis>key</emphasis>に対する<emphasis>name</emphasis>の、
   実際の値を出力する。
   </para>
@@ -4115,14 +4106,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   be given multiple times.
   </para>
 -->
-  <para>Set the value <emphasis>name</emphasis>
-  of an existing <emphasis>key</emphasis>.
-  <emphasis>type</emphasis> may be one of
-  <emphasis>sz</emphasis>, <emphasis>multi_sz</emphasis> or
-  <emphasis>dword</emphasis>.
-  In case of <emphasis>multi_sz</emphasis> <replaceable>value</replaceable> may
-  be given multiple times.</para><para>
-  存在する<emphasis>key</emphasis>に対する<emphasis>name</emphasis>の値を設定する。
+<para>存在する<emphasis>key</emphasis>に対する<emphasis>name</emphasis>の値を設定する。
   <emphasis>type</emphasis>は、<emphasis>sz</emphasis>、
   <emphasis>multi_sz</emphasis> か <emphasis>dword</emphasis>のうちのどれかが選べる。
   <emphasis>multi_sz</emphasis> <replaceable>値</replaceable>の場合は、
@@ -4142,14 +4126,10 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   <emphasis>inc</emphasis> defaults to 1.
   </para>
 -->
-  <para>Increment the DWORD value <emphasis>name</emphasis>
-  of <emphasis>key</emphasis> by <replaceable>inc</replaceable>
-  while holding a g_lock.
-  <emphasis>inc</emphasis> defaults to 1.</para><para>
-  g_lockを行う間、<replaceable>inc</replaceable>だけ増やすことで
+<para>g_lockを行う間、<replaceable>inc</replaceable>だけ増やすことで
   <emphasis>key</emphasis>の<emphasis>name</emphasis>のDWORD値を増加させる。
   <emphasis>inc</emphasis> 
-  の既定値は1である。
+  の既定値は 1 である。
   </para>
 </refsect3>
 
@@ -4162,9 +4142,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   of the given <emphasis>key</emphasis>.
   </para>
 -->
-  <para>Delete the value <emphasis>name</emphasis>
-  of the given <emphasis>key</emphasis>.</para><para>
-  与えられた<emphasis>key</emphasis>の<emphasis>name</emphasis>の
+<para>与えられた<emphasis>key</emphasis>の<emphasis>name</emphasis>の
   値を削除する。
   </para>
 </refsect3>
@@ -4176,9 +4154,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   <para>Get the security descriptor of the given <emphasis>key</emphasis>.
   </para>
 -->
-  <para>Get the security descriptor of the given <emphasis>key</emphasis>.
-  </para><para>
-  与えられた<emphasis>key</emphasis>のセキュリティ識別子を得る。
+<para>与えられた<emphasis>key</emphasis>のセキュリティ識別子を得る。
   </para>
 </refsect3>
 
@@ -4190,9 +4166,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   Security Descriptor Definition Language (SDDL) string.
   </para>
 -->
-  <para>Get the security descriptor of the given <emphasis>key</emphasis> as a
-  Security Descriptor Definition Language (SDDL) string.</para><para>
-  セキュリティ記述子定義言語(SDDL)文字列として与えられた
+<para>セキュリティ記述子定義言語(SDDL)文字列として与えられた
   <emphasis>key</emphasis>のセキュリティ記述子を得る。
   </para>
 </refsect3>
@@ -4206,10 +4180,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   Security Descriptor Definition Language (SDDL) string <emphasis>sd</emphasis>.
   </para>
 -->
-  <para>Set the security descriptor of the given <emphasis>key</emphasis> from a
-  Security Descriptor Definition Language (SDDL) string <emphasis>sd</emphasis>.
-  </para><para>
-  セキュリティ記述子定義言語(SDDL) <emphasis>sd</emphasis>から
+<para>セキュリティ記述子定義言語(SDDL) <emphasis>sd</emphasis>から
   与えられた<emphasis>key</emphasis>のセキュリティ記述子を設定する。
   </para>
 </refsect3>
@@ -4253,16 +4224,14 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
 	<listitem><para>&lt;value name&gt;=&lt;value&gt; checks whether the
 	  value exists and has the given value.</para></listitem>
 -->
-       <listitem><para>&lt;value name&gt;=&lt;value&gt; checks whether the
-         value exists and has the given value.</para>
+       <listitem>
          <para>&lt;value name&gt;=&lt;value&gt; は、値が存在して、与えられた
                値かどうかを検査する。</para></listitem>
 <!-- 原文 samba-4.6.7
 	<listitem><para>&lt;value name&gt;=- checks whether the value does
 	  not exist.</para></listitem>
 -->
-       <listitem><para>&lt;value name&gt;=- checks whether the value does
-         not exist.</para>
+       <listitem>
          <para>&lt;value name&gt;=- は、値が存在しないかを検査する。</para></listitem>
 <!-- 原文 samba-4.6.7
 	<listitem><para>[key] checks whether the key exists.</para>
@@ -4292,8 +4261,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   <emphasis>file</emphasis>.
   </para>
 -->
-  <para>Export a <emphasis>key</emphasis> to a registration entries (.reg)
-  </para><para>
+  <para>
   レジストリエントリー(.reg)<emphasis>file</emphasis>に<emphasis>key</emphasis>
   をエクスポートする。
   <emphasis>file</emphasis>.
@@ -4309,8 +4277,7 @@ string.sddl形式文字列でセキュリティ識別子を設定する。</memb
   <para>Convert a registration entries (.reg) file <emphasis>in</emphasis>.
   </para>
 -->
-  <para>Convert a registration entries (.reg) file <emphasis>in</emphasis>.
-  </para><para>
+  <para>
   レジストリエントリー(.reg)ファイル<emphasis>中に</emphasis>変換する。
   </para>
 </refsect3>
@@ -4549,7 +4516,7 @@ See the <citerefentry><refentrytitle>smb.conf</refentrytitle> <manvolnum>5</manv
 <para>In order for Samba to be joined or unjoined remotely an account must be used that is either member of the Domain Admins group, a member of the local Administrators group or a user that is granted the SeMachineAccountPrivilege privilege.
 </para>
 -->
-<para>Sambaでリモートでマシンをドメインに追加するには、操作するアカウントが Domain Admins グループのメンバーか、Administrators グループのメンバーか、または「SeMachineAccountPrivilege 権限が付与されている」のいずれかでなければならない。
+<para>Sambaでリモートでマシンをドメインに追加または削除するには、操作するアカウントが Domain Admins グループのメンバーか、Administrators グループのメンバーか、または「SeMachineAccountPrivilege 権限が付与されている」のいずれかでなければならない。
 </para>
 
 <!-- 原文 samba-4.6.7
@@ -4586,7 +4553,7 @@ Joins a computer into a domain. This command supports the following additional p
 <!-- 原文 samba-4.6.7
 <listitem><para><replaceable>DOMAIN</replaceable> can be a NetBIOS domain name (also known as short domain name) or a DNS domain name for Active Directory Domains. As in Windows, it is also possible to control which Domain Controller to use. This can be achieved by appending the DC name using the \ separator character. Example: MYDOM\MYDC. The <replaceable>DOMAIN</replaceable> parameter cannot be NULL.</para></listitem>
 -->
-<listitem><para><replaceable>DOMAIN</replaceable>には、NetBIOS名（ショートドメイン名とも言う）または ActiveDirectoryのDNSドメイン名を指定する。Windows の場合、使用するドメインコントローラーを選択できる。その場合 "\" で区切ってドメインコントローラーの名前を指定する（例：MYDOM\MYDC）。<replaceable>DOMAIN</replaceable>に空白は指定できない。
+<listitem><para><replaceable>DOMAIN</replaceable>には、NetBIOS名（ショートドメイン名とも言う）または ActiveDirectoryのDNSドメイン名を指定する。Windows の場合、使用するドメインコントローラーを選択できる。その場合 "\" で区切ってドメインコントローラーの名前を指定する（例：MYDOM\MYDC）。<replaceable>DOMAIN</replaceable>に空は指定できない。
 </para></listitem>
 
 <!-- 原文 samba-4.6.7
@@ -4618,7 +4585,7 @@ Note that you also need to use standard net parameters to connect and authentica
 </para>
 -->
 <para>
-ドメインに参加させたいマシンに接続して認証を行う場合、-S コンピューター や-U ユーザー のように net で標準的に使用されるパラメーターを別途指定する必要があることに注意。
+ドメインに参加させたいマシンに接続して認証を行う場合、-S コンピューター や -U ユーザー のように net で標準的に使用されるパラメーターを別途指定する必要があることに注意。
 </para>
 <!-- 原文 samba-4.6.7
 <para>
@@ -4680,7 +4647,7 @@ Note that you also need to use standard net parameters to connect and authentica
 </para>
 -->
 <para>
-ドメインから削除したいマシンに接続して認証を行う場合、-S コンピューター や-U ユーザー のようにnetで標準的に使用されるパラメーターを別途指定する必要があることに注意。
+ドメインから削除したいマシンに接続して認証を行う場合、-S コンピューター や -U ユーザー のようにnetで標準的に使用されるパラメーターを別途指定する必要があることに注意。
 </para>
 <!-- 原文 samba-4.6.7
 <para>
@@ -4771,7 +4738,7 @@ This example would connect to a computer named XP as the local administrator usi
 この例では、XP という名前のコンピューターに、パスワードが secret のローカルの
 Administrator として接続し、ドメインに参加しているコンピューターの名前を、
 MYDOM というドメインの管理者のアカウントとパスワード topsecret を使って、
-XPNEW に変更している。変更が成功したら、コンピューターをリブートする。
+XPNEW に変更している。変更が成功したら、コンピューターを再起動する。
 </para>
 
 </refsect3>
