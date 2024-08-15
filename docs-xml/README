@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2023/09/17
+						2024/8/15
 						日本Sambaユーザー会
 
 
@@ -48,10 +48,10 @@ COPYINGファイルを参照してください。
 原則として、オリジナルSambaが更新対象となっているものについて
 翻訳を行います。
 
-・4.16.x系列以前:	翻訳終了
-・4.17.x系列:		翻訳中
+・4.17.x系列以前:	翻訳終了
 ・4.18.x系列:		翻訳中
 ・4.19.x系列:		翻訳中
+・4.20.x系列:		翻訳中
 
 
 Sambaのバージョンが変更になってもドキュメントの修正がない場合には、
@@ -129,19 +129,11 @@ manpages、html、htmlman が実行可能になります。これ以外にも ma
 ======================================================================
 XMLのパラメータのみの修正(翻訳に影響なし)については、記載を省略しています。
 
-2023/09/17 Ver 4.19.0-1 4.19.0 対応
-	   idmap_ad.8.xml,idmap_autorid.8.xml,idmap_rid.8.xml,
-	   idmap_script.8.xml,net.8.xml,samba-tool.8.xml,
-	   smbcontrol.1.xml,smbget.1.xml,vfs_ceph.8.xml,
-	   vfs_fruit.8.xml,vfs_full_audit.8.xml,
-	   ldap/clientldapsaslwrapping.xml,
-	   locking/smb2leases.xml,
-	   logging/debugsyslogformat.xml,
-	   tuning/aioreadsize.xml,tuning/aiowritesize.xml
+2024/06/23 Ver 4.20.1-1 4.20.1 対応
+	   idmap_ad.8.xml,idmap_nss.8.xml,ntlm_auth.1.xml,
+	   net.8.xml
 	   変更
-	   samba-log-parser.1.xml,protocol/addcfunctionallevel.xml
 	   追加
-	   smbgetrc.5.xml,misc/directorynamecachesize.xml
 	   削除
 
 ======================================================================
