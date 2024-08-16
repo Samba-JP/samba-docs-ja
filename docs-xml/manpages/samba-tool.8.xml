@@ -6,9 +6,6 @@
 	<refentrytitle>samba-tool</refentrytitle>
 	<manvolnum>8</manvolnum>
 	<refmiscinfo class="source">Samba</refmiscinfo>
-<!-- 原文 samba-4.7.0
-	<refmiscinfo class="manual">System Administration tools</refmiscinfo>
--->
 	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
 	<refmiscinfo class="version">&doc.version;</refmiscinfo>
 </refmeta>
@@ -16,9 +13,6 @@
 
 <refnamediv>
 	<refname>samba-tool</refname>
-<!-- 原文 samba-4.7.0
-	<refpurpose>Main Samba administration tool.
--->
 	<refpurpose>Samba 管理のためのメインツール
 	</refpurpose>
 </refnamediv>
@@ -35,20 +29,12 @@
 </refsynopsisdiv>
 
 <refsect1>
-<!-- 原文 samba-4.7.0
-	<title>DESCRIPTION</title>
-	<para>This tool is part of the <citerefentry><refentrytitle>samba</refentrytitle>
-	<manvolnum>7</manvolnum></citerefentry> suite.</para>
--->
 	<title>説明</title>
 	<para>このツールは <citerefentry><refentrytitle>samba</refentrytitle>
 	<manvolnum>7</manvolnum></citerefentry> システムの一部である。</para>
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.7.0
-	<title>OPTIONS</title>
--->
 	<title>オプション</title>
 
 	<variablelist>
@@ -56,9 +42,6 @@
 	<varlistentry>
 	<term>-h|--help</term>
 	<listitem><para>
-<!-- 原文 samba-4.7.0
-	Show this help message and exit
--->
 	このヘルプメッセージを表示して終了する。
 	</para></listitem>
 	</varlistentry>
@@ -84,9 +67,6 @@
 	<varlistentry>
 	<term>--ipaddress=IPADDRESS</term>
 	<listitem><para>
-<!-- 原文 samba-4.7.0
-	IP address of the server
--->
 	サーバーの IP アドレス。
 	</para></listitem>
 	</varlistentry>
@@ -143,17 +123,8 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.7.0
-<title>COMMANDS</title>
--->
 <title>コマンド</title>
 
-<!-- Samba-4.11.0
-<refsect2>
-	<title>computer</title>
-	<para>Manage computer accounts.</para>
-</refsect2>
--->
 <refsect2>
 	<title>computer</title>
 	<para>コンピュータアカウントの管理。</para>
@@ -180,7 +151,7 @@
 	<varlistentry>
 	<term>- -description=DESCRIPTION</term>
 	<listitem><para>
-	The new computers's description.
+	The new computer's description.
 	</para></listitem>
 	</varlistentry>
 
@@ -419,7 +390,7 @@
 	<varlistentry>
 	<term>- -description=DESCRIPTION</term>
 	<listitem><para>
-	The new contacts's description.
+	The new contact's description.
 	</para></listitem>
 	</varlistentry>
 
@@ -533,7 +504,7 @@
 	<varlistentry>
 	<term>--description=DESCRIPTION</term>
 	<listitem><para>
-	新しい contacts の説明。
+	新しい contact の説明。
 	</para></listitem>
 	</varlistentry>
 
@@ -1390,7 +1361,7 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-tgt-lifetime</term>
+                        <term>--user-tgt-lifetime-mins</term>
                         <listitem>
                                 <para>
                                         ユーザアカウントの Ticket-Granting-Ticket 生存時間。
@@ -1401,16 +1372,107 @@
                         <term>--user-allow-ntlm-auth</term>
                         <listitem>
                                 <para>
-                                ユーザーが選択したデバイスに制限されている場合、
-				NTLM ネットワーク認証を許可する。
+				<constant>allowed-to-authenticate-from</constant>
+				が使用されているにもかかわらず、
+				<constant>NTLM</constant>と<constant>対話型の
+				NETLOGON SamLogon</constant>認証を行う。
+				これを行わないと、ユーザーは選択されたデバイスに制限される。
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-tgt-lifetime</term>
+                        <term>--user-allowed-to-authenticate-from</term>
                         <listitem>
                                 <para>
-                                        サービスアカウントの Ticket-Granting-Ticket 生存時間。
+					このポリシーの対象となるユーザが認証を許可される
+					ためにデバイスが満たす必要がある条件。これは
+					デバイスに対する制限だが、条件付き ACEルールは、
+					デバイスがユーザであるかのように表現される。
+                                </para>
+                                <para>
+					Deviceキーワードを参照しない有効なSDDL
+					文字列でなければならない。
+                                </para>
+                                <para>
+                                        例: O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AU)}))
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--user-allowed-to-authenticate-from-silo</term>
+                        <listitem>
+                                <para>
+					ユーザ認証用デバイスが割り当てられ、
+					指定されたサイロのメンバシップが許可
+					されている場合、ユーザーは認証を許可される。
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+					--user-allowed-to-authenticate-fromとともに
+					使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--user-allowed-to-authenticate-to=SDDL</term>
+                        <listitem>
+                                <para>
+					このポリシーは、サービスを提供するユーザ
+					アカウント(ユーザアカウントを持つ Web
+					サーバなど)に適用され、そのサービスに
+					アクセスできるアカウントを制限する。
+                                </para>
+                                <para>
+					有効な SDDL 文字列でなければならない。
+					SDDL はベア(ユーザ)とデバイス条件両方を
+					参照することができる。
+                                </para>
+                                <para>
+                                        SDDL の例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AO)}))</constant>
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--user-allowed-to-authenticate-to-by-group=GROUP</term>
+                        <listitem>
+                                <para>
+                                        <constant>GROUP</constant>.
+					このポリシーの対象となるネットワーク
+					サービスを提供するユーザーアカウントは、
+					指定された<constant>GROUP</constant>の
+					メンバーである他のアカウントからの
+					アクセスのみが許可される。
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+                                        --user-allowed-to-authenticate-to とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--user-allowed-to-authenticate-to-by-silo=SILO</term>
+                        <listitem>
+                                <para>
+					このポリシーの対象となるネットワーク
+					サービスを提供するユーザーアカウントには、
+					指定された SILO に割り当てられ、そのメ
+					ンバーシップに許可された(その認証条件を満たす)
+					他のアカウントからのアクセスのみが許可される。
+                                </para>
+                                <para>
+                                        この属性は、SDDLを手書きする必要性を回避し、
+                                        --user-allowed-to-authenticate-to とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--service-tgt-lifetime-mins</term>
+                        <listitem>
+                                <para>
+                                      サービスアカウント用の
+				      Ticket-Granting-Ticket 生存時間。.
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -1418,19 +1480,181 @@
                         <term>--service-allow-ntlm-auth</term>
                         <listitem>
                                 <para>
-                                サービスが選択したデバイスに制限されている場合、
-				NTLMネットワーク認証を許可する。
+					サービスが選択したデバイスに制限されている場合、
+					NTLM ネットワーク認証を許可する。
                                 </para>
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--computer-tgt-lifetime</term>
+                        <term>--service-allowed-to-authenticate-from</term>
+                        <listitem>
+                                <para>
+                                        このポリシーの対象となるサービスアカウ
+					ントが認証を許可されるためにデバイスが
+					満たす必要がある条件。これは
+                                        デバイスに対する制限だが、条件付き ACE ルールは、
+                                        デバイスがユーザであるかのように表現される。
+                                </para>
+                                <para>
+                                        Device キーワードを参照しない有効な SDDL
+                                        文字列でなければならない。
+                                </para>
+                                <para>
+                                        SDDL の例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AU)}))</constant>
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--service-allowed-to-authenticate-from-device-silo=SILO</term>
+                        <listitem>
+                                <para>
+					サービスアカウント(管理対象サービスアカウント、
+					グループ管理対象サービスアカウントなど)は、
+					認証元のデバイスが割り当てられ、指定された
+					<constant>SILO</constant>のメンバーシップが
+					許可されている場合に、認証を許可される。
+				</para>
+                                <para>
+					 この属性は、SDDLを手書きする必要性を回避し、
+                                        --service-allowed-to-authenticate-from とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--service-allowed-to-authenticate-from-device-group=GROUP</term>
+                        <listitem>
+                                <para>
+					サービスアカウント(Managed Service Account、
+					Group Managed Service Accountなど)は、
+					認証元のデバイスが指定された
+					<constant>group</constant>のメンバーである
+					場合、認証を許可される。
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+                                        --service-allowed-to-authenticate-from とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--service-allowed-to-authenticate-to=SDDL</term>
+                        <listitem>
+                                <para>
+					このポリシーは、サービスアカウント
+					(管理対象サービスアカウント、グループ管理対象
+					サービスアカウントなど)に適用され、その
+					アカウントにアクセスできるアカウントを制限する。
+                                </para>
+                                <para>
+					有効な SDDL 文字列でなければならない。
+                                        SDDL はベア(ユーザ)とデバイス条件両方を
+                                        参照することができる。
+                                </para>
+                                <para>
+                                        SDDL の例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AO)}))</constant>
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--service-allowed-to-authenticate-to-by-group=GROUP</term>
+                        <listitem>
+                                <para>
+					サービスアカウント(Managed Service Account、
+					Group Managed Service Accountなど)は、
+					指定された<constant>GROUP</constant>の
+					メンバである他のアカウントによるアクセス
+					のみが許可される。
+
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+                                        --service-allowed-to-authenticate-to とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--service-allowed-to-authenticate-to-by-silo=SILO</term>
+                        <listitem>
+                                <para>
+					サービス・アカウント(管理対象サービスアカウント、
+					グループ管理対象サービスアカウントなど)は、
+					指定された SILO に割り当てられ、その
+					メンバーシップを付与された(その認証条件を
+					満たす)他のアカウントによってのみアクセスが許可される。
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+                                        --service-allowed-to-authenticate-to とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--computer-tgt-lifetime-mins</term>
                         <listitem>
                                 <para>
                                 コンピュータアカウントの Ticket-Granting-Ticket 生存時間。
                                 </para>
                         </listitem>
                 </varlistentry>
+                <varlistentry>
+                        <term>--computer-allowed-to-authenticate-to=SDDL</term>
+                        <listitem>
+                                <para>
+					このポリシーは、コンピュータアカウント
+					(たとえば server または workstation)に
+					適用され、そのアカウントにアクセス
+					できるアカウントを制限する。
+                                </para>
+                                <para>
+					有効な SDDL 文字列でなければならない。
+                                        SDDL はベア(ユーザ)とデバイス条件両方を
+                                        参照することができる。
+                                </para>
+                                <para>
+                                        SDDL の例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AO)}))</constant>
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--computer-allowed-to-authenticate-to-by-group=GROUP</term>
+                        <listitem>
+                                <para>
+				       コンピュータアカウント(たとえば server
+				       または workstation)は、
+				       指定された<constant>GROUP</constant>の
+				       メンバである他のアカウントによるアクセス
+				       のみが許可される。
+
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+                                        --computer-allowed-to-authenticate-to とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--computer-allowed-to-authenticate-to-by-silo=SILO</term>
+                        <listitem>
+                                <para>
+				       コンピュータアカウント(たとえば server
+				       または workstation)は、指定された SILO に
+				       割り当てられ、そのメンバーシップを付与
+				       された(その認証条件を満たす)他の
+				       アカウントによってのみアクセスが許可される。
+                                </para>
+                                <para>
+					この属性は、SDDLを手書きする必要性を回避し、
+                                        --computer-allowed-to-authenticate-to とともに
+                                        使用することはできない。
+                                </para>
+                        </listitem>
+                </varlistentry>
+
         </variablelist>
 </refsect3>
 <!-- samba-4.19.0
@@ -1916,27 +2140,21 @@
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--policy</term>
+                        <term>--user-authentication-policy</term>
                         <listitem><para>
-                                このサイロ中のすべてのプリンシパルに対してシングルポリシを使用。
+                                ユーザアカウント認証ポリシ。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-policy</term>
+                        <term>--service-authentication-policy</term>
                         <listitem><para>
-                                ユーザアカウントポリシ。
+                                管理されたサーアビスアカウント認証ポリシ。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-policy</term>
+                        <term>--computer-authentication-policy</term>
                         <listitem><para>
-                                管理されたサーアビスアカウントポリシ。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--computer-policy</term>
-                        <listitem><para>
-                                コンピュータアカウントポリシ。
+                                コンピュータアカウント認証ポリシ。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
@@ -2102,27 +2320,21 @@
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--policy</term>
+                        <term>--user-authentication-policy</term>
                         <listitem><para>
-                                このサイロ中のすべてのプリンシパルに対してシングルポリシを使用。
+                                ユーザアカウント認証ポリシ。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-policy</term>
+                        <term>--service-authentication-policy</term>
                         <listitem><para>
-                                ユーザアカウントポリシ。
+                                管理されたサービスアカウント認証ポリシ。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-policy</term>
+                        <term>--computer-authentication-policy</term>
                         <listitem><para>
-                                管理されたサービスアカウントポリシ。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--computer-policy</term>
-                        <listitem><para>
-                                コンピュータアカウントポリシ。
+                                コンピュータアカウント認証ポリシ。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
@@ -2248,8 +2460,8 @@
 </refsect3>
 -->
 <refsect3>
-        <title>domain auth silo member add</title>
-        <para>認証サイロにメンバを追加。</para>
+        <title>domain auth silo member grant</title>
+        <para>認証サイロにメンバアクセスを許可。</para>
         <variablelist>
                 <varlistentry>
                         <term>-H, --URL</term>
@@ -2266,7 +2478,7 @@
                 <varlistentry>
                         <term>--member</term>
                         <listitem><para>
-                                このサイロに追加するメンバ(DN 又はアカウント名)。
+                                このサイロにアクセスを許可するメンバ(DN 又はアカウント名)。
                         </para></listitem>
                 </varlistentry>
         </variablelist>
@@ -2348,8 +2560,8 @@
 </refsect3>
 -->     
 <refsect3>
-        <title>domain auth silo member remove</title>
-        <para>認証サイロからメンバを削除。</para>
+        <title>domain auth silo member revoke</title>
+        <para>認証サイロからメンバを取り消し。</para>
         <variablelist>
                 <varlistentry>
                         <term>-H, --URL</term>
@@ -2366,7 +2578,7 @@
                 <varlistentry>
                         <term>--member</term>
                         <listitem><para>
-                                サイロから削除するメンバ(DN 又はアカウント名)。
+                                サイロから取り消すメンバ(DN 又はアカウント名)。
                         </para></listitem>
                 </varlistentry>
         </variablelist>
@@ -4372,6 +4584,24 @@
 	<para>オブジェクトクラススキーマ定義の表示。</para>
 </refsect3>
 
+<refsect2>
+        <title>shell</title>
+        <para>対話的な Samba Python シェルを開く。</para>
+</refsect2>
+
+<refsect3>
+        <title>shell [options]</title>
+        <para>Samba ldb 接続用に対話的な Python シェルを開く。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
 <!-- samba-4.19.0
 <refsect3>
         <title>sites list [options]</title>
@@ -4386,6 +4616,14 @@
         </variablelist>
 </refsect3>
 -->
+<refsect2>
+	<title>sites</title>
+<!-- 原文 samba-4.7.0
+	<para>Manage sites.</para>
+-->
+	<para>サイトを管理する。</para>
+</refsect2>
+
 <refsect3>
         <title>sites list [options]</title>
         <para>サイトを一覧表示する。</para>
@@ -4399,14 +4637,6 @@
         </variablelist>
 </refsect3>
 
-
-<refsect2>
-	<title>sites</title>
-<!-- 原文 samba-4.7.0
-	<para>Manage sites.</para>
--->
-	<para>サイトを管理する。</para>
-</refsect2>
 
 <refsect3>
 	<title>sites create <replaceable>site</replaceable> [options]</title>
@@ -4980,6 +5210,11 @@
 </refsect3>
 
 <refsect3>
+        <title>user get-kerberos-ticket <replaceable>username</replaceable> [options]</title>
+        <para>アカウントとして Kerberos Ticket Granting Ticket を取得する。</para>
+</refsect3>
+
+<refsect3>
         <title>user syncpasswords <replaceable>--cache-ldb-initialize</replaceable> [options]</title>
 <!-- 原文 samba-4.7.0
 	<para>Syncs the passwords of all user accounts, using an optional script.</para>
@@ -4988,6 +5223,52 @@
 -->
         <para>オプションのスクリプトを試用してすべてのユーザーアカウントのパスワードを同期する。</para>
         <para>このコマンドは、単一のドメインコントローラー上でのみ動かすこと（通常は PDC エミュレーター）。</para>
+</refsect3>
+
+<refsect3>
+        <title>user auth policy assign <replaceable>username</replaceable> [options]</title>
+        <para>ユーザに対して割り当てられた認証ポリシを設定する。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>--policy</term>
+                        <listitem><para>
+			  割り当てる認証ポリシの名前あるいは削除する場合は空のまま。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>user auth policy remove <replaceable>username</replaceable></title>
+        <para>ユーザから割り当てられた認証ポリシを取り去る。</para>
+</refsect3>
+
+<refsect3>
+        <title>user auth policy view <replaceable>username</replaceable></title>
+        <para>ユーザに割り当てられた認証ポリシを表示。</para>
+</refsect3>
+
+<refsect3>
+        <title>user auth silo assign <replaceable>username</replaceable> [options]</title>
+        <para>ユーザに対して割り当てられた認証サイロを設定する。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>--silo</term>
+                        <listitem><para>
+			  割り当てる認証サイロの名前あるいは削除する場合は空のまま。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>user auth silo remove <replaceable>username</replaceable></title>
+        <para>ユーザから割り当てられた認証サイロを取り去る。</para>
+</refsect3>
+
+<refsect3>
+        <title>user auth silo view <replaceable>username</replaceable></title>
+        <para>ユーザに割り当てられた認証サイロを表示。</para>
 </refsect3>
 
 <refsect2>
@@ -5150,10 +5431,6 @@
 </refsect2>
 
 <refsect2>
-<!-- 原文 samba-4.7.0
-<title>help</title>
-<para>Gives usage information.</para>
--->
 <title>ヘルプ</title>
 <para>使用方法を提示する。</para>
 </refsect2>
@@ -5161,30 +5438,14 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.7.0
-	<title>VERSION</title>
--->
 	<title>バージョン</title>
 
-<!-- 原文 samba-4.7.0
-	<para>This man page is complete for version 4 of the Samba
-	suite.</para>
--->
 	<para>このマニュアルページは Samba バージョン &doc.version; 用である。</para>
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.7.0
-	<title>AUTHOR</title>
--->
 	<title>著者</title>
 
-<!-- 原文 samba-4.7.0
-	<para>The original Samba software and related utilities
-	were created by Andrew Tridgell. Samba is now developed
-	by the Samba Team as an Open Source project similar
-	to the way the Linux kernel is developed.</para>
--->
 	<para>オリジナルの Samba ソフトウェアと関連するユーティリティは、
 	Andrew Tridgell によって作成された。現在 Samba は Samba Team によって、
 	Linux カーネルの開発と同様のオープンソースプロジェクトとして開発が
@@ -5194,9 +5455,9 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.19.0 - 4.19.0 に対応する。</para>
+	<para>このマニュアルページは Samba 4.20.0 - 4.20.0 に対応する。</para>
 
-	<para>Samba 4.0.0 - 4.19.0  対応の翻訳は、
+	<para>Samba 4.0.0 - 4.20.0  対応の翻訳は、
 	<itemizedlist>
 	<listitem><para>太田俊哉(ribbon@samba.gr.jp)</para></listitem>
 	<listitem><para>matsuand(michio_matsuyama@yahoo.co.jp)</para></listitem>
