@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE refentry PUBLIC "-//Samba-Team//DTD DocBook V4.2-Based Variant V1.0//EN" "http://www.samba.org/samba/DTD/samba-doc">
+<refentry id="winexe.1" lang="ja">
+
+  <refmeta>
+    <refentrytitle>wspsearch</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="source">Samba</refmiscinfo>
+    <refmiscinfo class="manual">ユーザコマンド</refmiscinfo>
+    <refmiscinfo class="version">&doc.version;</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>wspsearch</refname>
+    <refpurpose>SMB サーバに対して Windows Search プロトコル検索を実行</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>wspsearch</command>
+      <arg choice="req">//server/share</arg>
+      <arg choice="opt">--limit=results</arg>
+      <arg choice="opt">--search=phrase</arg>
+      <arg choice="opt">--kind=KIND</arg>
+      <arg choice="opt">--query=QUERY</arg>
+      <arg choice="opt">-?|--help</arg>
+      <arg choice="opt">--usage</arg>
+      <arg choice="opt">-d|--debuglevel=DEBUGLEVEL</arg>
+      <arg choice="opt">--debug-stdout</arg>
+      <arg choice="opt">-s|--configfile=CONFIGFILE</arg>
+      <arg choice="opt">--option=name=value</arg>
+      <arg choice="opt">-l|--log-basename=LOGFILEBASE</arg>
+      <arg choice="opt">--leak-report</arg>
+      <arg choice="opt">--leak-report-full</arg>
+      <arg choice="opt">-R|--name-resolve=NAME-RESOLVE-ORDER</arg>
+      <arg choice="opt">-O|--socket-options=SOCKETOPTIONS</arg>
+      <arg choice="opt">-m|--max-protocol=MAXPROTOCOL</arg>
+      <arg choice="opt">-n|--netbiosname=NETBIOSNAME</arg>
+      <arg choice="opt">--netbios-scope=SCOPE</arg>
+      <arg choice="opt">-W|--workgroup=WORKGROUP</arg>
+      <arg choice="opt">--realm=REALM</arg>
+      <arg choice="opt">-U|--user=[DOMAIN/]USERNAME[%PASSWORD]</arg>
+      <arg choice="opt">-N|--no-pass</arg>
+      <arg choice="opt">--password=STRING</arg>
+      <arg choice="opt">--pw-nt-hash</arg>
+      <arg choice="opt">-A|--authentication-file=FILE</arg>
+      <arg choice="opt">-P|--machine-pass</arg>
+      <arg choice="opt">--simple-bind-dn=DN</arg>
+      <arg choice="opt">--use-kerberos=desired|required|off</arg>
+      <arg choice="opt">--use-krb5-ccache=CCACHE</arg>
+      <arg choice="opt">--use-winbind-ccache</arg>
+      <arg choice="opt">--client-protection=sign|encrypt|off</arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>説明</title>
+
+    <para>このプログラムは、<citerefentry><refentrytitle>samba</refentrytitle>
+    <manvolnum>1</manvolnum></citerefentry>システムの一部である。</para>
+
+    <para>wspsearch は、WSP サービスが有効になっている SMB サーバーに対して
+    Windows Search Protocol検索を実行するための簡単なユーティリティである。</para>
+  </refsect1>
+
+  <refsect1>
+    <title>オプション</title>
+
+    <variablelist>
+      <varlistentry>
+	<term>server</term>
+	<listitem>
+	  <para>SMB サーバ名か接続する先の IP アドレス。</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>sharename</term>
+	<listitem>
+	  <para>サーバ上の共有名。</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>--query</term>
+	<listitem><para>単純化された AQS (Advanced query syntax)のような
+	形式で指定されたクエリ。</para>
+	<para>Basic (AQS) 文法がサポートされている(<emphasis>参照</emphasis>節
+	を参照)。クエリは AND, OR と NOT 論理演算子 によって接続された一連の
+	クエリで構成される。クエリ要素は本質的にはプロパティによって定義される
+	制限である。サポートされているサポートされてる演算子にはいくつか制限が
+	あり、列挙された範囲のようないくつかのタイプのプロパティは全くサポート
+	されてない。さらに、範囲値は AQS で指定されているようには区切られない
+	(範囲は代わりに value-value として指定される)。Windows の検索 UI に
+	表示されるいくつかの特殊なケース(たとえば 'tiny'、'small'、'large' の	
+	ようなサイズ) は、多かれ少なかれキーワードとし処て理される例外である。
+	<emphasis>例</emphasis>を参照のこと。</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>--search=phrase</term>
+	<listitem>
+	  <para>インデックス全体で検索される単純なフレーズ
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>--kind=KIND</term>
+	<listitem>
+	  <para>以下のうちのどれか;
+	  <itemizedlist>
+		  <listitem><para><emphasis>Calendar</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Communication</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Contact</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Document</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Email</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Feed</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Folder</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Game</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>InstantMessage</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Journal</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Movie</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Music</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Link</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Note</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Picture</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Program</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>RecordedTV</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>SearchFolder</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Task</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>Video</emphasis> </para> </listitem>
+		  <listitem><para><emphasis>WebHistory</emphasis> </para> </listitem>
+	  </itemizedlist>
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>--limit</term>
+	<listitem><para>返される結果の数の制限で、既定では 500個の結果までであり、
+	0 と言う制限値は制限無しを意味し、全ての結果が戻される。
+	there is a limit of 500 results, a limit of 0 indicates no limit and
+	</para></listitem>
+      </varlistentry>
+
+      &popt.autohelp;
+      &cmdline.common.samba.client;
+      &cmdline.common.credentials;
+    </variablelist>
+  </refsect1>
+
+  <refsect1>
+    <title>例</title>
+
+    <para>基本的なフレーズを使った検索:</para>
+    <programlisting>
+	'wspsearch -Usomeuser%password //server/share --phrase="cats"'
+    </programlisting>
+
+    <para>AQS のようなクエリを使用して、名前が p403 または p404 で始まる画像を検索:</para>
+    <programlisting>
+	'wspsearch -Usomeuser%password //server/share --query="ALL:$&lt;p403 OR ALL:$&lt;p404 AND System.Kind:picture"'
+    </programlisting>
+
+  </refsect1>
+
+  <refsect1>
+    <title>参照</title>
+    <para>Adanced Query Syntax
+    <ulink url="https://learn.microsoft.com/en-gb/windows/win32/search/-search-3x-advancedquerysyntax">
+    https://learn.microsoft.com/en-gb/windows/win32/search/-search-3x-advancedquerysyntax </ulink>
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>バージョン</title>
+
+    <para>このマニュアルは、Samba バージョン &doc.version; 用である。</para>
+  </refsect1>
+
+  <refsect1>
+    <title>著者</title>
+
+	<para>オリジナルの Samba ソフトウェアと関連ユーティリティは、Andrew
+	Tridgell によって作成された。現在 Samba は、Samba Team によって Linux
+	カーネルの開発と同様に、オープンソースプロジェクトとして開発されている。
+	</para>
+
+    <para>wspsearch マニュアルページは Noel Power によって作成された。</para>
+  </refsect1>
+
+<refsect1>
+	<title>日本語訳</title>
+	<para>このマニュアルページは Samba 4.20.0 - 4.20.0 に対応する。</para>
+        <para>このドキュメントの Samba 4.20.0 - 4.20.0 対応の翻訳は 太田俊哉(ribbon@samba.gr.jp)によって行われた。</para>
+</refsect1>
+</refentry>
