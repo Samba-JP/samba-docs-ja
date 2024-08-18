@@ -6,9 +6,6 @@
 	<refentrytitle>vfs_fruit</refentrytitle>
 	<manvolnum>8</manvolnum>
 	<refmiscinfo class="source">Samba</refmiscinfo>
-<!-- 原文 samba-4.6.6
-	<refmiscinfo class="manual">System Administration tools</refmiscinfo>
--->
 	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
 	<refmiscinfo class="version">&doc.version;</refmiscinfo>
 </refmeta>
@@ -16,9 +13,6 @@
 
 <refnamediv>
 	<refname>vfs_fruit</refname>
-<!-- 原文 samba-4.6.6
-	<refpurpose>Enhanced OS X and Netatalk interoperability</refpurpose>
--->
 	<refpurpose>OS X と Netatalk との相互運用性を強化</refpurpose>
 </refnamediv>
 
@@ -29,16 +23,8 @@
 </refsynopsisdiv>
 
 <refsect1>
-<!-- 原文 samba-4.6.6
-	<title>DESCRIPTION</title>
--->
 	<title>説明</title>
 
-<!-- 原文 samba-4.6.6
-	<para>This VFS module is part of the
-	<citerefentry><refentrytitle>samba</refentrytitle>
-	<manvolnum>7</manvolnum></citerefentry> suite.</para>
--->
 	<para>この VFS モジュールは
 	<citerefentry><refentrytitle>samba</refentrytitle>
 	<manvolnum>7</manvolnum></citerefentry> システムの一部である。</para>
@@ -147,9 +133,6 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.6.6
-	<title>GLOBAL OPTIONS</title>
--->
 	<title>グローバルオプション</title>
 
 <!-- 原文 samba-4.6.6
@@ -170,8 +153,8 @@
 	      <emphasis>yes</emphasis>. This extension enhances
 	      several deficiencies when connecting from Macs:</para>
 -->
-	      <para>グローバルオプション。Appleの コードネーム AAPL の、SMB2+ 拡張を
-	      有効にするかどうかを指定する。規定値では、
+	      <para><emphasis>グローバル</emphasis>オプション。Appleの コードネーム
+	       AAPL の、SMB2+ 拡張を有効にするかどうかを指定する。既定値は、
 	      <emphasis>yes</emphasis> である。この拡張は、Mac からの接続時に
 	      いくつかの足らない機能を補う:</para>
 
@@ -208,7 +191,7 @@
 	      default:</para>
 -->
 	      <para>ディレクトリ一覧表示時に、特定の Mac メタデータの計算を無効
-	      にするときに使う、共有単位のオプション群がある。既定値では
+	      にするときに使う、共有単位のオプション群がある。既定では
 	      すべて有効である:</para>
 
 	      <itemizedlist>
@@ -216,6 +199,8 @@
 		<listitem><para>readdir_attr:aapl_finder_info = true | false</para></listitem>
 		<listitem><para>readdir_attr:aapl_max_access = true | false</para></listitem>
 	      </itemizedlist>
+
+	      <para>以下は上記オプションの説明である。</para>
 
 	    </listitem>
 	  </varlistentry>
@@ -228,8 +213,9 @@
 	      querying and modifying the UNIX mode of directory entries via NFS
 	      ACEs is enabled, default <emphasis>yes</emphasis>.</para>
 -->
-	      <para>NFS ACE 経由での、ディレクトリエントリの UNIX モードを問合せ/変更する
-	      機能を有効にするかどうかの指定で、既定値は <emphasis>yes</emphasis>。 </para>
+	      <para>NFS ACE 経由での、ディレクトリエントリの UNIX モードを問合せ/変更
+	      のサポートを有効にするかどうかを指定する<emphasis>グローバル</emphasis>
+	      オプション。既定値は <emphasis>yes</emphasis>。 </para>
 	    </listitem>
 	  </varlistentry>
 
@@ -244,42 +230,13 @@
 	      client while the server does the copy.</para>.
 	      <para>The default is <emphasis>no</emphasis>.</para>
 -->
-	    <para>OS X 固有の、すべての付属するメタデータと一緒にファイル全体
-	    コピーを要求する copychunk ioctl を有効にするかの指定。</para>
+	    <para>OS X 固有の、添付された全てのメタデータと一緒にファイル全体の
+	    コピーを要求する copychunk ioctl を有効にするかを指定する
+	    <emphasis>グローバル</emphasis>オプション。</para>
 	    <para>注意: copyfile 要求は、サーバーがコピーを行っている間は
 	    クライアントに対してブロックされることに注意。</para>
 	    <para>既定値は <emphasis>no</emphasis> である。</para>
 	  </listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-	    <term>fruit:zero_file_id = yes | no</term>
-	    <listitem>
-<!-- Samba 4.17.0
-              <para>Whether to return zero to queries of on-disk file
-              identifier if the client has negotiated AAPL.</para>
-              <para>Mac applications and / or the Mac SMB client code expect the
-              on-disk file identifier to have the semantics of HFS+ Catalog Node
-              Identifier (CNID). Samba provides File-IDs based on a file's inode
-              number which gets recycled across file creation and deletion and
-              can therefore not be used for Mac client. Returning a file identifier of
-              zero causes the Mac client to stop using and trusting the file id
-              returned from the server.</para>
-              <para>The default is <emphasis>yes</emphasis>.</para>
--->
-	      <para>クライアントによる AAPL ネゴシエート
-              後に、ディスク上のファイル識別子の問い合わせに対してゼロを返すか
-              どうかを指定する。</para>
-	      <para>Mac アプリケーションや Mac SMB クライアントコードは、
-	      ディスク上のファイル識別子が HFS+ カタログノード識別子（HFS+
-	      Catalog Node Identifier; CNID）として機能することを想定している。
-	      Samba は、ファイルの i ノード番号に由来する File-ID を生成するが、
-	      これは、ファイルの作成と削除を通して再利用されるので、 Mac
-	      クライアントでは使用できない。
-	      ファイル識別子としてゼロが返ると、Mac クライアントはサーバーから
-	      返るファイル識別子を信用しなくなり、使わなくなる。</para>
-	      <para>既定値は <emphasis>yes</emphasis> である。</para>
-	    </listitem>
 	  </varlistentry>
 
 <!-- 原文 samba-4.6.7
@@ -303,40 +260,10 @@
             </listitem>
           </varlistentry>
 
-<!-- samba-4.19.0
-          <varlistentry>
-            <term>fruit:convert_adouble = yes | no</term>
-            <listitem>
-              <para>Whether an attempt shall be made to convert ._ AppleDouble
-              sidecar files to native streams (xattrs when using
-              vfs_streams_xattr). The main use case for this conversion is
-              transparent migration from a server config without streams support
-              where the macOS client created those AppleDouble sidecar
-              files.</para>
-              <para>The default is <emphasis>yes</emphasis>.</para>
-            </listitem>
-          </varlistentry>
--->
-          <varlistentry>
-            <term>fruit:convert_adouble = yes | no</term>
-            <listitem>
-              <para>._ AppleDouble sidecar ファイルをネイティブストリーム
-	      (vfs_streams_xattr を使用している場合は xattrs) に変換しようと
-	      するかどうか。この変換の主な使用例は、macOSクライアントが
-	      これらの AppleDouble sidecar ファイルを作成した
-	      ストリームサポートのないサーバ設定からの透過的な移行である。
-              </para>
-              <para>既定値は<emphasis>yes</emphasis>である。</para>
-            </listitem>
-          </varlistentry>
-
 	</variablelist>
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.6.6
-	<title>OPTIONS</title>
--->
 	<title>オプション</title>
 
 <!-- 原文 samba-4.6.6
@@ -365,6 +292,8 @@
 	      バグがあり、このオプションは 
 	      <emphasis>fruit:ressource</emphasis> 、すなわち2つの s が
 	      ついている形でも提供されている。</para>
+
+	      <para>設定:</para>
 
 	      <itemizedlist>
 <!-- 原文 samba-4.6.6
@@ -763,14 +692,87 @@
 	    </listitem>
 	  </varlistentry>
 	  
+	  <varlistentry>
+	    <term>fruit:zero_file_id = yes | no</term>
+	    <listitem>
+<!-- Samba 4.17.0
+              <para>Whether to return zero to queries of on-disk file
+              identifier if the client has negotiated AAPL.</para>
+              <para>Mac applications and / or the Mac SMB client code expect the
+              on-disk file identifier to have the semantics of HFS+ Catalog Node
+              Identifier (CNID). Samba provides File-IDs based on a file's inode
+              number which gets recycled across file creation and deletion and
+              can therefore not be used for Mac client. Returning a file identifier of
+              zero causes the Mac client to stop using and trusting the file id
+              returned from the server.</para>
+              <para>The default is <emphasis>yes</emphasis>.</para>
+-->
+	      <para>クライアントによる AAPL ネゴシエート
+              後に、ディスク上のファイル識別子の問い合わせに対してゼロを返すか
+              どうかを指定する。</para>
+	      <para>Mac アプリケーションや Mac SMB クライアントコードは、
+	      ディスク上のファイル識別子が HFS+ カタログノード識別子（HFS+
+	      Catalog Node Identifier; CNID）として機能することを想定している。
+	      Samba は、ファイルの i ノード番号に由来する File-ID を生成するが、
+	      これは、ファイルの作成と削除を通して再利用されるので、 Mac
+	      クライアントでは使用できない。
+	      ファイル識別子としてゼロが返ると、Mac クライアントはサーバーから
+	      返るファイル識別子を信用しなくなり、使わなくなる。</para>
+	      <para>既定値は <emphasis>yes</emphasis> である。</para>
+	    </listitem>
+	  </varlistentry>
 	  
+<!-- samba-4.19.0
+          <varlistentry>
+            <term>fruit:convert_adouble = yes | no</term>
+            <listitem>
+              <para>Whether an attempt shall be made to convert ._ AppleDouble
+              sidecar files to native streams (xattrs when using
+              vfs_streams_xattr). The main use case for this conversion is
+              transparent migration from a server config without streams support
+              where the macOS client created those AppleDouble sidecar
+              files.</para>
+              <para>The default is <emphasis>yes</emphasis>.</para>
+            </listitem>
+          </varlistentry>
+-->
+          <varlistentry>
+            <term>fruit:convert_adouble = yes | no</term>
+            <listitem>
+              <para>._ AppleDouble sidecar ファイルをネイティブストリーム
+	      (vfs_streams_xattr を使用している場合は xattrs) に変換しようと
+	      するかどうか。この変換の主な使用例は、macOSクライアントが
+	      これらの AppleDouble sidecar ファイルを作成した
+	      ストリームサポートのないサーバ設定からの透過的な移行である。
+              </para>
+              <para>既定値は<emphasis>yes</emphasis>である。</para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>fruit:validate_afpinfo = yes | no</term>
+            <listitem>
+              <para>
+	      Apple クライアントは、AFP_AfpInfo ストリームを使用して、構造化された
+	      ファイルメタデータを保存する。ストリームに保存されるマーシャリング
+	      されたデータの一部として、最初の8バイトにはいくつかのヘッダー情報が
+	      含まれる。Apple の SMB サーバーと Samba は、このヘッダーバイトを
+	      検証して、このストリームに対するクライアントの書き込み要求を処理
+	      する。検証が失敗した場合は、書き込みを失敗させる。この検証は
+	      一般的には正しいが、データ移行のシナリオによっては、クライアントが
+	      サードパーティの SMB サーバーから、何らかの理由でヘッダー情報が
+	      破損している Samba サーバーにデータを移行しようとする場合がある。
+	      このようなシナリオでの移行とヘッダーの修正を可能にするには、この
+	      オプションを<emphasis>no</emphasis>に設定して、検証を一時的に無効に
+	      できる。</para>
+	      <para>既定値は<emphasis>yes</emphasis>である。</para>
+            </listitem>
+          </varlistentry>
+
 	</variablelist>
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.6.6
-	<title>EXAMPLES</title>
--->
 	<title>例</title>
 
 <programlisting>
@@ -785,17 +787,8 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.6.6
-	<title>AUTHOR</title>
--->
 	<title>著者</title>
 
-<!-- 原文 samba-4.6.6
-	<para>The original Samba software and related utilities
-	were created by Andrew Tridgell. Samba is now developed
-	by the Samba Team as an Open Source project similar
-	to the way the Linux kernel is developed.</para>
--->
 	<para>
 	オリジナルの Samba ソフトウェアと関連するユーティリティは、Andrew
 	Tridgell によって作成された。現在 Samba は Samba Team に
@@ -806,7 +799,7 @@
 </refsect1>
 <refsect1>
     <title>日本語訳</title>
-    <para>このマニュアルページは Samba 4.19.0 - 4.19.0 に対応する。</para>
+    <para>このマニュアルページは Samba 4.20.0 - 4.20.0 に対応する。</para>
     <para>このドキュメントの翻訳は
     <itemizedlist>
         <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
