@@ -3,7 +3,7 @@
 <refentry id="vfs_linux_xfs_sgid.8" lang="ja">
 
 <refmeta>
-	<refentrytitle>vfs_syncops</refentrytitle>
+	<refentrytitle>vfs_linux_xfs_sgid</refentrytitle>
 	<manvolnum>8</manvolnum>
 	<refmiscinfo class="source">Samba</refmiscinfo>
 	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
@@ -45,9 +45,9 @@
 </refsect1>
 
 <refsect1>
-	<title>使用例</title>
+	<title>例</title>
 
-	<para>[share]に対するsyncops機能を追加:</para>
+	<para>[share]に対する linux_xfs_sgid 機能を追加:</para>
 <programlisting>
         <smbconfsection name="[share]"/>
 	<smbconfoption name="vfs objects">linux_xfs_sgid</smbconfoption>
@@ -72,7 +72,7 @@
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは、Samba 4.9.0 - 4.19.0 に対応する。</para>
+	<para>このマニュアルページは、Samba 4.9.0 - 4.20.0 に対応する。</para>
     <para>このドキュメントの翻訳は
 		<itemizedlist>
 			<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
