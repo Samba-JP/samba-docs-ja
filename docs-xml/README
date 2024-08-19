@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2024/8/18
+						2024/8/20
 						日本Sambaユーザー会
 
 
@@ -129,12 +129,13 @@ manpages、html、htmlman が実行可能になります。これ以外にも ma
 ======================================================================
 XMLのパラメータのみの修正(翻訳に影響なし)については、記載を省略しています。
 
-2024/08/18 Ver 4.20.1-1 4.20.1 対応
+2024/08/20 Ver 4.20.1-1 4.20.1 対応
 	   idmap_ad.8.xml,idmap_nss.8.xml,ntlm_auth.1.xml,
 	   net.8.xml,samba-tool.8.xml,smbcacls.1.xml,vfs_fruit.8.xml,
 	   vfs_linux_xfs_sgid.8.xml
 	   変更
-	   wspsearch.1.xml
+	   wspsearch.1.xml,misc/wspproperties.xml,
+	   protocol/dcerpcendpointservers.xml
 	   追加
 	   削除
 
