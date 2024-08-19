@@ -1,0 +1,56 @@
+<samba:parameter name="wsp property file"
+                 context="G"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+	<para>
+	<smbconfoption name="wsp property file"/> パラメータ。
+	このパラメータは、追加の WSP Windows 検索プロトコルプロパティが
+	格納されるファイルを指定する。ファイルの形式は、カンマで区切られた
+	10列で構成されるcsvである。最初の3列は必須である。その他の列は
+	存在することが望ましいが、必須ではない。
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>Property Name</term>
+			<listitem><para>プロパティ名、たとえば System.ItemUrl。</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>GUID</term>
+			<listitem><para>プロパティが属するプロパティセットを識別する guid。.</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>prop ID</term>
+			<listitem><para>GUID と共にプロパティを一意に識別する番号。</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>inInverted Index</term>
+			<listitem><para>TRUE に設定すると、プロパティにインデックスが作成される。</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>isColumn</term>
+			<listitem><para>TRUE に設定すると、プロパティは WSP クエリから行で返されることができるようになる。</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>type</term>
+			<listitem><para>
+			<emphasis>Boolean</emphasis>,<emphasis>Buffer</emphasis>,<emphasis>Byte</emphasis>,<emphasis>DateTime</emphasis>,<emphasis>Double</emphasis>,<emphasis>Int32</emphasis>,<emphasis>String</emphasis>,<emphasis>UInt16</emphasis>,<emphasis>UInt32</emphasis>,<emphasis>UInt64</emphasis>	のうちのどれか </para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>MaxSize</term>
+			<listitem><para>格納されるものの最大サイズ。</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>Vector Property</term>
+			<listitem><para>プロパティが複数の値を持つ場合は TRUE とする。</para></listitem>
+                </varlistentry>
+		<varlistentry>
+			<term>Description</term>
+			<listitem><para>プロパティが何に使われるかという説明。</para></listitem>
+                </varlistentry>
+	</variablelist>
+
+
+</description>
+<value type="default"/>
+</samba:parameter>
