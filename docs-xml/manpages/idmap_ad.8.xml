@@ -78,9 +78,6 @@
 </refsynopsisdiv>
 
 <refsect1>
-<!-- 原文 samba-4.6.7
-	<title>IDMAP OPTIONS</title>
--->
 	<title>IDMAP オプション</title>
 
 	<variablelist>
@@ -311,7 +308,7 @@
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.20.0 - 4.20.0  に対応する。</para>
+	<para>このマニュアルページは Samba 4.20.1 - 4.20.1  に対応する。</para>
         <para>このドキュメントの翻訳は
 	<itemizedlist>
 		<listitem><para>武田保真</para></listitem>
