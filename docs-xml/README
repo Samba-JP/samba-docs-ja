@@ -135,7 +135,8 @@ XMLのパラメータのみの修正(翻訳に影響なし)については、記
 	   vfs_linux_xfs_sgid.8.xml
 	   変更
 	   wspsearch.1.xml,misc/wspproperties.xml,
-	   protocol/dcerpcendpointservers.xml
+	   protocol/dcerpcendpointservers.xml,
+	   protocol/smb3sharecaps.xml
 	   追加
 	   削除
 
