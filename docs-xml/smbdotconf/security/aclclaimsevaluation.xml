@@ -1,0 +1,41 @@
+<samba:parameter name="acl claims evaluation"
+                 context="G"
+                 type="enum"
+                 enumlist="enum_acl_claims_evaluation"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+        <para>
+          このオプションは、Active Directory 要求に関して、Samba で
+	  セキュリティ記述子の評価を処理する方法を制御する。Windows 2012
+	  で導入された AD 要求は、基本的に管理者が定義する key-value ペアで
+	  あり、Active Directory(Kerberos PACを介して通信) とセキュリティ
+	  記述子自体の両方で設定できる。
+	</para>
+
+ 	<para>
+	  Active Directory 要求は Samba 4.20 で新しくなった。
+	  要求はセキュリティ記述子内の非常に柔軟な式言語に対して
+	  評価されるため、このオプションは、管理者が必要とする場合に
+	  このロジックを無効にするメカニズムを提供する。</para>
+
+	  <para>この既定の動作では、AD DC でのみ要求の評価が有効になる。また、
+	  AD DC での要求の評価は、DC の機能レベルが 2012 以上の場合にのみ
+	  有効になる。 <smbconfoption name="ad dc functional
+	level"/> を参照のこと。</para>
+
+	<para>取り得る値は以下の通り:</para>
+	<itemizedlist>
+	  <listitem>
+	    <para><constant>AD DC only</constant>: Samba AD
+	    DC (DC 機能レベルが 2012 あるいはそれ以降用)用に有効化。</para>
+	  </listitem>
+	  <listitem>
+	    <para><constant>never</constant>: 全ての場合で無効。
+	    このオプションは、AD DC で Windows 2012R2 機能レベルの認証
+	    ポリシー機能と認証ポリシーサイロ機能の一部を無効にする。</para>
+	  </listitem>
+	</itemizedlist>
+</description>
+
+<value type="default">AD DC only</value>
+</samba:parameter>
