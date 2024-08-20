@@ -136,7 +136,7 @@ XMLのパラメータのみの修正(翻訳に影響なし)については、記
 	   変更
 	   wspsearch.1.xml,misc/wspproperties.xml,
 	   protocol/dcerpcendpointservers.xml,
-	   protocol/smb3sharecaps.xml
+	   protocol/smb3sharecaps.xml,security/aclclaimsevaluation.xml
 	   追加
 	   削除
 
