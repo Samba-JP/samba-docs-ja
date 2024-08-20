@@ -10,6 +10,7 @@
 	指定する。
 	このパラメーターの値を1より大きくすると、いくらか遅い場合、
 	大量の同時 winbind 要求に対してスケーラビリティを改善できる。
+	このパラメータを変更する時には winbindd の再起動が必要である。
 	</para>
 	<para>
 	  もしも、<smbconfoption name="winbind offline logon"/>
