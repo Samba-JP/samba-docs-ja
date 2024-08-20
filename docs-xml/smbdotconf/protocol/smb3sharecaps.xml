@@ -1,0 +1,208 @@
+<samba:parameter name="smb3 share cap:CONTINUOUS AVAILABILITY"
+                 context="S"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+	<para>
+	  SMB3 プロトコルでは SMB2_SHARE_CAP_CONTINUOUS_AVAILABILITY フラグが
+	  導入された。これは、クライアントがサーバ(またはサーバのクラスタ)とは
+	  異なる expectation を持てることを意味する。
+	</para>
+
+	<para>
+	  注意:このオプションはディスク共有に対してのみ適用される。
+	</para>
+
+	<para>
+	  ctdb クラスタでは、共有は継続的に使用でるが、Windows クライアントでは、
+	  これとグローバル永続ハンドルのサポートが混同している。
+	</para>
+
+	<para>
+	  SMB2_SHARE_CAP_CONTINUOUS_AVAILABILITY が存在する場合は、
+	  SMB2_CAP_PERSISTENT_HANDLESがなくても、永続ハンドルが要求される。
+	</para>
+
+	<para>
+	  そして、SMB2_SHARE_CAP_CLUSTER を有効にするには、
+	  SMB2_SHARE_CAP_CONTINUOUS_AVAILABILITY が必要である。
+	</para>
+
+	<para>そのため、永続的なハンドルをサポートするまでは、既定で
+	これをアナウンスしない方がよい。
+	</para>
+
+	<para> <smbconfoption name="smb3 share cap:CONTINUOUS AVAILABILITY"/>
+	オプションを使用して、SMB2_SHARE_CAP_CONTINUOUS_AVAILABILITY の
+	アナウンスを強制することができる。
+	</para>
+
+	<para>
+	警告: 何をしようか分かっている場合にのみこれを使うこと!
+	</para>
+
+	<programlisting>
+	smb3 share cap:CONTINUOUS AVAILABILITY = yes
+	</programlisting>
+</description>
+<related>smb3 share cap:CLUSTER</related>
+</samba:parameter>
+
+<samba:parameter name="smb3 share cap:SCALE OUT"
+                 context="S"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+        <para>
+          SMB3 プロトコルでは、SMB2_SHARE_CAP_SCALEOUT フラグが導入された。
+	  これは、クライアントが複数のサーバのクラスタから異なる
+	  expectation を持ち、再試行/再接続の動作を変更できることを意味する。
+	</para>
+
+	<para>
+	注意:このオプションはディスク共有に対してのみ適用される。.
+	</para>
+
+	<para>
+	  ctdb クラスタには複数のアクティブノードがあるので、
+	  クラスタ内に MB2_SHARE_CAP_SCALEOUT をアナウンスする。
+	</para>
+
+	<para> <smbconfoption name="smb3 share cap:SCALE OUT"/>
+	オプションを使用すると、<smbconfoption name="clustering"/>が
+	yes の場合でも、SMB2_SHARE_CAP_SCALEOUT のアナウンスを無効にできる。
+	</para>
+
+	<programlisting>
+	clustering = yes
+	smb3 share cap: SCALE OUT = no
+	</programlisting>
+</description>
+<related>clustering</related>
+</samba:parameter>
+
+<samba:parameter name="smb3 share cap:CLUSTER"
+                 context="S"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+        <para>
+          SMB3 プロトコルでは、SMB2_SHARE_CAP_CLUSTER フラグが導入された。
+	  これは、[MS-SWN] プロトコルを使用してサーバークラスタを監視する
+	  ために、すべてのクラスタノードが監視サービスを提供することを
+	  クライアントが期待できることを意味する。
+	</para>
+
+        <para>
+          注意:このオプションはディスク共有に対してのみ適用される。
+	</para>
+
+	<para>
+	  rpcd_witness がアクティブになるのは、<citerefentry>
+	  <refentrytitle>samba-dcerpcd</refentrytitle><manvolnum>8</manvolnum></citerefentry>が
+	  オンデマンドヘルパーとして起動されておらず、ctdb クラスタ内でのみ起
+	  動されている場合だけである。
+	</para>
+
+	<para>
+	  そのため、<smbconfoption name="clustering"/>が yes で、
+	  <smbconfoption name="rpc start on demand helpers"/>が no の場合にのみ、
+	  SMB2_SHARE_CAP_CLUSTERをアナウンスする。
+	</para>
+
+	<para>
+	  <smbconfoption name="smb3 share cap:SCALE OUT"/>オプションを使用すると、
+	  <smbconfoption name="clustering"/>および
+	  <smbconfoption name="rpc start on demand helpers"/>とは別に、
+	  SMB2_SHARE_CAP_CLUSTER のアナウンスを制御できる。
+	</para>
+
+	<para>SMB2_SHARE_CAP_CLUSTER のアナウンスを無効化する例:
+	</para>
+	<programlisting>
+	clustering = yes
+	rpc start on demand helpers = no
+	smb3 share cap: CLUSTER = no
+	</programlisting>
+
+	<para>SMB2_SHARE_CAP_CLUSTER のアナウンスを強制する例:
+	</para>
+	<programlisting>
+	smb3 share cap: CLUSTER = yes
+	</programlisting>
+
+	<para>
+	  Windows クライアントに witness サービスを使わせる例。
+	  <smbconfoption name="smb3 share cap:CONTINUOUS AVAILABILITY"/> オプションを
+	  参照し、自分自身の責任において使用すること!:
+	</para>
+
+	<programlisting>
+	clustering = yes
+	rpc start on demand helpers = no
+	# This is the default with the above:
+	# smb3 share cap: CLUSTER = yes
+	#
+	# Use at you own risk!
+	smb3 share cap: CONTINUOUS AVAILABILITY = yes
+	</programlisting>
+</description>
+<related>clustering</related>
+<related>rpc start on demand helpers</related>
+<related>smb3 share cap:CONTINUOUS AVAILABILITY</related>
+<related>smb3 share cap:ASYMMETRIC</related>
+</samba:parameter>
+
+<samba:parameter name="smb3 share cap:ASYMMETRIC"
+                 context="S"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+        <para>
+          SMB3_02 プロトコルでは、SMB2_SHARE_CAP_ASYMMETRIC フラグが導入された。
+	  これは、クライアントがその動作を変更し、分離されたトランスポート接続と
+	  共有の witness 登録を使用することを意味する。これは、クライアントが
+	  個々の共有に対して異なるクラスタノードに接続できることを意味し、
+	  <command>net witness share-move</command>を使用してノードの
+	  使用を制御できる。
+	</para>
+
+	<para>
+          注意:このオプションはディスク共有に対してのみ適用される。
+	</para>
+
+	<para>
+	  ctdb クラスタ内の共有は対称的に設計されているため、既定では
+	  SMB2_SHARE_CAP_ASYMMETRIC はアナウンスされない。
+	</para>
+
+	<para><smbconfoption name="smb3 share cap:ASYMMETRIC"/> オプションを
+	オプションを使用して、SMB2_SHARE_CAP_ASYMMETRIC のアナウンスを
+	強制することができる。
+	</para>
+
+	<para>SMB2_SHARE_CAP_ASYMMETRIC	のアナウンスを強制する例:
+	</para>
+
+	<programlisting>
+	smb3 share cap: ASYMMETRIC = yes
+	</programlisting>
+
+	<para>Windows クライアントが witness サービスを使用できるようにする例。
+	<smbconfoption name="smb3 share cap:CONTINUOUS AVAILABILITY"/> オプションを
+	参照し、自分自身の責任において使用すること!:
+	</para>
+
+	<programlisting>
+	clustering = yes
+	rpc start on demand helpers = no
+	# This is the default with the above:
+	# smb3 share cap: CLUSTER = yes
+	#
+	# Use at you own risk!
+	smb3 share cap: CONTINUOUS AVAILABILITY = yes
+	smb3 share cap: ASYMMETRIC = yes
+	</programlisting>
+</description>
+<related>smb3 share cap:CLUSTER</related>
+</samba:parameter>
