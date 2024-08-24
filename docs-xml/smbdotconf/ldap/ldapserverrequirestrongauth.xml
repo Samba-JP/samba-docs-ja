@@ -7,20 +7,48 @@
 	<para>
 	  <smbconfoption name="ldap server require strong auth"/>は、ldap サーバが
 	  ldap 通信データに対して、署名付きか、署名+暗号化(シールされているか)を定義する。
-	  設定可能な値は<emphasis>no</emphasis>, <emphasis>allow_sasl_over_tls</emphasis>
+	  設定可能な値は<emphasis>no</emphasis>,
+	  <emphasis>allow_sasl_without_tls_channel_bindings</emphasis>
 	  と<emphasis>yes</emphasis>である。
 	</para>
 
+        <para>Windows には
+	<emphasis>HKLM\SYSTEM\CurrentControlSet\Services\NTDS\Parameters\</emphasis>
+	配下に<emphasis>LdapEnforceChannelBinding</emphasis>がある。
+        </para>
+
 	<para>値<emphasis>no</emphasis>は、すべての通信において、シンプルおよび sasl
-	バインド を許可する。</para>
+	バインド を許可する。これは LdapEnforceChannelBinding=0 と一致する。</para>
 
-	<para>値<emphasis>allow_sasl_over_tls</emphasis> は、TLS で暗号化された接続上で、
-	シンプルおよび sasl バインド(署名またはシールなしでの)を許可する。暗号化されて
-	いない接続は、署名またはシールされた sasl バインドのみ許可する。</para>
+        <para><emphasis>allow_sasl_without_tls_channel_bindings</emphasis>の値
+	は、TLS で暗号化された接続上で、シンプルおよび sasl バインド
+	(署名またはシールなしでの)を許可する。失敗した tls チャネルバインディングは
+	無視されるため、<emphasis>yes</emphasis>の値が使用できない場合にのみ使用すること。
+	暗号化されていない接続では、sign または seal を使用した sasl バインド
+	だけが許可される。これは、LdapEnforceChannelBinding=1 に一致する。
+        </para>
+	
+        <para>
+	  Samba で tls チャネルバインディングがサポートされる前は、tls チャネル
+	  バインディングなしで sasl バインディングを許可するために、
+	  <emphasis>allow_sasl_over_tls</emphasis>の値が使えた。
+	  これは、<emphasis>yes</emphasis>という値が tls チャネルバインディングを
+	  使用した sasl バインドが可能になったため誤解を招くようになった。
+	  設定は、<emphasis>yes</emphasis>か、本当に必要な場合は、代わりに
+	  <emphasis>allow_sasl_without_tls_channel_bindings</emphasis>に
+	  変更する必要がある。現在、<emphasis>allow_sasl_over_tls</emphasis>は
+	  <emphasis>allow_sasl_without_tls_channel_bindings</emphasis>の
+	  エイリアスにすぎないが、将来のバージョンでは削除される予定である。
+        </para>
 
-	<para>値<emphasis>yes</emphasis>は、TLS で暗号化された接続上で、シンプルバインド
-	のみ許可する。暗号化されていない接続は、署名またはシール付きの sasl バインドのみ
-	許可する。</para>
+	<para>
+	  <emphasis>yes</emphasis>の値は、単純なバインドのみが許可され、
+	  sasl は TLS 暗号化接続上で正しい TLS チャネルバインディングを
+	  使用してバインドする。TLS チャネルバインディングを使用しない
+	  sasl バインドは許可されない。暗号化されていない接続では、sign または
+	  seal を使用した sasl バインドのみが許可される。これは
+	  LdapEnforceChannelBinding=2 に一致する。
+	</para>
 </description>
 <value type="default">yes</value>
 </samba:parameter>
