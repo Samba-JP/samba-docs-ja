@@ -2305,9 +2305,30 @@ are made to the computer AD account.
 </refsect2>
 
 <refsect2>
-<title>ADS KEYTAB <replaceable>ADD</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
+<title>(削除済み!)ADS KEYTAB <replaceable>ADD</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
 
-<!-- Samba 4.9.0
+<!-- Samba 4.21.2
+<para>
+This command is no longer available in Samba 4.21.0 and newer. See <smbconfoption name="sync machine passw
+ord to keytab"/> for replacement.
+</para>
+
+To replace e.g. call of
+<programlisting>
+net ads keytab add wurst/brot@REALM
+</programlisting>
+Add to smb.conf:
+<programlisting>
+sync machine password to keytab = /path/to/keytab1:spns=wurst/brot@REALM:machine_password
+</programlisting>
+and run:
+<programlisting>
+net ads keytab create
+</programlisting>
+
+<para>
+Original description of this command:
+</para>
 <para>
 Adds a new keytab entry, the entry can be either;
   <variablelist>
@@ -2347,6 +2368,30 @@ preserve the bevhaviour of older clients 'net ads keytab ad_update_ads' is
 available.
 </para>
 -->
+
+<para>
+このコマンドは Samba 4.21.0 では無効である。代替については
+<smbconfoption name="sync machine password to keytab"/> を参照のこと。
+</para>
+
+<para>
+置き換えは、たとえば
+<programlisting>
+net ads keytab add wurst/brot@REALM
+</programlisting>
+は、smb.conf に以下のように追加し:
+<programlisting>
+sync machine password to keytab = /path/to/keytab1:spns=wurst/brot@REALM:machine_password
+</programlisting>
+以下を実行する:
+<programlisting>
+net ads keytab create
+</programlisting>
+</para>
+
+<para>
+このコマンドの元の説明は以下の通り:
+</para>
 <para>
 新しい keytab エントリを追加する。エントリは以下のどれかである;
   <variablelist>
@@ -2388,16 +2433,87 @@ available.
 </refsect2>
 
 <refsect2>
-<title>ADS KEYTAB <replaceable>ADD_UPDATE_ADS</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
+<title>(削除済み!) ADS KEYTAB <replaceable>DELETE</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
 
 <para>
-<!-- Samba 4.9.0
+このコマンドは Samba 4.21.0 では無効である。代替については
+<smbconfoption name="sync machine password to keytab"/> を参照のこと。
+</para>
+
+<para>
+置き換えはたとえば
+<programlisting>
+net ads keytab delete wurst/brot@REALM
+</programlisting>
+は、<smbconfoption name="sync machine password to keytab"/> principal
+"wurst/brot@REALM" を削除し、以下を実行する:
+<programlisting>
+net ads keytab create
+</programlisting>
+
+</para>
+</refsect2>
+
+
+<refsect2>
+<title>(削除済み!)ADS KEYTAB <replaceable>ADD_UPDATE_ADS</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
+
+<!-- Samba 4.21.0
+<para>
+This command is no longer available in Samba 4.21.0 and newer. See <smbconfoption name="sync machine password to keytab"/> for replacement.
+</para>
+
+To replace e.g. call of
+<programlisting>
+net ads keytab add_update_ads wurst/brot@REALM
+</programlisting>
+Add to smb.conf:
+<programlisting>
+sync machine password to keytab = /path/to/keytab2:sync_spns:machine_password
+</programlisting>
+and run:
+<programlisting>
+net ads setspn add wurst/brot@REALM
+net ads keytab create
+</programlisting>
+
+<para>
+Original description of this command:
+</para>
+
+<para>
 Adds a new keytab entry (see section for net ads keytab add). In addition to
 adding entries to the keytab file corrosponding Windows SPNs are created
 from the entry passed to this command. These SPN(s) added to the AD computer
 account object associated with the client machine running this command for
 the following entry types;
 -->
+<para>
+このコマンドは Samba 4.21.0 では無効である。代替については
+<smbconfoption name="sync machine password to keytab"/> を参照のこと。
+</para>
+
+<para>
+置き換えはたとえば
+<programlisting>
+net ads keytab add_update_ads wurst/brot@REALM
+</programlisting>
+は、smb.confに:
+<programlisting>
+sync machine password to keytab = /path/to/keytab2:sync_spns:machine_password
+</programlisting>
+を追加し、以下を実行する:
+<programlisting>
+net ads setspn add wurst/brot@REALM
+net ads keytab create
+</programlisting>
+</para>
+
+<para>
+このコマンドの元の説明は以下の通り:
+</para>
+
+<para>
 新しい keytab エントリを追加する(net ads keytab add 節を参照)。
 keytab ファイルにエントリを追加する事に加えて、関連した Windows SPN は
 このコマンドに渡されたパスから生成される。SPN は、以下のエントリタイプに対して、
@@ -5607,7 +5723,7 @@ net witness force-response   json 入力に基づいて AsyncNotify 応答を強
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.20.1 - 4.20.4 に対応する。</para>
+	<para>このマニュアルページは Samba 4.21.2 - 4.21.2 に対応する。</para>
 
         <para>このドキュメントの Samba 3.0.0 対応の翻訳は
 	<itemizedlist>
@@ -5617,7 +5733,7 @@ net witness force-response   json 入力に基づいて AsyncNotify 応答を強
        によって行なわれた。</para>
 
 	<para>Samba 3.0.23 - Samba 3.0.24 対応の翻訳は、たかはしもとのぶ (monyo@samba.gr.jp) によって行なわれた。</para>
-	<para>Samba 3.2.4 - 4.20.4 対応の翻訳は、
+	<para>Samba 3.2.4 - 4.21.2 対応の翻訳は、
 	  <itemizedlist>
 	    <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
 	    <listitem><para>matsuand(michio_matsuyama@yahoo.co.jp)</para></listitem>
