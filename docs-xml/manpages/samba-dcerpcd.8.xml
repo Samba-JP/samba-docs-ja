@@ -175,7 +175,8 @@
 		<varlistentry>
 		<term>--ready-signal-fd=&lt;fd&gt;</term>
 		<listitem><para>このfdを使用して、サービスの準備状況を
-		<command>smbd</command>に報告する。内部使用のみ。 </para></listitem>
+		<command>smbd</command> または <command>winbind</command> に
+		報告する。内部使用のみ。 </para></listitem>
 		</varlistentry>
 	</variablelist>
 </refsect1>
@@ -191,7 +192,7 @@
 
 <refsect1>
         <title>日本語訳</title>
-        <para>このドキュメントは、Samba 4.16.0 - 4.20.4 に対応する。</para>
+        <para>このドキュメントは、Samba 4.21.2 - 4.21.2 に対応する。</para>
     <para>このドキュメントの翻訳は
         <itemizedlist>
         <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
