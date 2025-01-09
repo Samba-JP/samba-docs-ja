@@ -1404,21 +1404,6 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--user-allowed-to-authenticate-from-silo</term>
-                        <listitem>
-                                <para>
-					ユーザ認証用デバイスが割り当てられ、
-					指定されたサイロのメンバシップが許可
-					されている場合、ユーザーは認証を許可される。
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-					--user-allowed-to-authenticate-fromとともに
-					使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
                         <term>--user-allowed-to-authenticate-to=SDDL</term>
                         <listitem>
                                 <para>
@@ -1434,41 +1419,6 @@
                                 </para>
                                 <para>
                                         SDDL の例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AO)}))</constant>
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--user-allowed-to-authenticate-to-by-group=GROUP</term>
-                        <listitem>
-                                <para>
-                                        <constant>GROUP</constant>.
-					このポリシーの対象となるネットワーク
-					サービスを提供するユーザーアカウントは、
-					指定された<constant>GROUP</constant>の
-					メンバーである他のアカウントからの
-					アクセスのみが許可される。
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-                                        --user-allowed-to-authenticate-to とともに
-                                        使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--user-allowed-to-authenticate-to-by-silo=SILO</term>
-                        <listitem>
-                                <para>
-					このポリシーの対象となるネットワーク
-					サービスを提供するユーザーアカウントには、
-					指定された SILO に割り当てられ、そのメ
-					ンバーシップに許可された(その認証条件を満たす)
-					他のアカウントからのアクセスのみが許可される。
-                                </para>
-                                <para>
-                                        この属性は、SDDLを手書きする必要性を回避し、
-                                        --user-allowed-to-authenticate-to とともに
-                                        使用することはできない。
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -1510,40 +1460,6 @@
                         </listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--service-allowed-to-authenticate-from-device-silo=SILO</term>
-                        <listitem>
-                                <para>
-					サービスアカウント(管理対象サービスアカウント、
-					グループ管理対象サービスアカウントなど)は、
-					認証元のデバイスが割り当てられ、指定された
-					<constant>SILO</constant>のメンバーシップが
-					許可されている場合に、認証を許可される。
-				</para>
-                                <para>
-					 この属性は、SDDLを手書きする必要性を回避し、
-                                        --service-allowed-to-authenticate-from とともに
-                                        使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--service-allowed-to-authenticate-from-device-group=GROUP</term>
-                        <listitem>
-                                <para>
-					サービスアカウント(Managed Service Account、
-					Group Managed Service Accountなど)は、
-					認証元のデバイスが指定された
-					<constant>group</constant>のメンバーである
-					場合、認証を許可される。
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-                                        --service-allowed-to-authenticate-from とともに
-                                        使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
                         <term>--service-allowed-to-authenticate-to=SDDL</term>
                         <listitem>
                                 <para>
@@ -1559,41 +1475,6 @@
                                 </para>
                                 <para>
                                         SDDL の例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AO)}))</constant>
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--service-allowed-to-authenticate-to-by-group=GROUP</term>
-                        <listitem>
-                                <para>
-					サービスアカウント(Managed Service Account、
-					Group Managed Service Accountなど)は、
-					指定された<constant>GROUP</constant>の
-					メンバである他のアカウントによるアクセス
-					のみが許可される。
-
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-                                        --service-allowed-to-authenticate-to とともに
-                                        使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--service-allowed-to-authenticate-to-by-silo=SILO</term>
-                        <listitem>
-                                <para>
-					サービス・アカウント(管理対象サービスアカウント、
-					グループ管理対象サービスアカウントなど)は、
-					指定された SILO に割り当てられ、その
-					メンバーシップを付与された(その認証条件を
-					満たす)他のアカウントによってのみアクセスが許可される。
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-                                        --service-allowed-to-authenticate-to とともに
-                                        使用することはできない。
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -1624,42 +1505,6 @@
                                 </para>
                         </listitem>
                 </varlistentry>
-                <varlistentry>
-                        <term>--computer-allowed-to-authenticate-to-by-group=GROUP</term>
-                        <listitem>
-                                <para>
-				       コンピュータアカウント(たとえば server
-				       または workstation)は、
-				       指定された<constant>GROUP</constant>の
-				       メンバである他のアカウントによるアクセス
-				       のみが許可される。
-
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-                                        --computer-allowed-to-authenticate-to とともに
-                                        使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--computer-allowed-to-authenticate-to-by-silo=SILO</term>
-                        <listitem>
-                                <para>
-				       コンピュータアカウント(たとえば server
-				       または workstation)は、指定された SILO に
-				       割り当てられ、そのメンバーシップを付与
-				       された(その認証条件を満たす)他の
-				       アカウントによってのみアクセスが許可される。
-                                </para>
-                                <para>
-					この属性は、SDDLを手書きする必要性を回避し、
-                                        --computer-allowed-to-authenticate-to とともに
-                                        使用することはできない。
-                                </para>
-                        </listitem>
-                </varlistentry>
-
         </variablelist>
 </refsect3>
 <!-- samba-4.19.0
@@ -1953,38 +1798,36 @@
 
 <refsect3>
 	<title>domain auth policy user-allowed-to-authenticate-from set</title>
-	<para>Set the user-allowed-to-authenticate-from property by scenario.</para>
+	<para>シナリオによって user-allowed-to-authenticate-from プロパティを設定する。</para>
 	<variablelist>
 		<varlistentry>
 			<term>-H, --URL</term>
 			<listitem><para>
-				LDB URL for database or target server.
+				データベースまたはターゲットサーバへの LDB URL。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--name</term>
 			<listitem><para>
-				Name of authentication policy.
+				認証ポリシーの名前。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--by-group=GROUP</term>
 			<listitem><para>
-				User is allowed to
-				authenticate, if the device they
-				authenticate from is assigned
-				and granted membership of a
-				given <constant>GROUP</constant>.
+			  認証元のデバイスが指定された
+			  <constant>GROUP</constant>のメンバーシップに
+			  割り当てられ、許可されている場合、ユーザ
+			  は認証が許可される。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--silo=SILO</term>
 			<listitem><para>
-				User is allowed to
-				authenticate, if the device they
-				authenticate from is assigned
-				and granted membership of a
-				given <constant>SILO</constant>.
+			  認証元のデバイスが指定された
+			  <constant>SILO</constant>のメンバーシップに
+			  割り当てられ、許可されている場合、ユーザは
+			  認証を許可される。
 			</para></listitem>
 		</varlistentry>
 	</variablelist>
@@ -1992,42 +1835,39 @@
 
 <refsect3>
 	<title>domain auth policy user-allowed-to-authenticate-to set</title>
-	<para>Set the user-allowed-to-authenticate-to property by scenario.</para>
+	<para>シナリオによって user-allowed-to-authenticate-to プロパティを設定する。</para>
 	<variablelist>
 		<varlistentry>
 			<term>-H, --URL</term>
 			<listitem><para>
-				LDB URL for database or target server.
+				データベースまたはターゲットサーバへのLDB URL。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--name</term>
 			<listitem><para>
-				Name of authentication policy.
+				認証ポリシーの名前。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--group=GROUP</term>
 			<listitem><para>
-				The user account, offering a
-				network service, covered by
-				this policy, will only be allowed
-				access from other accounts
-				that are members of the given
-				<constant>GROUP</constant>.
+				このポリシーの対象となるネットワーク
+                                サービスを提供するユーザーアカウントは、
+                                指定された<constant>GROUP</constant>の
+                                メンバーである他のアカウントからの
+                                アクセスのみが許可される。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--silo=SILO</term>
 			<listitem><para>
-				The user account, offering a
-				network service, covered by
-				this policy, will only be
-				allowed access from other accounts
-				that are assigned to,
-				granted membership of (and
-				meet any authentication
-				conditions of) the given <constant>SILO</constant>.
+			  このポリシーの対象となるネットワーク
+			  サービスを提供するユーザーアカウントは、
+			  指定された<constant>SILO</constant>に
+			  割り当てられ、そのメンバーシップを付与された
+			  (およびその認証条件を満たす)他のアカウント
+			  からのアクセスのみが許可される。
 			</para></listitem>
 		</varlistentry>
 	</variablelist>
@@ -2035,41 +1875,39 @@
 
 <refsect3>
 	<title>domain auth policy service-allowed-to-authenticate-from set</title>
-	<para>Set the service-allowed-to-authenticate-from property by scenario.</para>
+	<para>シナリオによって service-allowed-to-authenticate-from プロパティを設定する。</para>
 	<variablelist>
 		<varlistentry>
 			<term>-H, --URL</term>
 			<listitem><para>
-				LDB URL for database or target server.
+				データベースまたはターゲットサーバへの LDB URL。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--name</term>
 			<listitem><para>
-				Name of authentication policy.
+				認証ポリシーの名前。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--group=GROUP</term>
 			<listitem><para>
-				The service account (eg a Managed
-				Service Account, Group Managed
-				Service Account) is allowed to
-				authenticate, if the device it
-				authenticates from is a member
-				of the given <constant>GROUP</constant>.
+			  サービスアカウント(例えば、
+			  マネージドサービスアカウント、グループ
+			  マネージドサービスアカウント)は、認証元の
+			  デバイスが指定された<constant>GROUP</constant>の
+			  メンバーである場合、認証を許可される。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--silo=SILO</term>
 			<listitem><para>
-				The service account (eg a Managed
-				Service Account, Group Managed
-				Service Account) is allowed to
-				authenticate, if the device it
-				authenticates from is assigned
-				and granted membership of a
-				given <constant>SILO</constant>.
+			  サービスアカウント(例えば、
+			  マネージドサービスアカウント、グループ
+			  マネージドサービスアカウントなど)は、認証元の
+			  デバイスが特定の<constant>SILO</constant>の
+			  メンバーシップに割り当てられ、付与されている
+			  場合に、認証を許可される。
 			</para></listitem>
 		</varlistentry>
 	</variablelist>
@@ -2077,42 +1915,39 @@
 
 <refsect3>
 	<title>domain auth policy service-allowed-to-authenticate-to set</title>
-	<para>Set the service-allowed-to-authenticate-to property by scenario.</para>
+	<para>シナリオによって service-allowed-to-authenticate-to プロパティを設定する。</para>
 	<variablelist>
 		<varlistentry>
 			<term>-H, --URL</term>
 			<listitem><para>
-				LDB URL for database or target server.
+				データベースまたはターゲットサーバへの LDB URL。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--name</term>
 			<listitem><para>
-				Name of authentication policy.
+				認証ポリシーの名前。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--group=GROUP</term>
 			<listitem><para>
-				The service account (eg a Managed
-				Service Account, Group Managed
-				Service Account), will only be
-				allowed access by other accounts
-				that are members of the given
-				<constant>GROUP</constant>.
+			  サービスアカウント(例えば、
+			  マネージドサービスアカウント、グループ
+			  マネージドサービスアカウント)は、指定された
+			  <constant>GROUP</constant>のメンバーである
+			  他のアカウントによってのみアクセスが許可される。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--silo=SILO</term>
 			<listitem><para>
-				The service account (eg a
-				Managed Service Account, Group
-				Managed Service Account), will
-				only be allowed access by other
-				accounts that are assigned
-				to, granted membership of (and
-				meet any authentication
-				conditions of) the given <constant>SILO</constant>.
+			  サービスアカウント(例えば、
+			  マネージドサービスアカウント、グループ
+			  マネージドサービスアカウント)は、指定された
+			  <constant>SILO</constant>に割り当てられ、
+			  メンバーシップを付与された(および認証条件を満たす)
+			  他のアカウントによってのみアクセスが許可される。
 			</para></listitem>
 		</varlistentry>
 	</variablelist>
@@ -2120,41 +1955,37 @@
 
 <refsect3>
 	<title>domain auth policy computer-allowed-to-authenticate-to set</title>
-	<para>Set the computer-allowed-to-authenticate-to property by scenario.</para>
+	<para>シナリオによって computer-allowed-to-authenticate-to プロパティを設定する。</para>
 	<variablelist>
 		<varlistentry>
 			<term>-H, --URL</term>
 			<listitem><para>
-				LDB URL for database or target server.
+				データベースまたはターゲットサーバへの LDB URL。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--name</term>
 			<listitem><para>
-				Name of authentication policy.
+				認証ポリシーの名前。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--group=GROUP</term>
 			<listitem><para>
-				The computer account (eg a server
-				or workstation), will only be
-				allowed access by other accounts
-				that are members of the given
-				<constant>GROUP</constant>.
+			  コンピュータアカウント(たとえば server
+			  または workstation)は、指定された
+			  <constant>GROUP</constant>のメンバである
+			  他のアカウントによるアクセスのみが許可される。
 			</para></listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>--silo=SILO</term>
 			<listitem><para>
-				The computer account (eg a
-				server or workstation), will
-				only be allowed access by
-				other accounts that are
-				assigned to, granted
-				membership of (and meet any
-				authentication conditions of)
-				the given <constant>SILO</constant>.
+			  コンピュータアカウント(たとえば server
+			  または workstation)は、指定された
+			  <constant>SILO</constant> に割り当てられ、
+			  そのメンバーシップを付与された(そしてその認証条件を
+			  満たす)他のアカウントによってのみアクセスが許可される。
 			</para></listitem>
 		</varlistentry>
 	</variablelist>
@@ -2162,7 +1993,7 @@
 
 <refsect2>
 	<title>domain auth silo</title>
-	<para>Manage authentication silos.</para>
+	<para>認証サイロの管理。</para>
 </refsect2>
 
 
@@ -3341,6 +3172,215 @@
         </variablelist>
 </refsect3>
 
+<refsect2>
+        <title>service-account</title>
+        <para>サービスアカウント管理。</para>
+</refsect2>
+
+<refsect3>
+        <title>service-account list</title>
+        <para>ドメイン上のサービスアカウントを一覧表示する。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                リストの代わりに JSON でサービスアカウントを表示。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account view</title>
+        <para>ドメイン上の、一つのサービスアカウントを表示。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                表示するサービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account create</title>
+        <para>ドメン上で新規サービスアカウントを作成。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                表示するサービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--dns-host-name</term>
+                        <listitem><para>
+                                このサービスアカウントの DNS ホスト名(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--group-msa-membership</term>
+                        <listitem><para>
+                                オプションのグループ MSA メンバシップ SDDL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--managed-password-interval</term>
+                        <listitem><para>
+                                日単位の管理パスワード更新間隔。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account modify</title>
+        <para>ドメイン上の、既存のサービスアカウントの変更。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベース又はターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                表示するサービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--dns-host-name</term>
+                        <listitem><para>
+                                このサービスアカウントの更新する DNS ホスト名(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--group-msa-membership</term>
+                        <listitem><para>
+                                更新するグループ MSA メンバシップ SDDL。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account delete</title>
+        <para>ドメン上でサービスアカウントを削除。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                削除するサービスアカウントの名前。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect2>
+        <title>service-account group-msa-membership</title>
+        <para>サービスアカウントグループ MSA メンバシップの管理。</para>
+</refsect2>
+
+<refsect3>
+        <title>service-account group-msa-membership show</title>
+        <para>サービスアカウントの、グループ MSA メンバシップの表示。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                サービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                リストの代わりに JSON で返す。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account group-msa-membership add</title>
+        <para>サービスアカウントへのグループ MSA メンバシップへプリンシパルを追加。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                サービスアカウントのアカウント名(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--principal</term>
+                        <listitem><para>
+                                追加するための、プリンシパルの名前、DN または SID。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account group-msa-membership remove</title>
+        <para>サービスアカウントへのグループ MSA メンバシップからプリンシパルを削除。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                サービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--principal</term>
+                        <listitem><para>
+                                削除するプリンシパルの名前、DN または SID。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
 
 <refsect3>
 	<title>domain classicupgrade [options] <replaceable>classic_smb_conf</replaceable></title>
@@ -4209,6 +4249,13 @@
         無効の disabled group members を表示しない。
         </para></listitem>
         </varlistentry>
+        <varlistentry>
+        <term>--locked-only</term>
+        <listitem><para>
+        ロックされたユーザアカウントのみ一覧表示。
+        </para></listitem>
+        </varlistentry>
+
         </variablelist>
 </refsect3>
 
@@ -5675,9 +5722,9 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.20.1 - 4.20.4 に対応する。</para>
+	<para>このマニュアルページは Samba 4.21.2 - 4.21.2 に対応する。</para>
 
-	<para>Samba 4.0.0 - 4.20.4  対応の翻訳は、
+	<para>Samba 4.0.0 - 4.21.2  対応の翻訳は、
 	<itemizedlist>
 	<listitem><para>太田俊哉(ribbon@samba.gr.jp)</para></listitem>
 	<listitem><para>matsuand(michio_matsuyama@yahoo.co.jp)</para></listitem>
