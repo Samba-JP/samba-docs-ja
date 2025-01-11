@@ -42,7 +42,7 @@
 	</para>
 
 	<para>
-	  指定出来るキーは、speed, capability, と if_index である。Speed は
+	  指定出来るキーは、speed, capability,if_index と オプションである。Speed は
 	  秒単位のビット数で指定する。指定出来る capability は、RSS とRDMAである。
 	  if_index は、注意して使うべきである: 値は、kernel によって使われる
 	  インデックスと一致してはならない。
@@ -52,6 +52,25 @@
 	  無効の時に、最後の手段として使える。
 	  指定された値は、自動検出した値を上書きする。
 	</para>
+
+        <para>
+	  オプションが取り得る値は
+          &quot;dynamic&quot; and &quot;nodynamic&quot; である。
+	  このオプションは、<smbconfoption name="bind interfaces only"/>と
+	  組み合わせて使用する。
+	  &quot;dynamic&quot;を使用すると、IPアドレスがインターフェースに追加
+	  または削除されたときに、smbdがインターフェイス上のリスニングソケット
+	  を open/closeするようにする。
+	  &quot;nodynamic&quot;オプションを使用すると、インターフェイスの
+	  ip add/remove イベントを無視する。
+	  IPアドレスが削除されると、その IP アドレスへの接続も終了することに
+	  注意(従来の動作は、TCPフローを存続させることであった)。
+        </para>
+
+        <para>
+	  リスニングソケットを動的に開いたり閉じたりできるのは、一部の
+	  オペレーティングシステム(現在はLinux)だけであることに注意。
+        </para>
 
 	<para>
     以下の最初の2つの例では、eth0 デバイスと 192.168.2.10 および 192.168.3.10 の
