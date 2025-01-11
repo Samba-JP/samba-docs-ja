@@ -35,6 +35,15 @@
 	既定値は<emphasis>seal</emphasis>である。これは、<emphasis>Kerberos</emphasis>
 	を使う場合においては、KDC との時刻同期があることをを暗黙的に示している。
 	</para>
+
+        <para>STARTTLSまたはLDAPS(ポート636)でLDAP(ポート389)を強制的に使用
+	するには、<emphasis>starttls</emphasis> または	<emphasis>ldaps</emphasis>を
+	使うことができる。この場合、コネクションに接続するため、
+	NTLMSSP または Kerberos 認証を TLS チャネルバインドのために使うことが
+	できる。この場合、NTLMSSP または Kerberos 認証は、接続に結合するために
+	TLS チャネルバインディングを使用する。
+	</para>
+
 </description>
 <value type="default">seal</value>
 </samba:parameter>
