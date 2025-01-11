@@ -11,6 +11,24 @@
 	'*'と '?'は DOS のワイルドカードと同様、
 	複数のファイルやディレクトリを指定するために利用できる。</para>
 
+        <para>
+        <smbconfoption name="veto files"/> はパラメータオプションとしても
+        使用可能である。ここで、</para>
+
+        <para>
+        veto files : NAME =
+        </para>
+
+        <para>
+          中の NAME は、<smbconfoption name="valid users"/> と同じ文法で、
+          ユーザまたはグループ名を指定する。このパラメータ形式は、
+          異なるユーザまたはグループに対して複数回指定できる。これは、
+          これは、[global]セクションと共有セクションの両方で設定された
+          &quot;veto files : NAME&quot; が追加されることを意味するが、
+          通常、共有セクションで設定されたオプションは[global]セクションの
+          既定値を上書きする。
+        </para>
+
 	<para>各エントリは DOS の形式ではなく、
 	UNIX でのパス形式である必要があり、
 	UNIX のディレクトリ区切りである '/'を<emphasis>含めてはならない</emphasis>。
@@ -39,6 +57,14 @@
 ; any ending in .tmp, and any directory containing the
 ; word root.
 veto files = /*Security*/*.tmp/*root*/
+
+; Veto some files for anyone and some files for specific users and groups
+veto files = /vetoforall1/
+veto files : USER = /vetotoforuser/
+veto files : GROUP = /vetoforgroup/
+veto files : UNIVERSITY\Alumnis = /somefile.txt/
+veto files : john@university.org = /anotherfile.txt/
+veto files : S-1-5-21-123-456-789-1000 = /secretfile.txt/
 
 ; Veto the Apple specific files that a NetAtalk server
 ; creates.
