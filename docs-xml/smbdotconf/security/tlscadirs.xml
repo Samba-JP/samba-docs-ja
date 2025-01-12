@@ -1,0 +1,14 @@
+<samba:parameter name="tls ca directories"
+                 type="list"
+                 context="G"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+ <description>
+   <para>このオプションは、証明書または中間CA証明書に署名するために
+   信頼するルートCAのCA証明書を含むファイル(PEM形式)を含むディレクトリの
+   リストを設定できる。</para>
+ </description>
+
+ <related>tls trust system cas</related>
+ <related>tls cafile</related>
+ <related>tls crlfile</related>
+</samba:parameter>
