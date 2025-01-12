@@ -39,6 +39,13 @@
 	  <smbconfoption name="dedicated keytab file"/> 
       パラメーターを必ず設定しなければならない。
 	</para>
+
+        <para>
+        推奨される設定は、既定値 'secrets only' を
+        <smbconfoption name="sync machine password to keytab"/>
+	オプションと共に使うことである。
+        </para>
+	
 </description>
 <related>dedicated keytab file</related>
 <value type="default">default</value>
