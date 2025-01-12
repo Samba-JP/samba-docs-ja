@@ -1,0 +1,17 @@
+<samba:parameter name="tls trust system cas"
+                 type="boolean"
+                 context="G"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+ <description>
+   <para>このオプションでは、SSL/TLS 接続を信頼するために、
+   システムのデフォルトの信頼できる CA が使用される。</para>
+
+   <para>これは、システムにインストールされているすべての CA を
+   信頼することを意味するため、注意して使用すること!</para>
+ </description>
+
+ <related>tls ca directories</related>
+ <related>tls cafile</related>
+ <related>tls crlfile</related>
+ <value type="default">no</value>
+</samba:parameter>
