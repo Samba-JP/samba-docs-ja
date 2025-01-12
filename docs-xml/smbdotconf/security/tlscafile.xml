@@ -10,7 +10,9 @@
 	 <smbconfoption name="private dir"/> からの相対パスとなる。</para>
  </description>
 
- <related>tls certfile</related>
+<related>tls trust system cas</related>
+<related>tls ca directories</related>
+<related>tls certfile</related>
  <related>tls crlfile</related>
  <related>tls dh params file</related>
  <related>tls enabled</related>
