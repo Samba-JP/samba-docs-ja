@@ -21,7 +21,9 @@
     <para><constant>ca_only</constant>に設定した場合、証明書は
     <smbconfoption name="tls ca file"/>オプション中で指定された CA からの署名で
     検証される。
-    有効なファイルに<smbconfoption name="tls ca file"/>を設定することが要求される。
+    代わりに、<smbconfoption name="tls ca directories"/>または
+    <smbconfoption name="tls trust system cas"/>を使用できる。
+    有効なCA証明書を少なくとも1つ指定する必要がある。
     証明書の有効期間も検証される。もしも、<smbconfoption name="tls crl file"/>
     オプションが設定されている場合、証明書は CA CRL に対しても検証される。
     </para>
@@ -45,5 +47,9 @@
     </para>
   </description>
 
-  <value type="default">as_strict_as_possible</value>
+<related>tls trust system cas</related>
+<related>tls ca directories</related>
+<related>tls cafile</related>
+<related>tls crlfile</related>
+<value type="default">as_strict_as_possible</value>
 </samba:parameter>
