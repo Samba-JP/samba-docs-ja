@@ -137,6 +137,7 @@ XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)につ
 	   protocol/sharefakefscaps.xml,protocol/sharefakefscaps.xml,
 	   security/kerberosmethod.xml,security/tlscafile.xml,
 	   security/tlscertfile.xml,security/tlsverifypeer.xml
+	   generate-pathconf-entities.sh
 	   変更
 	   vfs_ceph_new.8.xml,
 	   misc/dnsclientname.xml,security/syncmachinepasswordscript.xml,
