@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE refentry PUBLIC "-//Samba-Team//DTD DocBook V4.2-Based Variant V1.0//EN" "http://www.samba.org/samba/DTD/samba-doc">
 <refentry id="vfs_expand_msdfs.8">
 
@@ -65,7 +65,7 @@ default.samba.org
 
 <refsect1>
         <title>日本語訳</title>
-        <para>このドキュメントは、Samba 4.16.0 - 4.20.4 に対応する。</para>
+        <para>このドキュメントは、Samba 4.16.0 - 4.21.3 に対応する。</para>
     <para>このドキュメントの翻訳は
                 <itemizedlist>
                         <listitem><para>太田俊哉 (ribbon@ribbon.samba.gr.jp)</para></listitem>
