@@ -68,6 +68,11 @@
 	</variablelist>
 
 	<para>このモジュールはスタック可能である。</para>
+	<para>このモジュールは完全にはスタック可能でない。これは他の
+	モジュールと組み合わせられるが、<command>vfs objects</command>
+	リスト中で最後のモジュールでなければならない。これは、OSの
+	ファイルシステム中でファイルに直接アクセスする。
+        </para>
 </refsect1>
 
 
@@ -124,7 +129,7 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは、Samba 4.0.10 - 4.20.4 に対応する。</para>
+	<para>このマニュアルページは、Samba 4.21.3 - 4.21.3 に対応する。</para>
     <para>このドキュメントの翻訳は
 		<itemizedlist>
 			<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
