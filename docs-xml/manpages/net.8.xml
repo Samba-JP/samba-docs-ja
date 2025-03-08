@@ -2166,13 +2166,16 @@ against an NT4 Domain Controller.
 <title>ADS DNS</title>
 
 <refsect3>
-<title>ADS DNS REGISTER [HOSTNAME [IP [IP.....]]]</title>
-<para>ホスト DNS エントリを Active Directory に追加する。</para>
+<title>ADS DNS REGISTER [FQDN [IP [IP.....]]]</title>
+<para>DNS レコードを Active Directory に追加する。FQDN がない場合、
+<smbconfoption name="dns hostname"/> が使われる。IP がない場合、
+全てのネットワークインタフェースからのIP アドレスが追加される。
+</para>
 </refsect3>
 
 <refsect3>
-<title>ADS DNS UNREGISTER &lt;HOSTNAME&gt;</title>
-<para>ホスト DNS エントリを Active Directory から取り去る。</para>
+<title>ADS DNS UNREGISTER &lt;FQDN&gt;</title>
+<para>FQDN DNS エントリを Active Directory から削除する。</para>
 </refsect3>
 
 <refsect2>
@@ -2295,80 +2298,37 @@ are made to the computer AD account.
 <title>ADS KEYTAB <replaceable>CREATE</replaceable></title>
 
 <para>
-既定値のエントリに存在していない場合に、新しい keytab ファイルを作成する。
-既定値のエントリは、クライアントのマシン名から作成された kerberos プリンシパル、
-(存在していれば) UPN と、クライアントのコンピュータ AD アカウントに関連づけられた
-任意の Windows SPN である。keytab ファイルがすでに存在している場合は、
-既定値のエントリから、欠けている kerberos プリンシパルのみが追加される。
-コンピュータ AD アカウントへの更新はない。
+Samba 4.21.0以降、keytab ファイルは
+<smbconfoption name="sync machine password to keytab"/>で指定されたとおりに
+作成される。
+keytab を作成できるのは、マシンパスワードが secrets.tdb で使用可能な場合のみ
+である。すなわち、
+<smbconfoption name="kerberos method">secrets only</smbconfoption> および
+<smbconfoption name="kerberos method">secrets and keytab</smbconfoption> である。
+smb.confの既定値は、
+<smbconfoption name="kerberos method">secrets only</smbconfoption>と
+<smbconfoption name="sync machine password to keytab"/>(既定値は 空)であり、
+この場合、keytab は生成されることはない。
+<smbconfoption name="sync machine password to keytab"/>がない場合は、
+<smbconfoption name="kerberos method">secrets and keytab</smbconfoption>に
+対して、AD から同期された SPN、アカウント名 COMPUTER$、および
+プリンシパルホスト/dns_hostname を含む既定の名前の keytab が作成される。
+</para>
+<para>
+Samba 4.20 までは、これらのエントリは既定で作成されていた。それは、
+アカウント名 COMPUTER$、'host'プリンシパル、および AD から同期された SPN
+である。次の例では、このような keytab が生成される。
+</para>
+<programlisting>
+<smbconfoption name="sync machine password to keytab">/etc/krb5.keytab:spn_prefixes=host:account_name:sync_spns:sync_kvno:machine_password</smbconfoption>
+</programlisting>
+<para>
+コンピュータのADアカウントは変更されない。
 </para>
 </refsect2>
 
 <refsect2>
 <title>(削除済み!)ADS KEYTAB <replaceable>ADD</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
-
-<!-- Samba 4.21.3
-<para>
-This command is no longer available in Samba 4.21.0 and newer. See <smbconfoption name="sync machine passw
-ord to keytab"/> for replacement.
-</para>
-
-To replace e.g. call of
-<programlisting>
-net ads keytab add wurst/brot@REALM
-</programlisting>
-Add to smb.conf:
-<programlisting>
-sync machine password to keytab = /path/to/keytab1:spns=wurst/brot@REALM:machine_password
-</programlisting>
-and run:
-<programlisting>
-net ads keytab create
-</programlisting>
-
-<para>
-Original description of this command:
-</para>
-<para>
-Adds a new keytab entry, the entry can be either;
-  <variablelist>
-    <varlistentry><term>kerberos principal</term>
-    <listitem><para>
-      A kerberos principal (identified by the presence of '@') is just
-      added to the keytab file.
-    </para></listitem>
-    </varlistentry>
-    <varlistentry><term>machinename</term>
-    <listitem><para>
-      A machinename (identified by the trailing '$') is used to create a
-      a kerberos principal 'machinename@realm' which is added to the
-      keytab file.
-    </para></listitem>
-    </varlistentry>
-    <varlistentry><term>serviceclass</term>
-    <listitem><para>
-    A serviceclass (such as 'cifs', 'html' etc.) is used to create a pair
-    of kerberos principals 'serviceclass/fully_qualified_dns_name@realm' &amp;
-    'serviceclass/netbios_name@realm' which are added to the keytab file.
-    </para></listitem>
-    </varlistentry>
-    <varlistentry><term>Windows SPN</term>
-    <listitem><para>
-    A Windows SPN is of the format 'serviceclass/host:port', it is used to
-    create a kerberos principal 'serviceclass/host@realm' which will
-    be written to the keytab file.
-    </para></listitem>
-    </varlistentry>
-  </variablelist>
-</para>
-
-<para>
-Unlike old versions no computer AD objects are modified by this command. To
-preserve the bevhaviour of older clients 'net ads keytab ad_update_ads' is
-available.
-</para>
--->
-
 <para>
 このコマンドは Samba 4.21.0 では無効である。代替については
 <smbconfoption name="sync machine password to keytab"/> を参照のこと。
@@ -2433,7 +2393,7 @@ net ads keytab create
 </refsect2>
 
 <refsect2>
-<title>(削除済み!) ADS KEYTAB <replaceable>DELETE</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
+<title>(削除済み!) ADS KEYTAB <replaceable>DELETE</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN)</replaceable></title>
 
 <para>
 このコマンドは Samba 4.21.0 では無効である。代替については
@@ -2456,7 +2416,7 @@ net ads keytab create
 
 
 <refsect2>
-<title>(削除済み!)ADS KEYTAB <replaceable>ADD_UPDATE_ADS</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN</replaceable></title>
+<title>(削除済み!)ADS KEYTAB <replaceable>ADD_UPDATE_ADS</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN)</replaceable></title>
 
 <!-- Samba 4.21.0
 <para>
@@ -2548,7 +2508,7 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
 </refsect2>
 
 <refsect2>
-<title>ADS setspn <replaceable>SETSPN LIST [machine]</replaceable></title>
+<title>ADS SETSPN LIST <replaceable>[machine]</replaceable></title>
 <!-- Samba 4.9.0
 <para>
    Lists the Windows SPNs stored in the 'machine' Windows AD Computer object.
@@ -2561,10 +2521,11 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
    'machine' が指定されていない場合は、このクライアントのコンピュータアカウントが代わりに
    使われる。
 </para>
+<para>例: <userinput>net ads setspn list --machine-pass</userinput></para>
 </refsect2>
 
 <refsect2>
-<title>ADS setspn <replaceable>SETSPN ADD SPN [machine]</replaceable></title>
+<title>ADS SETSPN ADD <replaceable>[machine] SPN</replaceable></title>
 
 <!-- Samba 4.9.0
 <para>
@@ -2578,11 +2539,12 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
    'machine' が指定されていない場合は、このクライアントのコンピュータアカウントが代わりに
    使われる。
 </para>
+<para>例: <userinput>net ads setspn add computername host/computername.example.com -U Administrator%Passw0rd</userinput></para>
 </refsect2>
 
 
 <refsect2>
-<title>ADS setspn <replaceable>SETSPN DELETE SPN [machine]</replaceable></title>
+<title>ADS SETSPN DELETE <replaceable>[machine] SPN</replaceable></title>
 
 <!-- Samba 4.9.0
 <para>
@@ -2597,6 +2559,7 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
    'machine' が指定されていない場合は、このクライアントのコンピュータアカウントが代わりに
    使われる。
 </para>
+<para>例: <userinput>net ads setspn delete computername host/computername.example.com -U Administrator%Passw0rd</userinput></para>
 
 </refsect2>
 
@@ -2636,44 +2599,33 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
 <para>0x00000004 RC4-HMAC</para>
 <para>0x00000008 AES128-CTS-HMAC-SHA1-96</para>
 <para>0x00000010 AES256-CTS-HMAC-SHA1-96</para>
+<para>0x00000020 AES256-CTS-HMAC-SHA1-96-SK</para>
+<para>0x00080000 RESOURCE-SID-COMPRESSION-DISABLED</para>
 
 </refsect2>
 
 <refsect2>
 	<title>ADS ENCTYPES LIST <replaceable>&lt;ACCOUNTNAME&gt;</replaceable></title>
-
-<!-- 原文 samba-4.6.7
-<para>
-	List the value of the "msDS-SupportedEncryptionTypes" attribute of a given account.
-</para>
--->
 <para>
         与えられたアカウントの "msDS-SupportedEncryptionTypes" 属性値を一覧表示する。
+	コンピュータアカウントでは末尾に '$' が必要である。
 </para>
 
-<!-- 原文 samba-4.6.7
-<para>Example: <userinput>net ads enctypes list Computername</userinput></para>
--->
-<para>例: <userinput>net ads enctypes list Computername</userinput></para>
+<para>例: <userinput>net ads enctypes list Computername$ --machine-pass</userinput></para>
 
 </refsect2>
 
 <refsect2>
 	<title>ADS ENCTYPES SET <replaceable>&lt;ACCOUNTNAME&gt;</replaceable> <replaceable>[enctypes]</replaceable></title>
 
-<!-- 原文 samba-4.6.7
 <para>
-	Set the value of the "msDS-SupportedEncryptionTypes" attribute of the LDAP object of ACCOUNTNAME to a given value. If the value is omitted, the value is set to 31 which enables all the currently supported encryption types.
-</para>
--->
-<para>
-	ACCOUNTNAME の LDAP オブジェクトの "msDS-SupportedEncryptionTypes" 属性値に、与えられた値を設定する。値が省略された場合は、すべての、現在サポートされている暗号化タイプを有効にする 31 が設定される。
+	ACCOUNTNAME の LDAP オブジェクトの "msDS-SupportedEncryptionTypes" 属性値に、
+	与えられた値を設定する。値が省略された場合は、
+	RC4-HMAC, AES128-CTS-HMAC-SHA1-96 と AES256-CTS-HMAC-SHA1-96 暗号化
+	タイプを有効にする 28 が設定される。
 </para>
 
-<!-- 原文 samba-4.6.7
-<para>Example: <userinput>net ads enctypes set Computername 24</userinput></para>
--->
-<para>例: <userinput>net ads enctypes set Computername 24</userinput></para>
+<para>例: <userinput>net ads enctypes set Computername$ 24 --machine-pass</userinput></para>
 
 </refsect2>
 
@@ -2689,10 +2641,7 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
 	ACCOUNTNAME の LDAP オブジェクトの "msDS-SupportedEncryptionTypes" 属性を削除する。
 </para>
 
-<!-- 原文 samba-4.6.7
-<para>Example: <userinput>net ads enctypes set Computername 24</userinput></para>
--->
-<para>例: <userinput>net ads enctypes set Computername 24</userinput></para>
+<para>例: <userinput>net ads enctypes set Computername$ --machine-pass</userinput></para>
 
 </refsect2>
 
