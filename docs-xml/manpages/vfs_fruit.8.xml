@@ -591,24 +591,6 @@
 	  </varlistentry>
 
 	  <varlistentry>
-	    <term>fruit:posix_rename = yes | no</term>
-	    <listitem>
-<!-- 原文 samba-4.6.6
-	      <para>Whether to enable POSIX directory rename behaviour
-	      for OS X clients. Without this, directories can't be
-	      renamed if any client has any file inside it
-	      (recursive!) open.</para>
-	      <para>The default is <emphasis>yes</emphasis>.</para>
--->
-	      <para>OS X クライアントで、POSIX の改名動作を有効にするかどうか。
-	      これがないと、クライアントが、対象ディレクトリ中 (再帰的に!) に
-	      オープンしているファイルがあると、ディレクトリは改名出来ない。
-	      </para>
-	      <para>既定値は <emphasis>yes</emphasis> である。</para>
-	    </listitem>
-	   </varlistentry>
-
-	  <varlistentry>
 	    <term>readdir_attr:aapl_rsize = yes | no</term>
 	    <listitem>
 
@@ -799,7 +781,7 @@
 </refsect1>
 <refsect1>
     <title>日本語訳</title>
-    <para>このマニュアルページは Samba 4.20.1 - 4.21.3 に対応する。</para>
+    <para>このマニュアルページは Samba 4.22.0 - 4.22.0 に対応する。</para>
     <para>このドキュメントの翻訳は
     <itemizedlist>
         <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
