@@ -150,6 +150,36 @@
 		</listitem>
 		</varlistentry>
 
+                <varlistentry>
+                <term>ceph_new:proxy = [ yes | no | auto ]</term>
+                <listitem>
+                <para>
+                  リソース使用率を最適化するために libceffs プロキシ
+		  ライブラリの使用を指示できるようにし、より多くの
+		  同時クライアント接続を可能にする。前提条件には、
+		  動的リンカ用にロード可能な場所に共有ライブラリ
+		  <emphasis>libcephfs_proxy.so.X</emphasis>と、
+		  アクティブな(実行中の)<emphasis>libcephfsd</emphasis>
+		  デーモンがあることである。
+                </para>
+
+                <itemizedlist>
+                        <listitem><para><constant>no</constant> (既定値) - プロキシ
+                        ライブラリを使わず、<emphasis>libcephfs.so.X</emphasis>
+			経由で通常の接続を行う。</para></listitem>
+
+                        <listitem><para><constant>yes</constant> - 常時プロキシ
+                        ライブラリを使用するが、前提条件が満たされない場合は
+                        クライアント接続要求は失敗する。</para></listitem>
+
+                        <listitem><para><constant>auto</constant> - プロキシ
+                        ライブラリの使用を試みるが、前提条件が満たされない場合は
+			通常の cepfs 接続に切り換える。</para></listitem>
+
+                </itemizedlist>
+
+                </listitem>
+                </varlistentry>
 	</variablelist>
 
 </refsect1>
@@ -173,7 +203,7 @@
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このドキュメントは、Samba 4.21.3 - 4.21.3 に対応する。</para>
+	<para>このドキュメントは、Samba 4.22.0 - 4.22.0 に対応する。</para>
 	<para>このドキュメントの翻訳は
 		<itemizedlist>
 			<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
