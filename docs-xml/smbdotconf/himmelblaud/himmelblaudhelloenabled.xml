@@ -1,0 +1,17 @@
+<samba:parameter name="himmelblaud hello enabled"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+
+    <para>
+    このパラメータは、Azure Entra ID への Hello 登録と認証を制御する。
+    既定では、SSH ポートを公開するホストなどのセキュリティリスクを
+    回避するために、無効になっている。管理者は、Hello 登録が環境に
+    適している場合にのみ、この設定を有効にする必要がある。
+    </para>
+</description>
+
+<value type="default">no</value>
+<value type="example">yes</value>
+</samba:parameter>
