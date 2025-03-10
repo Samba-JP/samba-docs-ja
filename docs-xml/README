@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2025/03/08
+						2025/03/10
 						日本Sambaユーザー会
 
 
@@ -133,6 +133,9 @@ XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)につ
 	   net.8.xml,samba-tool.8.xml,vfs_ceph_new.8.xml,
 	   vfs_gpfs.8.xml,vfs_nfs4acl_xattr.8.xml,wbinfo.1.xml
 	   変更
+	   himmelblaud/himmelblaudhelloenabled.xml,
+	   himmelblaud/himmelblaudhsmpinpath.xml,
+	   himmelblaud/himmelblaudsfafallback.xml
 	   追加
 	   削除
 
