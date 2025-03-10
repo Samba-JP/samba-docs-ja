@@ -62,7 +62,6 @@
 		<arg choice="opt">--remove-uid-mapping uid,sid</arg>
 		<arg choice="opt">-s sid</arg>
 		<arg choice="opt">--separator</arg>
-		<arg choice="opt">--sequence</arg>
 		<arg choice="opt">--set-auth-user user%password</arg>
 		<arg choice="opt">--set-gid-mapping gid,sid</arg>
 		<arg choice="opt">--set-uid-mapping uid,sid</arg>
@@ -511,13 +510,6 @@
                 </varlistentry>
 
 		<varlistentry>
-		<term>--sequence</term>
-		<listitem><para>このコマンドは将来廃止予定である。そのかわりに
-		--online-status を使って欲しい。
-		</para></listitem>
-		</varlistentry>
-
-		<varlistentry>
 		<term>--set-auth-user <replaceable>username%password</replaceable></term>
 		<listitem><para>ドメインコントローラーとのセッション確立時に使用される
 		ユーザー名とパスワードを保存する。これは<citerefentry><refentrytitle>winbindd
@@ -696,11 +688,11 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.18.0 - 4.21.3 に対応する。</para>
+	<para>このマニュアルページは Samba 4.22.0 - 4.22.0 に対応する。</para>
         <para>このドキュメントの Samba 3.0.0 対応の翻訳は
 山田 史朗 (shiro@miraclelinux.com)
 	によって行なわれた。</para>
-        <para>このドキュメントの Samba 3.2.4 - 4.21.3 対応の翻訳は 太田俊哉(ribbon@samba.gr.jp)によって行われた。</para>
+        <para>このドキュメントの Samba 3.2.4 - 4.22.0 対応の翻訳は 太田俊哉(ribbon@samba.gr.jp)によって行われた。</para>
 </refsect1>
 
 </refentry>
