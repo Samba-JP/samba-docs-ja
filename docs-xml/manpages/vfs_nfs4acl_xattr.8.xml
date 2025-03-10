@@ -31,15 +31,10 @@
     <para>この VFS モジュールは
     <citerefentry><refentrytitle>samba</refentrytitle>
     <manvolnum>7</manvolnum></citerefentry>システムの一部である。</para>
-<!-- Samba 4.8.0
-    <para>The <command>vfs_acl_xattr</command> VFS module stores NTFS Access
-    Control Lists (ACLs) in Extended Attributes (EAs/xattrs).  This enables the
-    full mapping of Windows ACLs on Samba servers.
-    </para>
--->
-    <para><command>vfs_acl_xattr</command> VFS モジュールは NTFS アクセス制御リスト
-    (ACLs) を拡張属性 (EAs/xattrs) に保存する。これにより、Samba  サーバ上で、 Windows ACL
-    の完全なマッピングが可能になる。
+
+    <para><command>vfs_nfs4acl_xattr</command> VFS モジュールは
+    クライアントが期待するSMB ACL と、ファイルシステムが提供する
+    NFSv4 ACL 実装との間の相互運用性レイヤーを提供する。
     </para>
 
     <para>このモジュールはスタック可能である。</para>
@@ -253,8 +248,8 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.11.0 - 4.21.3 に対応する。</para>
-        <para>このドキュメントの Samba 4.8.0 - 4.21.3 対応の翻訳は
+	<para>このマニュアルページは Samba 4.22.0 - 4.22.0 に対応する。</para>
+        <para>このドキュメントの Samba 4.8.0 - 4.22.0 対応の翻訳は
 	<itemizedlist>
 		<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
 	</itemizedlist>	
