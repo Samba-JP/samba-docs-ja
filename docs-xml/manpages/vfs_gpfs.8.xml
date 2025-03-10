@@ -554,6 +554,35 @@
 		</varlistentry>
 		<varlistentry>
 
+                <varlistentry>
+                <term>gpfs:clamp_invalid_times = [ yes | no ]</term>
+                <listitem>
+                <para>
+		GPFS は、秒コンポーネントに 32 ビットの符号なし整数を使用して
+		タイムスタンプを格納する。gpfs:settimes = yes を使用すると、
+		このモジュールは、クライアントが設定しようとする時刻が、
+		サポートされている GPFS の範囲 (0 から UINT32_MAX) 内に
+		あるかどうかを検証する。タイムスタンプがこの範囲外の場合、
+		クライアント要求は拒否される。クライアントが一時的なタイム
+		スタンプを有効範囲外に設定した場合などに対処するために、
+		このパラメータを使用して、クライアントのタイムスタンプを
+		許容範囲にクランプできる。
+		Thu Jan 1 12:00:00 AM UTC 1970(UNIXエポック)より前の時刻は
+		Thu Jan 1 12:00:00 AM UTC 1970 に設定され、
+		Sun Feb 7 06:28:15 AM UTC 2106 より後の時刻は
+		Sun Feb 7 06:28:15 AM UTC 2106 に設定される。
+                </para>
+
+                <itemizedlist>
+                <listitem><para>
+                <command>no(既定値)</command> - 不正な時刻の場合拒否。
+                </para></listitem>
+                <listitem><para>
+                <command>yes</command> - 不正な時刻を 0 または UINT32_MAX にクランプ。
+                </para></listitem>
+                </itemizedlist>
+                </listitem>
+                </varlistentry>
 
 		<term>gpfs:syncio = [yes|no]</term>
 		<listitem>
