@@ -1,0 +1,17 @@
+<samba:parameter name="himmelblaud sfa fallback"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+
+  <para>
+    このパラメータは、マルチファクター認証 (MFA) が無効な場合に、
+    Himmelblaud がシングルファクター認証 (SFA) にフォールバックする
+    かどうかを制御するように設計されている。これは通常、新しいユーザーが
+    MFA 登録を利用できる短時間のウィンドウ中で可能である。
+</para>
+</description>
+
+<value type="default">no</value>
+<value type="example">yes</value>
+</samba:parameter>
