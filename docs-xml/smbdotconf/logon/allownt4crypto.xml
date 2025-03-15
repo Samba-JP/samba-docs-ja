@@ -56,8 +56,10 @@
 	できる。</para>
 
 	<para>このオプションは、
-	'<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT"/>'
-	または '<smbconfoption name="reject md5 clients"/>' オプションが
+	'<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT"/>'、
+	'<smbconfoption name="reject md5 clients"/>'、
+	'<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT"/>'
+	または '<smbconfoption name="server reject aes schannel"/>' オプションが
 	の有効な値が 'yes' の場合に上書きされる。</para>
 </description>
 
@@ -100,8 +102,10 @@
     <para>このオプションは <smbconfoption name="allow nt4 crypto"/> オプションで上書きされる。</para>
 
     <para>このオプションは、
-        '<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT"/>'
-        または '<smbconfoption name="reject md5 clients"/>' オプションが
+        '<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT"/>'、
+	'<smbconfoption name="reject md5 clients"/>'、
+	'<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT"/>'
+        または '<smbconfoption name="server reject aes schannel"/>' オプションが
         の有効な値が 'yes' の場合に上書きされる。</para>
     <para>これは、'<smbconfoption name="allow nt4 crypto:COMPUTERACCOUNT">yes</smbconfoption>'
     が	
@@ -111,10 +115,13 @@
     <programlisting>
 	allow nt4 crypto:LEGACYCOMPUTER1$ = yes
 	server reject md5 schannel:LEGACYCOMPUTER1$ = no
+	server reject aes schannel:LEGACYCOMPUTER1$ = no
 	allow nt4 crypto:NASBOX$ = yes
 	server reject md5 schannel:NASBOX$ = no
+	server reject aes schannel:NASBOX$ = no
 	allow nt4 crypto:LEGACYCOMPUTER2$ = yes
 	server reject md5 schannel:LEGACYCOMPUTER2$ = no
+	server reject aes schannel:LEGACYCOMPUTER2$ = no
     </programlisting>
 </description>
 
