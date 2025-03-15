@@ -1,0 +1,40 @@
+<samba:parameter name="smb3 directory leases"
+                 context="G"
+                 type="enum"
+                 enumlist="enum_bool_auto"
+		 function="_smb3_directory_leases"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+  <para>
+    これは、SMB3ディレクトリリースを有効にするかどうかを
+    <command moreinfo="none">smbd</command>制御する列挙型である。
+    ディレクトリリースは、クライアントがディレクトリをキャッシュ
+    できるようにする SMB 3専用の機能である。
+  </para>
+  <para>
+    <smbconfoption name="smb3 directory leases"/>に指定できる値は、
+    <constant>yes</constant>、<constant>no</constant>、
+    <constant>auto</constant>で、
+    既定値は<constant>auto</constant>である。
+  </para>
+  <para>
+    <constant>auto</constant>に設定すると、有効な値はオプション
+    <smbconfoption name="clustering"/>に依存する。
+    <smbconfoption name="clustering"/>が有効になっている場合、
+    <smbconfoption name="smb3 directory leases"/>は無効になり、その逆も同様である。
+  </para>
+  <para>
+    <smbconfoption name="smb3 directory leases"/>は、
+    <smbconfoption name="smb2 leases">yes</smbconfoption>、
+    <smbconfoption name="oplocks">yes</smbconfoption>、および
+    <smbconfoption name="kernel oplocks">no</smbconfoption>でのみ使用できる。
+  </para>
+  <para>
+    <smbconfoption name="smb3 directory leases"/>を有効にすると、
+    <smbconfoption name="strict rename"/>が暗黙的に有効になる。
+  </para>
+</description>
+
+<related>smb2 leases</related>
+<value type="default">auto</value>
+</samba:parameter>
