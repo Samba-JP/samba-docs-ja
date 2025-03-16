@@ -1,0 +1,16 @@
+<samba:parameter name="elasticsearch:force substring search"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+  <description>
+    <para>
+      先頭に * を付けることで、文字列属性のパスのような文字列検索を
+      プレフィックス検索に強制する。
+      例: Spotlight 検索で「*=="samba*"」は、「'query':'(samba*)'」
+      ではなく「'query':'(*samba*)'」にマップされる。
+</para>
+  </description>
+
+  <value type="default">no</value>
+  <value type="example">yes</value>
+</samba:parameter>
