@@ -1,0 +1,31 @@
+<samba:parameter name="client netlogon ping protocol"
+                 context="G"
+                 type="enum"
+                 enumlist="enum_client_netlogon_ping_protocol"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+	<para>このオプションは、netlogon ping 要求を発行するために Samba が
+	使用するプロトコルを制御する。これは通常、コネクションレス LDAP を
+	介して行われるが、インストールによっては、このために
+	LDAPS over TCP ポート 636 が必要になる場合がある。
+</para>
+
+	<para>取り得る値は以下の通り :</para>
+	<itemizedlist>
+	  <listitem>
+	    <para><constant>CLDAP</constant></para>
+	  </listitem>
+	  <listitem>
+	    <para><constant>LDAP</constant></para>
+	  </listitem>
+	  <listitem>
+	    <para><constant>LDAPS</constant></para>
+	  </listitem>
+	  <listitem>
+	    <para><constant>STARTTLS</constant></para>
+	  </listitem>
+	</itemizedlist>
+</description>
+
+<value type="default">CLDAP</value>
+</samba:parameter>
