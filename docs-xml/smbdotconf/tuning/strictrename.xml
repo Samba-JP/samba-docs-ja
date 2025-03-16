@@ -1,6 +1,7 @@
 <samba:parameter name="strict rename"
                  context="S"
 		 type="boolean"
+		 function="_strict_rename"
                  xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
 <description>
   <para>既定値では、Windows SMB サーバは、ファイルシステム階層構造中で、
@@ -25,6 +26,9 @@
 
   <para>もしもクライアントが UNIX 拡張 (POSIX パス名) を要求した場合、
   名前変更は常時許可され、このパラメータは影響しない。</para>
+
+  <para><smbconfoption name="smb3 directory leases"/> を有効にすると、
+  暗黙で <smbconfoption name="strict rename"/> が有効になる。</para>
 
 </description>
 
