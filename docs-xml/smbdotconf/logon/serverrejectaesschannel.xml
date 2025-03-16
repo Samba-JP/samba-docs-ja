@@ -1,0 +1,127 @@
+<samba:parameter name="server reject aes schannel"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+	<para><emphasis>このオプションは現在実験中のものである!</emphasis>
+	</para>
+
+	<para>このオプションは、netlogon サーバ(現在は「Active Directory
+	ドメインコントローラ」モードのみ)が、ServerAuthenticateKerberos を
+	サポートしていないクライアントを拒否するかどうかを制御する。</para>
+
+	<para>ServerAuthenticateKerberos のサポートは、Windows では
+	Server 2025から追加された。Sambaでは4.22から利用でき、
+	「<smbconfoption name="server support krb5 netlogon">yes</smbconfoption>」
+	および「<smbconfoption name="client use krb5 netlogon">yes</smbconfoption>」
+	オプションは、既定では無効になっている。
+	</para>
+
+	<para>このオプションは、実際には CVE_2022_3802 3の背後にある
+	セキュリティ問題とは関連していないが、デバッグレベルに関連する
+	ロジックとオプションを使用していることに注意。</para>
+
+	<para>
+	クライアントに対して明示的なオプション
+	「<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT">no</smbconfoption>」を
+	指定せずにレガシークライアントが拒否された場合、Samba は
+	ログレベル 0 でログファイルにエラーを記録する。クライアント
+	ソフトウェアで必要な場合は、メッセージに
+	「<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT">no</smbconfoption>」と
+	いう明示的な行が追加されることが示される(ログレベルは、
+	より高いログレベルでのみ表示されるように
+	「<smbconfoption	name="CVE_2022_38023:error_debug_level">1</smbconfoption>」で
+	調整できる)。
+        </para>
+	
+	<para>
+	クライアントに対して明示的な
+	「<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT">no</smbconfoption>」
+	オプションなしでクライアントが許可されている場合、Samba は
+	ログレベル5でログファイルにメッセージを記録する。メッセージには、明示的な
+	「<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT">no</smbconfoption>」
+	行を追加する(クライアントソフトウェアで必要な場合)。
+	(ログレベルは、
+	'<smbconfoption 	name="NETLOGON_AES:usage_debug_level">0</smbconfoption>'
+	を使用して調整できる。これにより、低いログレベルまたは高いログレベルで
+	のみ警告が表示される)。これは、
+	「<smbconfoption name="server reject aes schannel">yes</smbconfoption>」に
+	変更する前に設定を準備するために使用できる。
+	</para>
+
+	<para>Admins では、
+	「<smbconfoption name="server reject aes schannel:COMPUTERACCOUNT">no/yes</smbconfoption>」
+	オプションを使用して、より詳細な制御を行うことができる。</para>
+	
+	<para>「yes」に設定すると、このオプションは
+	「<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT"/>」および
+	「<smbconfoption name="reject md5 clients"/>」オプションを上書きし、
+	「<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT">no</smbconfoption>」を
+	暗黙に仮定する。
+	</para>
+	
+	<para>このオプションは、
+	'<smbconfoption name="server support krb5 netlogon"/>'オプションと
+	相互に影響する。
+	</para>
+
+	<para>今のところ、
+	'<smbconfoption name="server reject aes schannel"/>'は実験的な
+	ものであり、明示的に設定すべきではない。</para>
+</description>
+
+<value type="default">no</value>
+<value type="example">yes</value>
+</samba:parameter>
+
+<samba:parameter name="server reject aes schannel:COMPUTERACCOUNT"
+                 context="G"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+
+    <para>ほとんどのドメインメンバーまたは信頼されたドメインが
+    ServerAuthenticateKerberos をサポートしている場合が来たとき、
+    管理者は「server reject aes schannel=yes」を使用することができる。
+    「server reject aes schannel:COMPUTERACCOUNT=no」と設定することで、
+    コンピュータアカウントごとに明示的な例外を指定できる。
+    COMPUTERACCOUNTは、コンピューターアカウントの sAMAccountName 値
+    (末尾の'$'記号を含む)である必要がある。
+    </para>
+    <para>このオプションは、実際には CVE_2022_38023 の背後にあるセキュリティ
+    問題とは関連していないが、デバッグレベルに関連するロジックとオプションを
+    使用していることに注意。
+  </para>
+  
+    <para>
+      このオプションが「no」に設定されているが、関連するコンピュータが
+      それを必要としない場合、Samba はセキュリティ問題に関する情報を
+      ログレベル 0 のログファイルに記録する。
+      (ログレベルは、
+      「<smbconfoption name="CVE_2022_38023:warn_about_unused_debug_level">1</smbconfoption>」
+      を使用して、より高いログレベルでのみ警告するように調整できる)。
+    </para>
+    <para>
+      指定されたコンピュータアカウントに設定が必要な場合、
+      Sambaはログレベル5でログファイルに警告を記録する。
+    </para>
+
+    <para>このオプションは<smbconfoption name="server reject aes schannel"/>
+    オプションを上書きする。</para>
+
+    <para>'yes' に設定するとこのオプションは
+    '<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT"/>' と
+    '<smbconfoption name="reject md5 clients"/>' オプションを上書きし、
+    '<smbconfoption name="server reject md5 schannel:COMPUTERACCOUNT">no</smbconfoption>'
+    を暗黙に仮定する。
+    </para>
+
+    <programlisting>
+	server reject aes schannel:LEGACYCOMPUTER1$ = no
+	server reject aes schannel:NASBOX$ = no
+	server reject aes schannel:LEGACYCOMPUTER2$ = no
+	server reject aes schannel:HIGHPRIVACYSRV$ = yes
+    </programlisting>
+</description>
+
+</samba:parameter>
