@@ -1,0 +1,53 @@
+<samba:parameter name="vfs mkdir use tmp name"
+                 context="S"
+                 type="enum"
+                 enumlist="enum_bool_auto"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+        <para>
+	SMBクライアントの新しいディレクトリを作成するのは、非常に複雑な作業である!
+	これには、親ディレクトリから権限を継承することや、DOS属性を保存する
+	ことなどが含まれる。
+	</para>
+
+	<para>
+	Other clients should not see the existence of the directory that
+	is in progress of being created!
+	他のクライアントは、作成中のディレクトリの存在を見るべきでは
+	ない。
+	</para>
+
+	<para>
+	このオプションは、一時ディレクトリ名の使用を制御する列挙型である。
+	これを<constant>yes</constant> に設定すると、ディレクトリ名の前に
+	'.::TMPNAME:D:$SERVERID:'が付く($SERVERIDは現在のプロセスの一意の識別子)。
+	</para>
+
+	<para>
+	このオプションがAuto(既定値)に設定されている場合、次のオプションの
+	少なくとも1つが実質的に<constant>no</constant>に設定されていなければ、
+	サーバは一時ディレクトリ名を使用する:
+	<smbconfoption name="inherit acls"/>,
+	<smbconfoption name="inherit owner"/>,
+	<smbconfoption name="inherit permissions"/>,
+	<smbconfoption name="nt acl support"/> or
+	<smbconfoption name="store dos attributes"/>.
+	Note on OpenBSD Auto (the default) is mapped to
+	<constant>no</constant>,
+	注意:OpenBSDでのAuto(既定値)は<constant>no</constant>にマップされる。
+	<ulink url="https://bugzilla.samba.org/show_bug.cgi?id=15801">https://bugzilla.samba.org/show_bug.cgi?id=15801</ulink>を参照。
+	</para>
+
+	<para>
+	SMB/CIFSマウントの再エクスポートは、
+	<command moreinfo="none">vfs mkdir use tmp name=no</command>
+	が役に立つまれなケースの1つである。</para>
+
+	<para>
+	ほとんどどの場合
+	<command moreinfo="none">vfs mkdir use tmp name = Auto</command> は保持する必要がある。
+	</para>
+</description>
+<value type="default">Auto</value>
+</samba:parameter>
+
