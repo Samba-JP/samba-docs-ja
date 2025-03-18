@@ -18,6 +18,9 @@
   <para>このオプションは、CVE-2022-38023 対応のパッチのために、既定値が 'no' から 'yes' に
   変更された。https://bugzilla.samba.org/show_bug.cgi?id=15240 を参照のこと。
   </para>
+
+  <para>このオプションは<smbconfoption name="reject aes netlogon servers"/> オプションによって上書きされる。</para>
+  
   <para>このオプションは、<smbconfoption name="require strong key"/> オプションを上書きする。</para>
 </description>
 
