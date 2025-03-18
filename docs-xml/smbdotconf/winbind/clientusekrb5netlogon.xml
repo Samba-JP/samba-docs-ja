@@ -1,0 +1,54 @@
+<samba:parameter name="client use krb5 netlogon"
+                 context="G"
+                 type="enum"
+                 enumlist="enum_bool_auto_default"
+                 function="_client_use_krb5_netlogon"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+	<para><emphasis>このオプションは現時点では実験的である!</emphasis>
+	</para>
+
+	<para>このオプションは、winbindd(および他のクライアント・ツール)が
+	netlogonセキュア・チャネルにServerAuthenticateKerberosを使用するか
+	どうかを制御する。</para>
+
+	<para>この動作は、オプションとして 'client use krb5 netlogon:NETBIOSDOMAIN=yes no'を
+	使用することで、NetBIOS ドメインごとに制御できる。</para>
+
+	<para>このオプションは、<smbconfoption name="reject aes netlogon servers"/>
+	オプション(有効になっている場合)によって上書きされ、
+	<smbconfoption name="client use krb5 netlogon"/>も yes になる。</para>
+
+	<para>
+	'既定値' は現在の所 'no' になっている。
+	</para>
+
+	<para>
+	  'auto' の意味は、使用される kerberos ライブラリと
+	  信頼/ドメインの種類によって異なる。
+	</para>
+
+	<para>
+	samba が '--without-ads' または '--with-system-heimdarkrb 5' を使用して
+	コンパイルされた場合、krb5_init_creds_step() 関数は使用できないため、
+	ServerAuthenticateKerberos 機能を有効にすることはできない。
+	これにより、'auto' は強制的に 'no' として動作する。
+	</para>
+
+	<para>
+	'auto' の値は、ドメインが Active Directory ドメインとして検出された場合
+	(たとえば、'SECURITY=ADS'または Active Directory ドメインコントローラ上の
+	場合)、'yes' にマッピングされる。
+	</para>
+
+	<para><emphasis>
+	警告:このオプションはこの Samba バージョンでは実験的なものであり
+	(後述のバージョンセクションを参照)、運用環境では使用すべきでない!
+	</emphasis></para>
+</description>
+
+<value type="default">default</value>
+<value type="example">no</value>
+<value type="example">auto</value>
+<value type="example">yes</value>
+</samba:parameter>
