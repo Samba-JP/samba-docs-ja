@@ -193,7 +193,7 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.20.1 - 4.21.3 に対応する。</para>
-        <para>このドキュメントの Samba 4.20.1 - 4.21.3 対応の翻訳は 太田俊哉(ribbon@samba.gr.jp)によって行われた。</para>
+	<para>このマニュアルページは Samba 4.20.1 - 4.22.0 に対応する。</para>
+        <para>このドキュメントの Samba 4.20.1 - 4.22.0 対応の翻訳は 太田俊哉(ribbon@samba.gr.jp)によって行われた。</para>
 </refsect1>
 </refentry>

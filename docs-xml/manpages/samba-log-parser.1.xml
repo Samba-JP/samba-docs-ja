@@ -165,8 +165,8 @@ options:
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.19.0 - 4.21.3 に対応する。</para>
-	<para>Samba 4.19.0 - 4.21.3 対応の翻訳は、太田俊哉 (ribbon@samba.gr.jp) によって行なわれた。</para>
+	<para>このマニュアルページは Samba 4.19.0 - 4.22.0 に対応する。</para>
+	<para>Samba 4.19.0 - 4.22.0 対応の翻訳は、太田俊哉 (ribbon@samba.gr.jp) によって行なわれた。</para>
 </refsect1>
 
 </refentry>
