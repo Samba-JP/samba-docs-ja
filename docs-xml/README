@@ -138,6 +138,7 @@ XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)につ
 	   tuning/strictrename.xml,
 	   winbind/rejectmd5servers.xml,
 	   build/DTD/samba.entities
+	   generate-pathconf-entities.sh
 	   変更
 	   himmelblaud/himmelblaudhelloenabled.xml,
 	   himmelblaud/himmelblaudhsmpinpath.xml,
