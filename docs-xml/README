@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2025/03/18
+						2025/03/19
 						日本Sambaユーザー会
 
 
@@ -129,14 +129,15 @@ manpages、html、htmlman が実行可能になります。これ以外にも ma
 ======================================================================
 XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)については、記載を省略しています。
 
-2025/03/17 Ver 4.22.0-1 4.22.0 対応
+2025/03/19 Ver 4.22.0-1 4.22.0 対応
 	   net.8.xml,samba-tool.8.xml,vfs_ceph_new.8.xml,
 	   vfs_gpfs.8.xml,vfs_nfs4acl_xattr.8.xml,wbinfo.1.xml,
 	   logon/allownt4crypto.xml,logon/rejectmd5clients.xml,
 	   protocol/sharefakefscaps.xml,
 	   security/syncmachinepasswordtokeytab.xml,
 	   tuning/strictrename.xml,
-	   winbind/rejectmd5servers.xml
+	   winbind/rejectmd5servers.xml,
+	   build/DTD/samba.entities
 	   変更
 	   himmelblaud/himmelblaudhelloenabled.xml,
 	   himmelblaud/himmelblaudhsmpinpath.xml,
