@@ -2392,6 +2392,16 @@ net ads keytab create
 </para>
 </refsect2>
 
+ <refsect2>
+   <title>ADS KEYTAB <replaceable>LIST</replaceable> <replaceable>[keytab]</replaceable></title>
+
+   <para>
+       コマンドは、keytab の内容を一覧表示する。keytab が指定されない
+       場合、KRB5 によって設定された既定の keytab を表示する。
+   </para>
+</refsect2>
+
+
 <refsect2>
 <title>(削除済み!) ADS KEYTAB <replaceable>DELETE</replaceable> <replaceable>(principal | machine | serviceclass | windows SPN)</replaceable></title>
 
@@ -4909,6 +4919,13 @@ Dump the locking table of a certain global lock.
 		</itemizedlist>
 
 	</refsect3>
+
+	<refsect3>
+                <title>tdb smbXsrv wipedbs</title>
+                <para>smbXsrv データベースから古いエントリーを削除する。</para>
+                <para><command>net serverid wipedbs</command> の別名である。
+                </para>
+        </refsect3>
 </refsect2>
 
 <!-- Samba 4.12.0
@@ -5624,6 +5641,35 @@ net witness force-response   json 入力に基づいて AsyncNotify 応答を強
 </refsect2>
 
 <refsect2>
+  <title>serverid</title>
+  <para>サーバ ID の存在を確認し、ファイルサーバ状態データベースから古い
+  エントリを削除する。</para>
+  <para>以下のコマンドが実装されている:
+  <simplelist>
+    <member>net serverid exists          serverid の存在をチェック</member>
+    <member>net serverid wipedbs         ファイルサーバ状態データベースから古いエントリを削除</member>
+  </simplelist>
+  </para>
+
+<refsect3>
+  <title>serverid exists &lt;serverid&gt;</title>
+  <para>serverid が存在するかをチェックする。</para>
+</refsect3>
+
+<refsect3>
+  <title>serverid wipedbs</title>
+  <para>ファイルサーバ状態データベースから古いエントリを削除する。</para>
+  <para>wipedbs へのオプションは以下の通り:</para>
+  <para>        --test</para>
+  <para>            古いエントリのチェックだけで、それらをログに記録</para>
+  <para>        --verbose</para>
+  <para>            詳細なログを生成</para>
+</refsect3>
+
+
+</refsect2>
+
+<refsect2>
 <title>HELP [COMMAND]</title>
 
 <!-- 原文 samba-4.6.7
@@ -5641,11 +5687,7 @@ net witness force-response   json 入力に基づいて AsyncNotify 応答を強
 -->
 	<title>バージョン</title>
 
-<!-- 原文 samba-4.6.7
-	<para>This man page is complete for version 3 of the Samba 
-	suite.</para>
--->
-	<para>このマニュアルページは Samba 3 用のものである。</para>
+	<para>このマニュアルは Samba バージョン &doc.version; 用である。</para>
 </refsect1>
 
 <refsect1>
