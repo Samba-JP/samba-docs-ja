@@ -1,0 +1,15 @@
+<samba:parameter name="smbd profiling share"
+                 context="S"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+        <para>このパラメータを使用すると、管理者は共有ごとの
+        プロファイル・サポートを有効にできる。有効にすると、
+	プロファイル・カウンタは特定の共有の共有ごとの粒度で収集される場合が
+	ある。グローバルオプション
+	<smbconfoption name="smbd profiling level"/> が有効のときのみ
+	影響を受ける。
+	</para>
+</description>
+<value type="default">no</value>
+</samba:parameter>
