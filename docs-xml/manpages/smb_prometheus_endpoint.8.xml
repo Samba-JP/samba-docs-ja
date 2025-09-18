@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE refentry PUBLIC "-//Samba-Team//DTD DocBook V4.2-Based Variant V1.0//EN" "http://www.samba.org/samba/DTD/samba-doc">
+<refentry id="smb_prometheus_endpoint.8">
+
+<refmeta>
+	<refentrytitle>smb_prometheus_endpoint</refentrytitle>
+	<manvolnum>8</manvolnum>
+	<refmiscinfo class="source">Samba</refmiscinfo>
+	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
+	<refmiscinfo class="version">&doc.version;</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+	<refname>smb_prometheus_endpoint</refname>
+	<refpurpose>prometheus が Samba のプロファイル情報を利用できるようにする。
+	</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <cmdsynopsis>
+    <command>smb_prometheus_endpoint</command>
+    <arg choice="opt">-a ADDRESS</arg>
+    <arg choice="opt">-p PORT</arg>
+    <arg>smbprofile.tdb</arg>
+  </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+	<title>説明</title>
+
+	<para>このプログラムは<citerefentry><refentrytitle>samba</refentrytitle>
+	<manvolnum>8</manvolnum></citerefentry>システムの一部である。</para>
+
+	<para>Samba のプロファイル情報を http 経由で prometheus に提供する。</para>
+</refsect1>
+
+<refsect1>
+  <title>オプション</title>
+	<variablelist>
+	  <varlistentry>
+	    <term>-a ADDRESS</term>
+	    <listitem>
+	      <para>
+	      <command>smb_prometheus_endpoint</command> がリッスンする
+	      アドレス。既定値は 127.0.0.1。</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>-p PORT</term>
+	    <listitem>
+	      <para>
+	      <command>smb_prometheus_endpoint</command> がリッスンする
+	      ポート。既定値は port 9922。</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>smbprofile.tdb</term>
+	    <listitem>
+	      <para>Samba が統計情報を保存するシステムの smbprofile.tdb への
+	      フルパス。</para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+</refsect1>
+
+<refsect1>
+	<title>著者</title>
+
+        <para>オリジナルの Samba ソフトウェアと関連するユーティリティは、
+        Andrew Tridgell によって作られた。
+        Samba は現在 Linux カーネルが 開発されているような方法での
+        オープンソースプロジェクトである Samba Team によって開発されている。
+        </para>
+</refsect1>
+
+<refsect1>
+        <title>日本語訳</title>
+        <para>このマニュアルページは Samba 4.23.0 - 4.23.0 に対応する。</para>
+        <para>このマニュアルページの Samba 4.23.0 - 4.23.0 対応の翻訳は、太田俊哉 (ribbon@samba\
+.gr.jp) によって行なわれた。</para>
+
+</refsect1>
+</refentry>
