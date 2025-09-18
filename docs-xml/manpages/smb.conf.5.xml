@@ -509,7 +509,7 @@ chmod 1770 /usr/local/samba/lib/usershares
 		<listitem><para>クライアントマシンの NetBIOS 名 (とても便利)。</para>
 			<para>Samba がポート 445 で待機している場合、クライアントがこの情報を送信しないため、この変数は利用できない。
 			Samba がドメインコントローラーであるドメインで include パラメーターにおいてこの変数を用いている場合などは、
-			[global] セクションで <parameter>smb ports = 139</parameter> の設定を行なうこと。
+			[global] セクションで <parameter>server smb ports = 139</parameter> の設定を行なうこと。
 			これにより Samba はポート 445 で待機しなくなり、Samba 2.X で実現していた include 機能が利用できる。
 			</para></listitem>
 

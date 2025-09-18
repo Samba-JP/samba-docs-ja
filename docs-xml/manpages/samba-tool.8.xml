@@ -36,13 +36,18 @@
 
 <refsect1>
 	<title>オプション</title>
+        <para>
+          Samba-tool は多数のサブコマンドで構成されており、各サブコマンドには
+	  独自のオプションのセットがある。このセクションにリストされている
+	  オプションは、いくつかのサブコマンドに共通である。
+        </para>
 
 	<variablelist>
 
 	<varlistentry>
 	<term>-h|--help</term>
 	<listitem><para>
-	このヘルプメッセージを表示して終了する。
+	ヘルプメッセージを表示して終了する。
 	</para></listitem>
 	</varlistentry>
 
@@ -64,37 +69,83 @@
 
 	&cmdline.common.credentials.authenticationfile;
 
+        <varlistentry>
+          <term>-H URL, --URL=URL</term>
+	  <listitem>
+            <para>データベースまたはターゲットサーバの LDB URL。</para>
+            <para>URL は、単純なファイルパスでも、ここにリストされている
+	    スキームのいずれかを使用してもかまわない。単純なパスを使用
+	    すると、'tdb://' が使用されたかのように扱われる。
+            <variablelist>
+              <varlistentry>
+                <term>tdb://PATH</term>
+                <listitem>
+                  <para>
+                    PATH は TDB データベースの位置である。
+                  </para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term>mdb://PATH</term>
+                <listitem>
+                  <para>
+                    PATH は LMBD データベースの位置である。
+                  </para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term>ldb://PATH</term>
+                <listitem>
+                  <para>
+                    PATH は LMDB または TDB フォーマットのどちらかである、
+		    LDB データベースの位置である。フォーマットは、 1つが
+		    成功するか、すべてが失敗するまで、次々に試行される。
+		    ファイルのフォーマットがわからない場合は、これを使用
+		    しても安全である。
+                  </para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term>ldap://HOSTNAME, ldaps://HOSTNAME</term>
+                <listitem>
+                  <para>
+                    LDB バックエンドは、指定された ldap サーバである。ldaps://
+		    は、接続を TLS でラップする。
+                  </para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term>ldapi://SOCKET</term>
+                <listitem>
+                  <para>
+                    バックエンドサーバは、Unix ドメインソケットを使用する
+		    ローカル LDAP サーバである。
+                  </para>
+                </listitem>
+              </varlistentry>
+
+            </variablelist>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>--color=always|never|auto</term>
+          <listitem><para>有効であれば色を使う (既定値: auto)</para></listitem>
+        </varlistentry>
+
+
 	<varlistentry>
 	<term>--ipaddress=IPADDRESS</term>
 	<listitem><para>
 	サーバーの IP アドレス。
 	</para></listitem>
 	</varlistentry>
-
-<!-- Samba 4.18.0	
         <varlistentry>
-        <term>- -color=always|never|auto</term>
-        <listitem>
-          <para>
-            Indicate whether samba-tool should use ANSI colour codes
-            in its output. If 'auto' (the default), samba-tool will
-            use colour when its output is directed toward a terminal,
-            unless the NO_COLOR environment variable is set and
-            non-empty.
-          </para>
-          <para>
-            The values 'yes' and 'force' are accepted as synonyms for
-            'always'; 'no' and 'none' for 'never'; and 'tty' and
-            'if-tty' for 'auto'.
-          </para>
-          <para>
-            Note that asking for colour doesn't mean samba-tool will
-            necessarily be very colourful. Many commands are very
-            monochrome, particularly when successful.
-        </para>
-        </listitem>
+          <term>-s FILE, --configfile=FILE</term>
+          <listitem><para>ここで指定する smb.conf 設定ファイルを使用する。</para></listitem>
         </varlistentry>
--->
+
         <varlistentry>
         <term>--color=always|never|auto</term>
         <listitem>
@@ -115,6 +166,13 @@
 	    ほとんど白黒である。
         </para>
         </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>-V, --version</term>
+          <listitem><para>バージョン番号を表示して終了する。</para></listitem>
+
+
         </varlistentry>
 
 	&cmdline.common.debug.client;
@@ -898,6 +956,20 @@
 </refsect2>
 
 <refsect3>
+        <title>delegation add-principal <replaceable>accountname</replaceable> <replaceable>principal</replaceable> [options]</title>
+        <para>アカウントに委任する可能性のあるプリンシパルを
+	msDS-AllowedToActOnBehalfOfOtherIdentity に追加する。
+        </para>
+</refsect3>
+
+<refsect3>
+        <title>delegation del-principal <replaceable>accountname</replaceable> <replaceable>principal</replaceable> [options]</title>
+        <para>msDS-AllowedToActOnBehalfOfOtherIdentity からプリンシパルを削除
+	して、アカウントに委任できないようにする。
+        </para>
+</refsect3>
+
+<refsect3>
 	<title>delegation add-service <replaceable>accountname</replaceable> <replaceable>principal</replaceable> [options]</title>
 <!-- 原文 samba-4.7.0
 	<para>Add a service principal as msDS-AllowedToDelegateTo.</para>
@@ -948,10 +1020,26 @@
 
 <refsect3>
 	<title>dns add <replaceable>server</replaceable> <replaceable>zone</replaceable> <replaceable>name</replaceable> <replaceable>A|AAAA|PTR|CNAME|NS|MX|SRV|TXT</replaceable> <replaceable>data</replaceable></title>
-<!-- 原文 samba-4.7.0
-	<para>Add a DNS record.</para>
--->
 	<para>DNS レコードを追加する。</para>
+        <variablelist>
+        <varlistentry>
+        <term>--allow-existing</term>
+        <listitem><para>この名前とタイプの既存のレコードをエラーとして
+	扱わないようにする。機能的な変更はない(新しい DNS レコードは
+	追加されない) が、メッセージと samba-tool のリターンコードは
+	エラーを示さない。</para></listitem>
+        </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>dns cleanup <replaceable>server</replaceable> <replaceable>name</replaceable> </title>
+        <para>ホストの DNS レコードをクリーンアップして、DNS クエリが
+	結果を返さないようにする。通常、これはデータベース内でレコードを
+	削除済みとしてマークすることで機能する。</para>
+        <para>
+          例: <constant>samba-tool dns cleanup dc1 computer.samdom.test.site</constant>
+        </para>
 </refsect3>
 
 <refsect3>
@@ -1026,6 +1114,68 @@
 	<para>DNS ゾーンを一覧表示する。</para>
 </refsect3>
 
+<refsect3>
+        <title>dns zoneoptions <replaceable>server</replaceable> <replaceable>zone</replaceable> [options]</title>
+        <para>エージングオプションを操作する。これは、動的 DNS を使用するゾーンで役立つ。</para>
+        <para>正規表現または経過時間に基づいてレコードを静的から動的に
+	変更するオプションがある。これは、古いバージョンの Samba で値が
+	混同された場合に役立つ。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-n, --dry-run</term>
+                        <listitem><para>実際には何も変更せず、
+			何が起こるかを示す。</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--client-version=w2k|dotnet|longhorn</term>
+                        <listitem><para>Windowsクライアントのプロトコル・
+			バージョン。デフォルトは<constant>longhorn</constant>
+			で、おそらくこれが必要。</para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--mark-old-records-static=YYYY-MM-DD</term>
+                        <listitem><para>指定された日付より古いレコードを
+			静的としてマークする。</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--mark-records-static-regex=REGEXP</term>
+                        <listitem><para>指定された perl 互換の正規表現に
+			一致するレコードを静的としてマークする。
+			</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--mark-records-dynamic-regex=REGEXP</term>
+                        <listitem><para>指定された perl 互換の正規表現に
+                        一致するレコードを動的としてマークする。
+			</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--aging=0|1</term>
+                        <listitem>
+                          <para>--aging=1 はこのゾーンでエージングを有効にする。</para>
+                        <para>--aging=0 はこのゾーンでエージングを無効にする。</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--norefreshinterval=HOURS</term>
+                        <listitem><para>動的更新の後、これ以上の更新を
+			行わないようにする。デフォルトを使用するには、
+			0に設定する。</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term>--refreshinterval=HOURS</term>
+                  <listitem><para>時間単位の動的リフレッシュ間隔(0:デフォルトを使用)</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term></term>
+                        <listitem><para></para></listitem>
+                </varlistentry>
+        </variablelist>
+
+
+
+</refsect3>
+		
 <refsect2>
 	<title>domain</title>
 <!-- 原文 samba-4.7.0
@@ -1399,7 +1549,7 @@
 					文字列でなければならない。
                                 </para>
                                 <para>
-                                        例: O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AU)}))
+                                        例: <constant>O:SYG:SYD:(XA;OICI;CR;;;WD;(Member_of {SID(AU)}))</constant>
                                 </para>
                         </listitem>
                 </varlistentry>
@@ -3172,14 +3322,38 @@
         </variablelist>
 </refsect3>
 
-<refsect2>
-        <title>service-account</title>
-        <para>サービスアカウント管理。</para>
-</refsect2>
+<refsect3>
+        <title>domain classicupgrade [options] <replaceable>classic_smb_conf</replaceable></title>
+        <para>Samba クラシック(NT 4風)データベースから Samba AD DC
+	データベースにアップグレードする。</para>
+</refsect3>
 
 <refsect3>
-        <title>service-account list</title>
-        <para>ドメイン上のサービスアカウントを一覧表示する。</para>
+        <title>domain dcpromo <replaceable>dnsdomain</replaceable> [DC|RODC] [options]</title>
+        <para>既存のドメインメンバーまたはNT4 PDCをAD DCに昇格する。</para>
+</refsect3>
+
+<refsect3>
+        <title>domain demote</title>
+        <para>ドメインコントローラの役割から自分自身を降格する。</para></refsect3>
+
+<refsect3>
+        <title>domain exportkeytab <replaceable>keytab</replaceable> [options]</title>
+        <para>ドメインの Kerberos キーを keytab にダンプする。</para>
+</refsect3>
+
+<refsect3>
+        <title>domain functionalprep [options]</title>
+        <para>機能レベルをアップグレードするためにドメインを準備する。
+	<constant>--functional-level</constant> を使用しない場合は、
+	サポートされている最新バージョン(現在は2016)が使用される。</para>
+        <para>
+          この準備には、フォレストとドメインに関連する2つの側面がある。
+	  デフォルトでは、両方が実行される。<constant>--forest-prep</constant>
+	  または <constant>--domain-prep</constant> のいずれかを使用すると、
+	  対応する準備のみが行われる。両方の引数を一緒に使用すると、どちらも
+	  使用しない場合と同様に、すべての準備が行われる。
+        </para>
         <variablelist>
                 <varlistentry>
                         <term>-H, --URL</term>
@@ -3188,74 +3362,61 @@
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--json</term>
+                        <term>--functional-level [2008_R2|2012|2012_R2|2016]</term>
                         <listitem><para>
-                                リストの代わりに JSON でサービスアカウントを表示。
+                                準備する機能レベル。デフォルトは2016。
                         </para></listitem>
                 </varlistentry>
+                <varlistentry>
+                        <term>--forest-prep</term>
+                        <listitem><para>
+                                フォレストの準備のみを実行する(--domain-prepも使用しない場合)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--domain-prep</term>
+                        <listitem><para>
+                                ドメインの準備のみを実行する(--forest-prepも使用しない場合)。
+                        </para></listitem>
+                </varlistentry>
+                <?ignore
+                  <!-- these are ignored by the tool, so let's not document them. -->
+                <varlistentry>
+                        <term>-q, --quiet</term>
+                        <listitem><para>
+                                Be quieter.
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>-v, --verbose</term>
+                        <listitem><para>
+                                Be more verbose.
+                        </para></listitem>
+                        </varlistentry>
+                ?>
         </variablelist>
 </refsect3>
 
 <refsect3>
-        <title>service-account view</title>
-        <para>ドメイン上の、一つのサービスアカウントを表示。</para>
-        <variablelist>
-                <varlistentry>
-                        <term>-H, --URL</term>
-                        <listitem><para>
-                                データベースまたはターゲットサーバへの LDB URL。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--name</term>
-                        <listitem><para>
-                                表示するサービスアカウントの名前(必須)。
-                        </para></listitem>
-                </varlistentry>
-        </variablelist>
+        <title>domain info <replaceable>ip_address</replaceable> [options]</title>
+        <para>ドメインと指定された DC についての基本情報を表示
+</para>
 </refsect3>
 
 <refsect3>
-        <title>service-account create</title>
-        <para>ドメン上で新規サービスアカウントを作成。</para>
-        <variablelist>
-                <varlistentry>
-                        <term>-H, --URL</term>
-                        <listitem><para>
-                                データベースまたはターゲットサーバへの LDB URL。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--name</term>
-                        <listitem><para>
-                                表示するサービスアカウントの名前(必須)。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--dns-host-name</term>
-                        <listitem><para>
-                                このサービスアカウントの DNS ホスト名(必須)。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--group-msa-membership</term>
-                        <listitem><para>
-                                オプションのグループ MSA メンバシップ SDDL。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--managed-password-interval</term>
-                        <listitem><para>
-                                日単位の管理パスワード更新間隔。
-                        </para></listitem>
-                </varlistentry>
-        </variablelist>
+        <title>domain join <replaceable>dnsdomain</replaceable> [DC|RODC|MEMBER|SUBDOMAIN] [options]</title>
+        <para>メンバーまたはバックアップドメインコントローラのどちらかとしてドメインに参加。</para>
 </refsect3>
 
 <refsect3>
-        <title>service-account modify</title>
-        <para>ドメイン上の、既存のサービスアカウントの変更。</para>
-        <variablelist>
+        <title>domain kds root-key</title>
+        <para>キー分散サービス root キーの管理。</para>
+</refsect3>
+
+<refsect3>
+        <title>domain kds root-key create [options]</title>
+        <para>KDS ルートキーの作成</para>
+	<variablelist>
                 <varlistentry>
                         <term>-H, --URL</term>
                         <listitem><para>
@@ -3263,78 +3424,33 @@
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
-                        <listitem><para>
-                                表示するサービスアカウントの名前(必須)。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--dns-host-name</term>
-                        <listitem><para>
-                                このサービスアカウントの更新する DNS ホスト名(必須)。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--group-msa-membership</term>
-                        <listitem><para>
-                                更新するグループ MSA メンバシップ SDDL。
-                        </para></listitem>
-                </varlistentry>
-        </variablelist>
-</refsect3>
-
-<refsect3>
-        <title>service-account delete</title>
-        <para>ドメン上でサービスアカウントを削除。</para>
-        <variablelist>
-                <varlistentry>
-                        <term>-H, --URL</term>
-                        <listitem><para>
-                                データベースまたはターゲットサーバへの LDB URL。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--name</term>
-                        <listitem><para>
-                                削除するサービスアカウントの名前。
-                        </para></listitem>
-                </varlistentry>
-        </variablelist>
-</refsect3>
-
-<refsect2>
-        <title>service-account group-msa-membership</title>
-        <para>サービスアカウントグループ MSA メンバシップの管理。</para>
-</refsect2>
-
-<refsect3>
-        <title>service-account group-msa-membership show</title>
-        <para>サービスアカウントの、グループ MSA メンバシップの表示。</para>
-        <variablelist>
-                <varlistentry>
-                        <term>-H, --URL</term>
-                        <listitem><para>
-                                データベースまたはターゲットサーバへの LDB URL。
-                        </para></listitem>
-                </varlistentry>
-                <varlistentry>
-                        <term>--name</term>
-                        <listitem><para>
-                                サービスアカウントの名前(必須)。
-                        </para></listitem>
+                        <term>--use-start-time=["now"|iso8601 or LDIF time string]</term>
+                        <listitem><para>指定された時間からキーが
+			有効になる。 </para>
+                        <para>有効な時間指定方法は
+                        文字列 "now"、 LDIF 形式
+                        <constant>YYYYmmddHHMMSS.0Z</constant>、あるいは
+                        ISO 形式 <constant>YYYY-mm-dd[*HH[:MM[:SS[.fff[fff]]]][+HH:MM[:SS[.ffffff]]]]</constant>
+                        で、'*' は任意の文字で、オプションの最後の
+                        '[+HH:MM[:SS[.ffffff]]]' はタイムゾーンオフセット
+			(たとえば UTC なら '+00:00') である。
+                      </para>
+                        </listitem>
                 </varlistentry>
                 <varlistentry>
                         <term>--json</term>
                         <listitem><para>
-                                リストの代わりに JSON で返す。
+                                JSON 形式で結果を出力する。
                         </para></listitem>
                 </varlistentry>
         </variablelist>
 </refsect3>
 
 <refsect3>
-        <title>service-account group-msa-membership add</title>
-        <para>サービスアカウントへのグループ MSA メンバシップへプリンシパルを追加。</para>
+        <title>domain kds root-key delete --name={GUID}</title>
+        <para>指定された KDS ルートキーを削除する。
+	<constant>samba-tool domain kds root-key list </constant> を使用して
+	キーの名前を検索すること。</para>
         <variablelist>
                 <varlistentry>
                         <term>-H, --URL</term>
@@ -3343,23 +3459,30 @@
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>--name=NAME</term>
                         <listitem><para>
-                                サービスアカウントのアカウント名(必須)。
+                                削除するキーの名前。GUID でなければならない。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--principal</term>
+                        <term>-v, --verbose</term>
                         <listitem><para>
-                                追加するための、プリンシパルの名前、DN または SID。
+                          すべての属性を表示(--show secrets が使用
+			  されていない限り、シークレットのものは対象外)。
+                        </para></listitem>
+                        </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                JSON 形式で結果を出力。
                         </para></listitem>
                 </varlistentry>
         </variablelist>
 </refsect3>
 
 <refsect3>
-        <title>service-account group-msa-membership remove</title>
-        <para>サービスアカウントへのグループ MSA メンバシップからプリンシパルを削除。</para>
+        <title>domain kds root-key list [options]</title>
+        <para>KDS ルートキーの一覧表示。最新のキーが最初に表示される。</para>
         <variablelist>
                 <varlistentry>
                         <term>-H, --URL</term>
@@ -3368,131 +3491,174 @@
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--name</term>
+                        <term>--show-secrets</term>
                         <listitem><para>
-                                サービスアカウントの名前(必須)。
+                          秘密または潜在的に機密性の高い属性、すなわち
+			  msKds-RootKeyData および msKds-SecretAgreementParam
+			  を出力する。
                         </para></listitem>
                 </varlistentry>
                 <varlistentry>
-                        <term>--principal</term>
+                        <term>-v, --verbose</term>
                         <listitem><para>
-                                削除するプリンシパルの名前、DN または SID。
+                          より多くの属性を表示(--show secrets が使用
+                          されていない限り、シークレットのものは対象外)。
+                        </para></listitem>
+                        </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                JSON 形式で結果を出力。
                         </para></listitem>
                 </varlistentry>
         </variablelist>
 </refsect3>
 
 <refsect3>
-	<title>domain classicupgrade [options] <replaceable>classic_smb_conf</replaceable></title>
-<!-- 原文 samba-4.7.0
-	<para>Upgrade from Samba classic (NT4-like) database to Samba AD DC
-	database.</para>
--->
-	<para>旧形式（NT4 風）の Samba データベースから Samba AD DC データベースにアップグレードする。</para>
+        <title>domain kds root-key view [options]</title>
+        <para>KDSルートキーを表示する。デフォルトの出力は
+	<constant>samba-tool domain kds root-key list --verbose</constant>と
+	似ているが、キーは1つしか表示されない。キーを選択するには、
+	<constant>--latest</constant> を使用して最新のキーを選択するか、
+	<constant>--name</constant> を使用して名前でキーを選択する。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--latest</term>
+                        <listitem><para>最新の root キーを表示。
+                      </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name=NAME</term>
+                        <listitem><para>表示するキーの名前。GUID でなければならない。
+                      </para>
+                        </listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>-v, --verbose</term>
+                        <listitem><para>すべての属性を表示(--show secrets が使用
+                        されていない限り、シークレットのものは対象外)。
+			これは、LDB bookkeeping にのみ便利な属性を含む。
+			</para></listitem>
+                        </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                JSON 形式で結果を出力する。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
 </refsect3>
 
 <refsect3>
-	<title>domain dcpromo <replaceable>dnsdomain</replaceable> [DC|RODC] [options]</title>
-<!-- 原文 samba-4.7.0
-	<para>Promote an existing domain member or NT4 PDC to an AD DC.</para>
--->
-	<para>既存のドメインメンバーまたは NT4 PDC を AD DC に昇格（promote）する。</para>
-</refsect3>
-
-<refsect3>
-	<title>domain demote</title>
-<!-- 原文 samba-4.7.0
-	<para>Demote ourselves from the role of domain controller.</para>
--->
-	<para>ドメインコントローラーの降格（demote）を行う。</para>
-</refsect3>
-
-<refsect3>
-	<title>domain exportkeytab <replaceable>keytab</replaceable> [options]</title>
-<!-- 原文 samba-4.7.0
-	<para>Dumps Kerberos keys of the domain into a keytab.</para>
--->
-	<para>ドメインの Kerberos キーを keytab ファイルにダンプする。</para>
-</refsect3>
-
-<refsect3>
-	<title>domain info <replaceable>ip_address</replaceable> [options]</title>
-<!-- 原文 samba-4.7.0
-	<para>Print basic info about a domain and the specified DC.
--->
-	<para>ドメインと特定の DC についての基本情報を表示する。</para>
-</refsect3>
-
-<refsect3>
-	<title>domain join <replaceable>dnsdomain</replaceable> [DC|RODC|MEMBER|SUBDOMAIN] [options]</title>
-<!-- 原文 samba-4.7.0
-	<para>Join a domain as either member or backup domain controller.</para>
--->
-	<para>メンバーまたはバックアップドメインコントローラーのどちらかとしてドメインに参加する。</para>
+        <title>domain leave [options]</title>
+        <para>ドメインメンバー上で実行すると、ドメインから離脱する。</para>
+	<para>ドメインからドメインサーバーを削除するには、まず
+	<constant>samba-tool domain demote</constant>が必要である。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>--keep-account</term>
+                        <listitem><para>
+                                マシンアカウントを削除するのではなく、無効にする。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
 </refsect3>
 
 <refsect3>
 	<title>domain level <replaceable>show|raise</replaceable> <replaceable>options</replaceable> [options]</title>
-<!-- 原文 samba-4.7.0
-	<para>Show/raise domain and forest function levels.</para>
--->
-	<para>ドメインやフォレストの機能レベルの参照/上昇を行う。</para>
+
+	<para>ドメインとフォレストレベルの表示/昇格を行う。</para>
+	
 </refsect3>
 
 <refsect3>
-	<title>domain passwordsettings <replaceable>show|set</replaceable> <replaceable>options</replaceable> [options]</title>
-<!-- 原文 samba-4.7.0
-	<para>Show/set password settings.</para>
--->
-	<para>パスワード設定を表示、設定する。</para>
+	<title>domain passwordsettings set <replaceable>options</replaceable> [options]</title>
+	<para>Samba AD DC サーバーで、複雑さの要件、ロックアウトポリシー、履歴
+	の長さ、最小パスワード長、最小および最大パスワード経過時間などのパスワー
+	ド設定を行う。</para>
+
+	<para>Windows DC に対して使用することは可能だが、グループポリシーに
+	よって上書きされる。</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-q, --quiet</term>
+            <listitem><para>表示を抑制</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--complexity=COMPLEXITY</term>
+            <listitem><para>パスワードの複雑さの設定(on | off | default). 既定値は 'on'</para
+></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--store-plaintext=STORE_PLAINTEXT</term>
+            <listitem><para>アカウントの 'store passwords with reversible encryption' 設定によって
+	    平文でパスワードを格納 (on | off | default)。既定値は 'off'</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--history-length=HISTORY_LENGTH</term>
+            <listitem><para>パスワード履歴長
+	    (<replaceable>integer</replaceable> | default)。  既定値は 24。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--min-pwd-length=MIN_PWD_LENGTH</term>
+            <listitem><para>最小パスワード長
+	    (<replaceable>integer</replaceable> | default)。  既定値は 7。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+           <term>--min-pwd-age=MIN_PWD_AGE</term>
+            <listitem><para>最小パスワード保持期間(<replaceable>日数
+	    </replaceable> | default)。既定値は 1。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--max-pwd-age=MAX_PWD_AGE</term>
+            <listitem><para>最大パスワード保持期間(<replaceable>日数
+	    </replaceable> | default)。 既定値は 43。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--account-lockout-duration=ACCOUNT_LOCKOUT_DURATION</term>
+            <listitem><para>間違ったパスワード試行を超えたときにアカウントを
+	    ロックする時間。(<replaceable>分</replaceable> | default)。
+	    既定値は 30分。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--account-lockout-threshold=ACCOUNT_LOCKOUT_THRESHOLD</term>
+            <listitem><para>アカウントをロックする前に許される不正なパスワード
+	    試行回数(<replaceable>回数</replaceable> | default)。
+	    既定値は 0 (ロックアウトしない)。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--reset-account-lockout-after=RESET_ACCOUNT_LOCKOUT_AFTER</term>
+            <listitem><para>指定された時間後、記録されている試行回数が0になる
+	    (<replaceable>integer</replaceable> | default)。既定値は 30。</para></listitem>
+          </varlistentry>
+</variablelist>
+	
 </refsect3>
 
-<!--
 <refsect3>
-	<title>domain passwordsettings pso</title>
-	<para>Manage fine-grained Password Settings Objects (PSOs).</para>
+	<title>domain passwordsettings show <replaceable>options</replaceable> [options]</title>
+	<para>ドメインの現在のパスワード設定を表示する。</para>
+
+        <variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+        </variablelist>
 </refsect3>
 
-<refsect3>
-	<title>domain passwordsettings pso apply <replaceable>pso-name</replaceable> <replaceable>user-or-group-name</replaceable> [options]</title>
-	<para>Applies a PSO's password policy to a user or group.</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso create <replaceable>pso-name</replaceable> <replaceable>precedence</replaceable> [options]</title>
-	<para>Creates a new Password Settings Object (PSO).</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso delete <replaceable>pso-name</replaceable> [options]</title>
-	<para>Deletes a Password Settings Object (PSO).</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso list [options]</title>
-	<para>Lists all Password Settings Objects (PSOs).</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso set <replaceable>pso-name</replaceable> [options]</title>
-	<para>Modifies a Password Settings Object (PSO).</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso show <replaceable>user-name</replaceable> [options]</title>
-	<para>Displays a Password Settings Object (PSO).</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso show-user <replaceable>pso-name</replaceable> [options]</title>
-	<para>Displays the Password Settings that apply to a user.</para>
-</refsect3>
-
-<refsect3>
-	<title>domain passwordsettings pso unapply <replaceable>pso-name</replaceable> <replaceable>user-or-group-name</replaceable> [options]</title>
-	<para>Updates a PSO to no longer apply to a user or group.</para>
-</refsect3>
--->
 <refsect3>
 	<title>domain passwordsettings pso</title>
 	<para>Manage fine-grained Password 設定オブジェクト (PSOs) を管理する。</para>
@@ -3544,6 +3710,75 @@
 	<para>Promote an existing domain member or NT4 PDC to an AD DC.</para>
 -->
 	<para>既存のドメインメンバーまたは NT4 PDC を AD DC に昇格（promote）する。</para>
+</refsect3>
+
+<refsect3>
+        <title>domain schemaupgrade [options]</title>
+        <para>スキーマをアップグレードする。
+        </para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--schema [2012|2012_R2|2016|2019]</term>
+                        <listitem><para>
+                          この Windows スキーマレベルにアップグレードする。既定値は 2019。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--ldf-file</term>
+                        <listitem><para>標準スキーマ・レベルに更新するのでは
+			なく、この LDIF ファイルにスキーマの変更を適用する。
+			</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--base-dir</term>
+                        <listitem><para>
+                          スキーマ LDIF ファイルを検索するための代替位置を指定する。
+                        </para></listitem>
+                </varlistentry>
+                <?ignore
+                  <!-- these are currently ignored by the tool, so let's not document them. -->
+                <varlistentry>
+                        <term>-q, --quiet</term>
+                        <listitem><para>
+                                Be quieter.
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>-v, --verbose</term>
+                        <listitem><para>
+                                Be more verbose.
+                        </para></listitem>
+                        </varlistentry>
+                ?>
+        </variablelist>
+
+
+</refsect3>
+
+<refsect3>
+        <title>domain tombstones expunge NC [NC [...]] [options]</title>
+        <variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--current-time=YYYY-MM-DD</term>
+            <listitem><para>tombstone lifetime からを評価する現在の時刻(YYYY-MM-DD)</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--tombstone-lifetime=DAYS</term>
+            <listitem><para>tombstone が保存されるべき日数</para></listitem>
+          </varlistentry>
+        </variablelist>
+
+
 </refsect3>
 
 <refsect3>
@@ -3629,6 +3864,77 @@
 	<para>サーバーの DRS 性能を表示する。</para>
 </refsect3>
 
+<refsect3>
+  <title>drs clone-dc-database <replaceable>dnsdomain</replaceable>
+  --targetdir=<replaceable>DIR</replaceable> [options]</title>
+
+        <para>ドメインの最初のクローンをレプリケートするが、JOIN しない。
+        </para>
+
+        <variablelist>
+          <varlistentry>
+            <term>--server=DC</term>
+            <listitem><para>この DC をクローンする。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--targetdir=TARGETDIR</term>
+            <listitem><para>プロビジョンを格納する場所(必須)。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-q, --quiet</term>
+            <listitem><para>非表示モード</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--include-secrets</term>
+            <listitem><para>シークレット値もレプリケート。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--backend-store=BACKENDSTORE</term>
+            <listitem><para>使用するバックエンドデータベースを指定
+            (既定値は tdb)。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--backend-store-size=SIZE</term>
+            <listitem><para>バックエンドデータベースのサイズを指定するが、
+            現在の所 lmdb バックエンドのみサポート(既定値は 8GB)。</para></listitem>
+          </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>drs uptodateness [options]</title>
+        <para>Show uptodateness status.
+        </para>
+
+        <variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-p PARTITION, --partition=PARTITION</term>
+            <listitem><para>このパーティションのみに制限</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--json</term>
+            <listitem><para>JSON 形式でデータを表示</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--maximum</term>
+            <listitem><para>最大 out-of-date-ness のみを表示</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--median</term>
+            <listitem><para>median out-of-date-ness のみを表示</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--full</term>
+            <listitem><para>すべての out-of-date-ness データを表示</para></listitem>
+          </varlistentry>
+        </variablelist>
+
+</refsect3>
+	
 <refsect3>
 	<title>drs kcc</title>
 <!-- 原文 samba-4.7.0
@@ -3800,12 +4106,120 @@
 </refsect2>
 
 <refsect3>
+        <title>gpo aclcheck [options]</title>
+        <para>空の GPO を作成する。</para>
+        <para>すべての GPO が、一致する LDAP と DS ACL を持っているかを検査する。
+        </para>
+
+        <variablelist>
+        <varlistentry>
+        <term>-H URL, --URL=URL</term>
+        <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+        </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>gpo admxload [options]</title>
+        <para>sysvol に samba admx ファイルをロード
+        </para>
+
+        <variablelist>
+        <varlistentry>
+        <term>-H URL, --URL=URL</term>
+        <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+        </varlistentry>
+        <varlistentry>
+        <term>--admx-dir=ADMX_DIR</term>
+        <listitem><para>admx テンプレートが格納されているディレクトリ</para></listitem>
+        </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>gpo backup <replaceable>gpo</replaceable>[options]</title>
+        <para>Backup a GPO.
+        </para>
+
+        <variablelist>
+          <varlistentry>
+            <term>-H H</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--tmpdir=TMPDIR</term>
+            <listitem><para>ポリシーファイルをコピーするための一時ディレクトリ</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--generalize</term>
+            <listitem><para>リストアするための XML エンティティを生成</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--entities=ENT_FILE</term>
+            <listitem><para>リストア用の定義済みの XML エンティティをエクスポートするためのファイル</para></listitem>
+          </varlistentry>
+        </variablelist>
+
+</refsect3>
+
+
+<refsect3>
 	<title>gpo create <replaceable>displayname</replaceable> [options]</title>
 <!-- 原文 samba-4.7.0
 	<para>Create an empty GPO.</para>
 -->
 	<para>空の GPO を作成する。</para>
 </refsect3>
+
+<refsect3>
+        <title>gpo cse list </title>
+
+<para>現在のホスト上の、登録済みクライアントサイド拡張 (CSEs) を一覧表示する。</para>
+</refsect3>
+
+<refsect3>
+        <title>gpo cse register <replaceable>cse_file</replaceable> <replaceable>cse_name</replaceable> [options]</title>
+
+<para>現在のホスト上にクライアントサイド拡張 (CSE) を登録する。</para>
+
+<para>
+このコマンドは、CSEファイル名を引数として取り、現在のホストにポリシーを
+適用するために登録する。これは、現在のバージョンの Samba で配布されて
+いるCSEには必要ないが、実験用の CSE やカスタムビルドの CSE を
+インストールする場合に便利である。
+</para>
+<para>
+<replaceable>cse_file</replaceable>引数は、CSE の永続的な場所でなければ
+ならない。register コマンドは、ファイルを他のディレクトリにコピーしない。
+samba-gpupdate コマンドは、このコマンドで指定された正確な場所から
+CSEを実行する。
+</para>
+
+<variablelist>
+          <varlistentry>
+            <term>--machine</term>
+            <listitem><para>CSE をマシンポリシーとして登録するかどうか</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--user</term>
+            <listitem><para>CSE をユーザー・ポリシーとして登録するかどうか</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>gpo cse unregister <replaceable>GUID</replaceable></title>
+
+<para>クライアントサイド拡張 (CSE) を現在のホストから登録解除する。</para>
+
+<para>
+このコマンドは、一意の GUIDを 引数 (登録済 CSE を表す) として取得し、
+現在のホストにポリシーを適用するために登録を解除する。
+`samba-tool gpo cse list` コマンドを使用して、CSE の一意の GUID を判別する。
+</para>
+
+</refsect3>
+
 
 <refsect3>
 	<title>gpo del <replaceable>gpo</replaceable> [options]</title>
@@ -3872,6 +4286,234 @@
 </refsect3>
 
 <refsect3>
+        <title>gpo load <replaceable>gpo</replaceable> [options]</title>
+
+<para>GPO にポリシーをロード。</para>
+
+<para>
+--content を介して json 形式のファイルが提供されない限り、
+EOF まで標準入力から json を読みこむ。
+</para>
+  <para>
+    json_input の例:
+    <programlisting>
+[
+    {
+        "keyname": "Software\Policies\Mozilla\Firefox\Homepage",
+        "valuename": "StartPage",
+        "class": "USER",
+        "type": "REG_SZ",
+        "data": "homepage"
+    },
+    {
+        "keyname": "Software\Policies\Mozilla\Firefox\Homepage",
+        "valuename": "URL",
+        "class": "USER",
+        "type": "REG_SZ",
+        "data": "google.com"
+    },
+    {
+        "keyname": "Software\Microsoft\Internet Explorer\Toolbar",
+        "valuename": "IEToolbar",
+        "class": "USER",
+        "type": "REG_BINARY",
+        "data": [0]
+    },
+    {
+        "keyname": "Software\Policies\Microsoft\InputPersonalization",
+        "valuename": "RestrictImplicitTextCollection",
+        "class": "USER",
+        "type": "REG_DWORD",
+        "data": 1
+    }
+    ]
+    </programlisting>
+  </para>
+    <para>
+有効なクラス属性: MACHINE|USER|BOTH
+データ配列はバイトとして解釈される。
+    </para>
+    <para>
+--machine-ext-name および --user-ext-name オプションは、
+GPO の gPCMachineExtensionNames および gPCUserExtensionNames
+ldap 属性をそれぞれ設定する複数値の入力である。これらの属性は、
+Windows グループポリシーが正しく機能するように、正しい GUID 名に
+設定する必要がある。これらの GUID は、コンピュータに適用される
+クライアント側の拡張を表す。Linux グループポリシーはこの制約を
+強制しない。{35378EAC-683F-11D2-A89A-00C04FBBCFA2} は既定で
+提供され、ほとんどのレジストリポリシーを有効にする。
+</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H H</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--content=CONTENT</term>
+            <listitem><para>ポリシー入力の JSON ファイル</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--machine-ext-name=MACHINE_EXTS</term>
+            <listitem><para>gPCMachineExtensionNames に追加するためのマシン拡張名</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--user-ext-name=USER_EXTS</term>
+            <listitem><para>gPCUserExtensionNames に追加するためのユーザ拡張名</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--replace</term>
+            <listitem><para>既存のグループポリシーを併合するのではなく置き換える</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>gpo manage security list <replaceable>gpo</replaceable> [options]</title>
+
+        <para>sysvol からの Samba セキュリティグループポリシーを一覧表示する。</para>
+
+        <para>このコマンドは、winbind クライアントに適用される sysvol の
+	セキュリティ設定を一覧表示する。これらの設定は AD DC にのみ適用される。</para>
+        <para>
+        例:
+        <programlisting>samba-tool gpo manage security list {31B2F340-016D-11D2-945F-00C04FB984F9}</programlisting>
+      </para>
+
+      <variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+      </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>gpo manage security set <replaceable>gpo</replaceable> [options]</title>
+
+        <para>Samba セキュリティグループポリシーを sysvol に設定する。</para>
+
+        <para>このコマンドは、winbind クライアントに適用するためのセキュリティ
+	設定を sysvol に設定する。値を指定しないと、ポリシーが設定解除される。
+	これらの設定は AD DC にのみ適用される。</para>
+
+        <para>例:
+        <programlisting>samba-tool gpo manage security set {31B2F340-016D-11D2-945F-00C04FB984F9} MaxTicketAge 10</programlisting>
+        </para>
+        <para>
+          利用可能なポリシー:
+          <variablelist>
+            <varlistentry>
+              <term>MaxTicketAge</term>
+              <listitem><para>ユーザチケットの最大ライフタイム (時間)。</para></listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>MaxServiceAge</term>
+              <listitem><para>分単位でのサービスチケットの最大ライフタイム。
+              Defined in minutes</para></listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>MaxRenewAge</term>
+              <listitem><para>分単位での最大ユーザチケット更新ライフタイム。
+              </para></listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>MinimumPasswordAge</term>
+              <listitem><para>日単位の最小パスワード有効時間。
+              </para></listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>MaximumPasswordAge</term>
+              <listitem><para>日単位の最大パスワード有効時間。</para></listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>MinimumPasswordLength</term>
+              <listitem><para>文字数での最小パスワード長。
+              </para></listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>PasswordComplexity</term>
+              <listitem><para>パスワードが複雑さを要求するか否か。
+              1 は有効、 0 は無効。</para></listitem>
+            </varlistentry>
+          </variablelist>
+        </para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+</variablelist>
+
+
+        <para>List Samba Security Group Policy from the sysvol.</para>
+
+        <para>このコマンドは、winbind クライアントに適用される sysvol の
+	セキュリティ設定を一覧表示する。これらの設定は AD DC にのみ適用される。</para>
+        <para>
+        例:
+        <programlisting>samba-tool gpo manage security list {31B2F340-016D-11D2-945F-00C04FB984F9}</programlisting>
+      </para>
+
+      <variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+      </variablelist>
+</refsect3>
+
+<refsect3>
+  <title>gpo manage smb_conf list</title>
+
+  <para>winbind クライアントに適用される sysvol の smb.conf 設定を一覧表示する。</para>
+
+  <para>
+    例:
+    <programlisting>samba-tool gpo manage smb_conf list {31B2F340-016D-11D2-945F-00C04FB984F9}</programlisting>
+  </para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+</variablelist>
+
+</refsect3>
+
+<refsect3>
+  <title>gpo manage smb_conf set <replaceable>gpo</replaceable> <replaceable>[value]</replaceable> [options]</title>
+
+<para>winbindクライアントに適用するために、sysvol に smb.conf 設定を設定または設定解除する。
+</para>
+<para>値が指定されている場合、使用される値は smb.conf である。値が指定されていない場合、ポリシーは削除される。
+</para>
+
+  <para>
+    例:
+    <programlisting>samba-tool gpo manage smb_conf set {31B2F340-016D-11D2-945F-00C04FB984F9} 'apply gpo policies' yes</programlisting>
+</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+</variablelist>
+
+
+</refsect3>
+
+ 
+<refsect3>
 	<title>gpo setinheritance <replaceable>container_dn</replaceable> <replaceable>block|inherit</replaceable> [options]</title>
 <!-- 原文 samba-4.7.0
 	<para>Set inheritance flag on a container.</para>
@@ -3885,6 +4527,95 @@
 	<para>Add or Update a GPO link to a container.</para>
 -->
 	<para>コンテナーに対して GPO を追加または更新する。</para>
+</refsect3>
+
+<refsect3>
+        <title>gpo remove<replaceable>gpo</replaceable> [options]</title>
+        <para>GPO の情報を表示する。</para>
+<para>GPO からポリシーを削除する。</para>
+
+<para>
+--content を介して json 形式のファイルが提供されない限り、EOF まで標準入力から
+json を読みこむ。
+</para>
+
+<para>
+<programlisting>
+json_input の例:
+[
+    {
+        "keyname": "Software\Policies\Mozilla\Firefox\Homepage",
+        "valuename": "StartPage",
+        "class": "USER",
+    },
+    {
+        "keyname": "Software\Policies\Mozilla\Firefox\Homepage",
+        "valuename": "URL",
+        "class": "USER",
+    },
+    {
+        "keyname": "Software\Microsoft\Internet Explorer\Toolbar",
+        "valuename": "IEToolbar",
+        "class": "USER"
+    },
+    {
+        "keyname": "Software\Policies\Microsoft\InputPersonalization",
+        "valuename": "RestrictImplicitTextCollection",
+        "class": "USER"
+    }
+]
+</programlisting>
+
+有効なクラス属性: MACHINE|USER|BOTH
+</para>
+<variablelist>
+          <varlistentry>
+            <term>-H H</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--content=CONTENT</term>
+            <listitem><para>ポリシー入力の JSON ファイル</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--machine-ext-name=MACHINE_EXTS</term>
+            <listitem><para>gPCMachineExtensionNames から削除するマシン拡張名</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--user-ext-name=USER_EXTS</term>
+            <listitem><para>gPCUserExtensionNames から削除するユーザ拡張名</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--color=always|never|auto</term>
+            <listitem><para>有効であれば色を使用(既定値: auto)</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>gpo restore <replaceable>displayname</replaceable> <replaceable>backup location</replaceable> [options]</title>
+
+<para>新しいコンテナに GPO をリストア。</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H H</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--tmpdir=TMPDIR</term>
+            <listitem><para>ポリシファイルをコピーするための一時ディレクトリ</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--entities=ENTITIES</term>
+            <listitem><para>DOCTYPE ヘッダに挿入するための XML エンティティファイル</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--restore-metadata</term>
+            <listitem><para>古いGPT.INIファイルと関連するバージョン番号を保持</para></listitem>
+          </varlistentry>
+</variablelist>
+
 </refsect3>
 
 <refsect3>
@@ -4153,6 +4884,44 @@
 </refsect3>
 
 <refsect3>
+        <title>group addunixattrs <replaceable>groupname</replaceable> <replaceable>gidnumber</replaceable> [options]</title>
+
+        <para>RFC2307 Unix 属性を Active Directory ドメインのグループ
+アカウントに追加する。コマンドで指定されるグループ名は sAMaccountName
+である。</para>
+
+<para>Unix (RFC2307) 属性はグループアカウントに追加される。</para>
+<para>これらの属性をUID/GIDマッピングに使用するには、
+'idmap_ldb:use rfc2307 = Yes' をsmb.conf に追加する。</para>
+
+<para>このコマンドは、root ユーザー ID または別の許可されたユーザー ID から
+実行できる。-H または --URL= オプション を使用すると、リモート・サーバーに
+対してコマンドを実行できる。</para>
+
+<para>
+例1:
+<programlisting>samba-tool group addunixattrs Group1 10000</programlisting>
+</para>
+<para>
+例1は、ドメイン対応のグループアカウントに RFC2307 属性を追加する方法を
+示している。
+</para>
+<para>
+  グループの Unix ID は、この ID がまだ使用されていなければ「10000」に
+  設定される。
+</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+</variablelist>
+
+
+</refsect3>
+
+<refsect3>
 	<title>group delete <replaceable>groupname</replaceable> [options]</title>
 <!-- 原文 samba-4.7.0
 	<para>Delete an AD group.</para>
@@ -4415,79 +5184,6 @@
 	<para>NT ACL を管理する。</para>
 </refsect2>
 
-<!-- Samba-4.11.0
-<refsect3>
-	<title>ntacl changedomsid <replaceable>original-domain-SID</replaceable> <replaceable>new-domain-SID</replaceable> <replaceable>file</replaceable> [options]</title>
-	<para>Change the domain SID for ACLs.
-	Can be used to change all entries in acl_xattr when the machine's SID
-	has accidentially changed or the data set has been copied
-	to another machine either via backup/restore or rsync.</para>
-
-	<variablelist>
-	<varlistentry>
-	<term>- -use-ntvfs</term>
-	<listitem><para>
-	Set the ACLs directly to the TDB or xattr. The POSIX permissions will
-	NOT be changed, only the NT ACL will be stored.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -service=SERVICE</term>
-	<listitem><para>
-	Specify the name of the smb.conf service to use. This option is
-	required in combination with the - -use-s3fs option.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -use-s3fs</term>
-	<listitem><para>
-	Set the ACLs for use with the default s3fs file server via the VFS
-	layer. This option requires a smb.conf service, specified by the
-	- -service=SERVICE option.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -xattr-backend=[native|tdb]</term>
-	<listitem><para>
-	Specify the xattr backend type (native fs or tdb).
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -eadb-file=EADB_FILE</term>
-	<listitem><para>
-	Name of the tdb file where attributes are stored.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -recursive</term>
-	<listitem><para>
-	Set the ACLs for directories and their contents recursively.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -follow-symlinks</term>
-	<listitem><para>
-	Follow symlinks when - -recursive is specified.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -verbose</term>
-	<listitem><para>
-	Verbosely list files and ACLs which are being processed.
-	</para></listitem>
-	</varlistentry>
-	</variablelist>
-</refsect3>
-
--->
-
 <refsect3>
 	<title>ntacl changedomsid <replaceable>original-domain-SID</replaceable> <replaceable>new-domain-SID</replaceable> <replaceable>file</replaceable> [options]</title>
 	<para>ACL のドメイン SID を変更する。
@@ -4556,6 +5252,11 @@
 	</para></listitem>
 	</varlistentry>
 	</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>ntacl getdosinfo <replaceable>file</replaceable> [options]</title>
+        <para>xattr からファイルの DOS 情報を取得する。</para>
 </refsect3>
 
 <refsect3>
@@ -4783,6 +5484,29 @@
 	ドメインDNコンポーネントなしで指定できる。</para>
 </refsect3>
 
+<refsect2>
+        <title>processes</title>
+        <para>Samba サーバプロセスを一覧表示する。</para>
+        <para>プロセスが表示されていないが、Samba が実行されている
+	場合は、samba-tool が正しい smb.conf を検出していない可能性があり、
+	-s/--configfile の使用が必要である。
+        </para>
+        <variablelist>
+        <varlistentry>
+        <term>--name=NAME</term>
+        <listitem><para>
+        指定された名前のプロセスを表示する。
+        </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+        <term>--pid=PID</term>
+        <listitem><para>
+          指定された PID の名前を表示する。
+        </para></listitem>
+        </varlistentry>
+        </variablelist>
+</refsect2>
 
 <refsect2>
 	<title>rodc</title>
@@ -4849,6 +5573,217 @@
 <refsect3>
 	<title>schema objectclass show <replaceable>objectclass</replaceable> [options]</title>
 	<para>オブジェクトクラススキーマ定義の表示。</para>
+</refsect3>
+
+<refsect2>
+        <title>service-account</title>
+        <para>サービスアカウント管理。</para>
+</refsect2>
+
+<refsect3>
+        <title>service-account list</title>
+        <para>ドメイン上のサービスアカウントを一覧表示する。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                リストの代わりに JSON でサービスアカウントを表示。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+
+<refsect3>
+        <title>service-account view</title>
+        <para>ドメイン上の、一つのサービスアカウントを表示。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                表示するサービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account create</title>
+        <para>ドメン上で新規サービスアカウントを作成。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                表示するサービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--dns-host-name</term>
+                        <listitem><para>
+                                このサービスアカウントの DNS ホスト名(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--group-msa-membership</term>
+                        <listitem><para>
+                                オプションのグループ MSA メンバシップ SDDL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--managed-password-interval</term>
+                        <listitem><para>
+                                日単位の管理パスワード更新間隔。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account modify</title>
+        <para>ドメイン上の、既存のサービスアカウントの変更。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベース又はターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                表示するサービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--dns-host-name</term>
+                        <listitem><para>
+                                このサービスアカウントの更新する DNS ホスト名(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--group-msa-membership</term>
+                        <listitem><para>
+                                更新するグループ MSA メンバシップ SDDL。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account delete</title>
+        <para>ドメイン上でサービスアカウントを削除。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                削除するサービスアカウントの名前。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect2>
+        <title>service-account group-msa-membership</title>
+        <para>サービスアカウントグループ MSA メンバシップの管理。</para>
+</refsect2>
+
+<refsect3>
+        <title>service-account group-msa-membership show</title>
+        <para>サービスアカウントの、グループ MSA メンバシップの表示。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                サービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--json</term>
+                        <listitem><para>
+                                リストの代わりに JSON で返す。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account group-msa-membership add</title>
+        <para>サービスアカウントへのグループ MSA メンバシップへプリンシパルを追加。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                サービスアカウントのアカウント名(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--principal</term>
+                        <listitem><para>
+                                追加するための、プリンシパルの名前、DN または SID。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect3>
+        <title>service-account group-msa-membership remove</title>
+        <para>サービスアカウントへのグループ MSA メンバシップからプリンシパルを削除。</para>
+        <variablelist>
+                <varlistentry>
+                        <term>-H, --URL</term>
+                        <listitem><para>
+                                データベースまたはターゲットサーバへの LDB URL。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--name</term>
+                        <listitem><para>
+                                サービスアカウントの名前(必須)。
+                        </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                        <term>--principal</term>
+                        <listitem><para>
+                                削除するプリンシパルの名前、DN または SID。
+                        </para></listitem>
+                </varlistentry>
+        </variablelist>
 </refsect3>
 
 <refsect2>
@@ -5052,6 +5987,106 @@
 	<para>新しいユーザーを AD ドメインに追加する。</para>
 </refsect3>
 
+<refsect3>
+        <title>user addunixattrs <replaceable>username</replaceable> <replaceable>uid-number</replaceable> [options]</title>
+
+        <para>ユーザに RFC2307 属性を追加する。</para>
+
+        <para>このコマンドは、Active Directory ドメインのユーザーアカウントに
+	 Unix属性を追加する。</para>
+
+        <para>コマンドで指定されるユーザ名は、sAMaccountNameである。</para>
+
+        <para>一意の uid を提供しなければならない。</para>
+
+        <para>UNIX(RFC2307) 属性がユーザー・アカウントに追加される。</para>
+
+        <para>'--gid-number' でグループIDを指定した場合、これはユーザの
+	Unix 'gidNumber' 属性に使用される。</para>
+
+        <para>'--gid-number' が指定されていない場合、ユーザーの Unix gidNumber 	は
+	'Domain Users'のものに設定される。これは、Domain Users に gidNumber
+	属性が必要であることを意味する。</para>
+
+        <para>'--unix-home' が指定されていない場合、ユーザの Unix ホーム
+	ディレクトリは /home/DOMAIN/username に設定される。</para>
+
+        <para>'--login-shell' が指定されていない場合、ユーザーの Unix
+	ログイン・シェルは '/bin/sh'に設定される。</para>
+
+        <para>'---gecos'が指定されていない場合、ユーザの Unix gecosフィールドは
+	ユーザーの 'CN' 属性に設定される。</para>
+
+        <para>UID/GID マッピングにこれらの属性を使用するには、DC の
+	smb.conf に 'idmap_ldb:use rfc2307 = Yes' を追加する。</para>
+
+        <para>コマンドは、root ユーザー ID または別の許可されたユーザー ID から
+	実行できる。-H または --URL= オプションを使用して、
+	リモート・サーバーに対してコマンドを実行できる。</para>
+
+        <para>例1:
+        <programlisting>samba-tool user addunixattrs User1 10001</programlisting>
+
+
+        例1 は、RFC2307 属性をドメイン対応のユーザーアカウントに追加する
+	方法を示している。Domain Users はユーザー gidNumber として設定される。</para>
+
+        <para>この ID がまだ使用されていなければ、ユーザーの Unix IDは '10001' 	に設定される。</para>
+
+        <para>例2:
+        <programlisting>samba-tool user addunixattrs User2 10002 --gid-number=10001 --unix-home=/home/User2</programlisting>
+      </para>
+
+        <para>例2は、ドメイン対応のユーザーアカウントに RFC2307 属性を追加する方法を示している。</para>
+
+        <para>この ID がまだ使用されていなければ、ユーザーの Unix ID は	'10002' に設定される。</para>
+
+        <para>ユーザの gidNumber 属性は '10001'に設定される。</para>
+
+        <para>ユーザーの Unix ホーム・ディレクトリは '/home/user2' に設定される。</para>
+
+        <para>例3:
+        <programlisting>samba-tool user addunixattrs User3 10003 --gid-number=10001 --login-shell=/bin/false --gecos='User3 test'</programlisting>
+      </para>
+
+        <para>例3は、ドメイン対応のユーザーアカウントに RFC2307 属性を追加する方法を示している。</para>
+
+        <para>ユーザーの Unix ID は、まだ使用されていなければ '10003' に
+	設定される。ユーザーの gidNumber 属性は '10001' に設定される。
+	ユーザーの Unix ログイン・シェルは '/bin/false' に設定される。
+	ユーザーの gecos フィールドは 'User3 test' に設定される。
+	</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--gid-number=GROUP_ID</term>
+            <listitem><para>ユーザの Unix/RFC2307 GID</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--unix-home=DIR</term>
+            <listitem><para>ユーザの Unix/RFC2307 ホームディレクトリ</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--login-shell=SHELL</term>
+            <listitem><para>ユーザの Unix/RFC2307 ログインシェル</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--gecos=GECOS</term>
+            <listitem><para>ユーザの Unix/RFC2307 GECOS フィールド</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--uid=USER_ID</term>
+            <listitem><para>ユーザの Unix/RFC2307 ユーザ id</para></listitem>
+          </varlistentry>
+</variablelist>
+
+
+</refsect3>
+	
 <refsect3>
 	<title>user create <replaceable>username</replaceable> [<replaceable>password</replaceable>]</title>
 <!-- 原文 samba-4.14.0
@@ -5443,6 +6478,18 @@
         </variablelist>
 </refsect3>
 
+<refsect3>
+        <title>user sensitive <replaceable>accountname</replaceable> [show|on|off] [options]</title>
+        <para>アカウントの UF_NOT_DELEGATED を設定/設定解除または表示する。</para>
+
+<variablelist>
+          <varlistentry>
+            <term>-H URL, --URL=URL</term>
+            <listitem><para>データベースまたはターゲットサーバへの LDB URL</para></listitem>
+          </varlistentry>
+</variablelist>
+
+</refsect3>
 
 <refsect3>
 	<title>user setexpiry <replaceable>username</replaceable> [options]</title>
