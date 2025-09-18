@@ -67,6 +67,12 @@
 logon path = \\PROFILESERVER\PROFILE\%U
 </programlisting>
 	</para>
+	<para>
+	この例では、ローミングプロファイルの使用は無効になっている(passdbの設定にも依存する):
+<programlisting>
+logon path =
+</programlisting>
+        </para>
 </description>
 <value type="default">\\%N\%U\profile</value>
 </samba:parameter>
