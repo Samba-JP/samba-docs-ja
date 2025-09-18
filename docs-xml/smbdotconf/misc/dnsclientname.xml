@@ -4,12 +4,13 @@
                  function="_dns_hostname"
                  xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
 <description>
-    この値は、AD 配下で登録するとき、join 中か
-    <programlisting>
-        net ads dns register
-    </programlisting>
-    を呼び出す時か、サービスプリンシパル名を作成するための Kerberos 認証
-    中に使用される。これはまだ samba-tool ではサポートされていない。
+    この値は以下で使われる:
+    <itemizedlist>
+    <listitem><para>JOIN 中または<programlisting>net ads dns register</programlisting>へのコール中に AD にDNS レコードを登録</para></listitem>
+    <listitem><para>Kerberos 認証時のサービス・プリンシパル名の作成</para></listitem>
+    <listitem><para>keytab 作成中 - <smbconfoption name="sync machine password to keytab"/> パラメータを参照</para></listitem>
+    </itemizedlist>
+    これはまだ samba-tool でサポートされていない。
 </description>
 
 <value type="default">[netbios name].[realm]</value>
