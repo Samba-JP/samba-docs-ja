@@ -1,0 +1,53 @@
+<samba:parameter name="client smb transports"
+                 context="G"
+                 type="list"
+                 handler="handle_client_smb_transports"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+	<para>クライアントが SMB トラフィックに対して接続を試行するトランスポートとポートを指定する。</para>
+
+	<para>順序は、フォールバックのために短い遅延で試行されるので重要である。</para>
+
+	<para>トランスポート 'tcp' は、SMB PDU ごとに 4バイト長のヘッダーを
+	持つ raw tcpを使用する。'tcp' のデフォルトポートは 445である。他の
+	ポートは、':'の後に追加することで指定できる(例:'tcp:1445')。
+	</para>
+
+	<para>トランスポート 'nbt' は、SMB PDU ごとに tcp の上に
+	NetBIOS フレーミングを使用する。'nbt' のデフォルトポートは 139である。
+	他のポートは、':' の後に追加することで指定できる(例:'nbt:1139')。
+	</para>
+
+	<para>トランスポート 'quic' は、udp の上に quic プロトコルを使用
+	する。'quic' のデフォルトポートは 443 である。他のポートは、':' の
+	後に追加することで指定できる(例:'quic:1443')。
+	次のオプションも関連している:
+	<smbconfoption name="tls enabled"/>,
+	<smbconfoption name="tls ca directories"/>,
+	<smbconfoption name="tls trust system cas"/>,
+	<smbconfoption name="tls cafile"/>,
+	<smbconfoption name="tls certfile"/>,
+	<smbconfoption name="tls keyfile"/> and
+	<smbconfoption name="tls verify peer"/>.
+	</para>
+
+	<para>
+	注意:'quic' では、https://github.com/lxin/quic の Linux 用 quic.ko カー	ネル
+	モジュールが必要である(Linux 6.14でテスト済み)。将来のLinux バージョン
+	ではネイティブにサポートされる可能性がある。
+	</para>
+
+	<para>数字のポートは 'tcp' として扱われるが、ポート '139' は 'nbt' として扱われる。
+	</para>
+
+	<para>現在、一意のトランスポートは 10 個に制限されており、その他はすべて無視されることに注意。</para>
+</description>
+
+<value type="example">445</value>
+<value type="example">tcp, tcp:1445</value>
+<value type="example">8000, nbt:1139</value>
+<value type="example">tcp, quic, nbt</value>
+<value type="example">+quic</value>
+
+<value type="default">tcp, nbt</value>
+</samba:parameter>
