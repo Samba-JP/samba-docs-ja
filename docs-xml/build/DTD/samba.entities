@@ -170,7 +170,7 @@
 
 <!ENTITY cmdline.common.debug.client '
 <varlistentry>
-        <term>-d|--debuglevel=DEBUGLEVEL</term>
+        <term>-d|--debuglevel=level</term>
         <listitem>
                 <para>
                         <replaceable>level</replaceable> は0から10までの整数値である。
@@ -213,7 +213,7 @@
 
 <!ENTITY cmdline.common.debug.server '
 <varlistentry>
-        <term>-d|--debuglevel=DEBUGLEVEL</term>
+        <term>-d|--debuglevel=level</term>
         <listitem>
                 <para>
                         <replaceable>level</replaceable> は0から10までの整数値である。
@@ -699,7 +699,19 @@
                          このパラメータは、Samba クライアントツールが Kerberos を
 			 使って認証を試みるかを決定する。Kerberos 認証では、サービスに
 			 接続する際、IP アドレスではなく、DNS 名を使用する必要がある。
-                </para>
+
+			 デフォルトでは、Samba クライアントツールはデフォルトの
+			 Kerberos 資格情報キャッシュ(ccache)を使用しようとする。
+			 ccache が存在しない場合、または -U|--user オプションが
+			 指定されている場合、クライアントはパスワードの入力を
+			 求められ、Kerberos チケット (kinit) を取得する。
+		</para>
+
+		<para>
+			このパラメータをここで指定すると、&smb.conf; ファイルの
+			<smbconfoption name="client use kerberos" /> パラメータが
+			上書きされる。
+		</para>
 
                 <para>
                         ここでこのパラメータを指定すると、&smb.conf; ファイル中の
@@ -719,7 +731,7 @@
                 </para>
 
                 <para>
-                        これは  --use-kerberos=required も同時に設定する。
+                        これは  --use-kerberos=required も同時に強制する。
                 </para>
         </listitem>
 </varlistentry>
