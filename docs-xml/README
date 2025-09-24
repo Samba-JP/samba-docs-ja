@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2025/09/18
+						2025/09/23
 						日本Sambaユーザー会
 
 
@@ -129,10 +129,19 @@ manpages、html、htmlman が実行可能になります。これ以外にも ma
 ======================================================================
 XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)については、記載を省略しています。
 
-2025/09/17 Ver 4.23.0-1 4.23.0 対応
-	   net.8.xml,samba-tool.8.xml,smb.conf.5.xml
+2025/09/23 Ver 4.23.0-1 4.23.0 対応
+	   net.8.xml,samba-tool.8.xml,smb.conf.5.xml,smbspool.8.xml,
+	   base/serverservices.xml,logon/logonpath.xml,
+	   misc/dnsclientname.xml,protocol/smb3unixextensions.xml,
+	   security/serverrole.xml,
+	   build/DTD/samba.entities
 	   変更
+	   smb_prometheus_endpoint.8.xml,
+	   misc/smbdprofilingext.xml,protocol/clientsmbtransports.xml,
+	   protocol/serversmbtransports.xml,
+	   winbind/winbindvarlinkservice.xml
 	   追加
+	   protocol/smbports.xml
 	   削除
 
 ======================================================================
