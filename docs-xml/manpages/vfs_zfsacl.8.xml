@@ -238,14 +238,8 @@
 </refsect1>
 
 <refsect1>
-<!-- 原文 samba-4.7.0
-	<title>EXAMPLES</title>
--->
 	<title>使用例</title>
 
-<!-- 原文 samba-4.7.0
-	<para>A ZFS mount can be exported via Samba as follows :</para>
--->
 	<para>ZFS マウントは以下のようにして Samba 経由でエクスポートされる。</para>
 
 <programlisting>
@@ -259,7 +253,7 @@
 
 <refsect1>
 	<title>バージョン</title>
-	<para>このマニュアルページはバージョン 4.0.x の Samba システム用である。
+	<para>このマニュアルページはバージョン &doc.version; の Samba システム用である。
 	</para>
 </refsect1>
 
@@ -274,7 +268,7 @@
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このドキュメントは、Samba 4.17.0 - 4.22.0 に対応する。</para>
+	<para>このドキュメントは、Samba 4.17.0 - 4.23.0 に対応する。</para>
 	<para>このドキュメントの翻訳は
 		<itemizedlist>
 			<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
