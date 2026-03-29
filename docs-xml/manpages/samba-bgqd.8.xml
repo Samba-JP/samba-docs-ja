@@ -56,6 +56,17 @@
 </refsect1>
 
 <refsect1>
+        <title>参照</title>
+
+        <para>
+        <citerefentry><refentrytitle>smbd</refentrytitle>
+        <manvolnum>8</manvolnum></citerefentry>, と
+        <citerefentry><refentrytitle>smb.conf</refentrytitle>
+        <manvolnum>5</manvolnum></citerefentry>。
+        </para>
+</refsect1>
+
+<refsect1>
 	<title>著者</title>
 
         <para>オリジナルの Samba ソフトウェアと関連するユーティリティは、
