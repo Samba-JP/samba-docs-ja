@@ -13,32 +13,46 @@
 
 <refnamediv>
 	<refname>samba-bgqd</refname>
-	<refpurpose>非同期印刷関連のジョブを実行する、
+	<refpurpose>非同期印刷関連のタスクを実行する、
 	内部ヘルパプログラム</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
 	<cmdsynopsis>
 		<command>samba-bgqd</command>
+                <arg choice="opt">-D|--daemon</arg>
+                <arg choice="opt">-i|--interactive</arg>
+                <arg choice="opt">-F|--foreground</arg>
+                <arg choice="opt">--no-process-group</arg>
+                <arg choice="opt">-d &lt;debug level&gt;</arg>
+                <arg choice="opt">--debug-stdout</arg>
+                <arg choice="opt">--configfile=&lt;configuration file&gt;</arg>
+                <arg choice="opt">--option=&lt;name&gt;=&lt;value&gt;</arg>
+                <arg choice="opt">-l|--log-basename &lt;log directory&gt;</arg>
+                <arg choice="opt">--ready-signal-fd &lt;fd&gt;</arg>
+                <arg choice="opt">--parent-watch-fd &lt;fd&gt;</arg>
 	</cmdsynopsis>
 </refsynopsisdiv>
 
 <refsect1>
 	<title>説明</title>
 
-        <para>このツールは <citerefentry><refentrytitle>samba</refentrytitle>
+        <para>このプロクラムは <citerefentry><refentrytitle>samba</refentrytitle>
         <manvolnum>7</manvolnum></citerefentry> システムの一部である。</para>
 	
-<!-- Samba-4.15.0
-	<para>samba-bgqd is an helper program to be spawned by smbd or
-	spoolssd to perform jobs like updating the printer list or
-	other management tasks asynchronously on demand. It is not
-	intended to be called by users or administrators.</para>
- -->
 	<para>samba-bgqd は、非同期に、プリンタ一覧の更新や、他の管理タスクを
 	オンデマンドで行うような、ジョブを実行するために、smbd や spoolssd
 	によって起動されるヘルパプログラムである。これは、ユーザや管理者
 	によって呼び出されることを意図していない。</para>
+
+        <para><command>samba-bgqd</command> は、ユーザによって
+	呼び出されることを意図していない。</para>
+
+        <para>同様に、<command>samba-bgqd</command>はシステム管理者が手動で実
+	行することを意図したものではないが、CUPS 経由で構成された多数の
+	プリンタを持つシステムでは、印刷操作のパフォーマンスと応答性を向上
+	させるために、<command>samba-bgqd</command>を systemd サービスとして
+	実行することをお勧めする。</para>
 </refsect1>
 
 <refsect1>
@@ -51,9 +65,9 @@
 </refsect1>
 <refsect1>
         <title>日本語訳</title>
-        <para>このマニュアルページは Samba 4.15.0 - 4.23.0 に対応する。</para>
+        <para>このマニュアルページは Samba 4.24.0 - 4.24.0 に対応する。</para>
 
-        <para>Samba 4.15.0 - 4.23.0  対応の翻訳は、
+        <para>Samba 4.15.0 - 4.24.0  対応の翻訳は、
         <itemizedlist>
         <listitem><para>太田俊哉(ribbon@samba.gr.jp)</para></listitem>
         </itemizedlist>
