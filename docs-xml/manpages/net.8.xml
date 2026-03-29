@@ -2656,6 +2656,183 @@ keytab ファイルにエントリを追加する事に加えて、関連した 
 </refsect2>
 
 <refsect2>
+        <title>ADS KERBEROS</title>
+
+<para>
+        Active Directory KDC に対して Kerberos 操作を発行する。
+</para>
+
+</refsect2>
+
+<refsect2>
+        <title>ADS KERBEROS KINIT</title>
+
+<para>
+       特定のユーザーに対して kinit 要求を発行する。次のメソッドを使用して、
+       TGT(Ticket Granting Ticket)を格納する場所を指定できる(優先順位順):
+</para>
+
+<itemizedlist>
+        <listitem>
+                <para>option <option>--use-krb5-ccache</option></para>
+        </listitem>
+        <listitem>
+                <para><replaceable>KRB5CCNAME</replaceable>環境変数</para>
+        </listitem>
+        <listitem>
+                <para><parameter>default_ccache_name</parameter> <filename>krb5.conf</filename>中の設定</para>
+        </listitem>
+</itemizedlist>
+
+<variablelist><title>例:</title>
+<varlistentry>
+<term>ファイルベースのキャッシュを使用 (FILE:/tmp/krb5cache)</term>
+<listitem><literallayout>
+net ads kerberos kinit -P --use-krb5-ccache=/tmp/krb5cache
+</literallayout></listitem>
+</varlistentry>
+<varlistentry>
+<term>認証を検証するためにメモリキャッシュを使用(MEMORY:net) to verify the authentication</term>
+<listitem><literallayout>
+net ads kerberos kinit -P --use-krb5-ccache=MEMORY:net
+</literallayout></listitem>
+</varlistentry>
+</variablelist>
+
+</refsect2>
+
+<refsect2>
+        <title>ADS KERBEROS RENEW</title>
+
+<para>
+        すでに取得済みの TGT(Ticket Granting Ticket)を更新する。
+</para>
+
+<para>例: <userinput>net ads kerberos renew</userinput></para>
+
+</refsect2>
+
+<refsect2>
+        <title>ADS KERBEROS PAC</title>
+
+<para>
+        Active Directory KDC への認証中に Kerberos PAC を要求する。
+</para>
+
+<para>
+        以下のコマンドが提供されている:
+</para>
+
+<simplelist>
+<member>net ads kerberos pac dump - PAC を標準出力にダンプ。</member>
+<member>net ads kerneros pac save - PAC をファイルに保存。</member>
+</simplelist>
+
+<para>
+        すべてのコマンドで、<replaceable>impersonate=STRING</replaceable>
+        オプションを使用して Kerberos Service for User (S4U2SELF) 操作を
+	実行するための偽装プリンシパルを定義できる。偽装プリンシパルは、
+	複数の異なる形式を持つことができる:
+</para>
+
+<itemizedlist>
+        <listitem>
+                <para><replaceable>user@MY.REALM</replaceable></para>
+                <para>これは既定の形式である。</para>
+        </listitem>
+        <listitem>
+                <para><replaceable>user@MY.REALM@MY.REALM</replaceable></para>
+                <para>The Kerberos Service for User (S4U2SELF) は
+                エンタープライズプリンシパルもサポートする。</para>
+        </listitem>
+        <listitem>
+                <para><replaceable>user@UPN.SUFFIX@MY.REALM</replaceable></para>
+                <para>定義済みの upn サフィックスを使用するエンタープライズプリンシパル。</para>
+        </listitem>
+        <listitem>
+                <para><replaceable>user@WORKGROUP@MY.REALM</replaceable></para>
+                <para>netbios ドメイン名のエンタープライズプリンシパル。この
+		形式は現在Samba ADではサポートされていない。</para>
+        </listitem>
+</itemizedlist>
+
+<para>
+        既定では、net は参加しているマシンのローカルサービスのサービスチケットを
+	要求する。<replaceable>local_service=STRING</replaceable>を使用して
+	別のサービスを定義できる。
+</para>
+
+</refsect2>
+<refsect2>
+        <title>ADS KERBEROS PAC DUMP [impersonate=string] [local_service=string] [pac_buffer_type=int]</title>
+
+<para>
+        Active Directory KDC への認証中に Kerberos PAC を要求する。
+        PACは標準出力に出力される。
+</para>
+
+<para>
+        特定の pac_buffer が選択されていない場合、すべてのバッファが出力される。
+        以下の一覧から <replaceable>pac_buffer_type=INT</replaceable> を介して
+	特定のものを選択することができる:
+</para>
+
+<simplelist>
+<member>1 PAC_TYPE_LOGON_INFO</member>
+<member>2 PAC_TYPE_CREDENTIAL_INFO</member>
+<member>6 PAC_TYPE_SRV_CHECKSUM</member>
+<member>7 PAC_TYPE_KDC_CHECKSUM</member>
+<member>10 PAC_TYPE_LOGON_NAME</member>
+<member>11 PAC_TYPE_CONSTRAINED_DELEGATION</member>
+<member>12 PAC_TYPE_UPN_DNS_INFO</member>
+<member>13 PAC_TYPE_CLIENT_CLAIMS_INFO</member>
+<member>14 PAC_TYPE_DEVICE_INFO</member>
+<member>15 PAC_TYPE_DEVICE_CLAIMS_INFO</member>
+<member>16 PAC_TYPE_TICKET_CHECKSUM</member>
+<member>17 PAC_TYPE_ATTRIBUTES_INFO</member>
+<member>18 PAC_TYPE_REQUESTER_SID</member>
+<member>19 PAC_TYPE_FULL_CHECKSUM</member>
+</simplelist>
+
+<para>例: <userinput>net ads kerberos pac dump -P impersonate=anyuser@MY.REALM.COM</userinput></para>
+
+</refsect2>
+
+<refsect2>
+        <title>ADS KERBEROS PAC SAVE [impersonate=string] [local_service=string] [filename=string
+<member>11 PAC_TYPE_CONSTRAINED_DELEGATION</member>
+<member>12 PAC_TYPE_UPN_DNS_INFO</member>
+<member>13 PAC_TYPE_CLIENT_CLAIMS_INFO</member>
+<member>14 PAC_TYPE_DEVICE_INFO</member>
+<member>15 PAC_TYPE_DEVICE_CLAIMS_INFO</member>
+<member>16 PAC_TYPE_TICKET_CHECKSUM</member>
+<member>17 PAC_TYPE_ATTRIBUTES_INFO</member>
+<member>18 PAC_TYPE_REQUESTER_SID</member>
+<member>19 PAC_TYPE_FULL_CHECKSUM</member>
+</simplelist>
+
+<para>例: <userinput>net ads kerberos pac dump -P impersonate=anyuser@MY.REALM.COM</userinpu
+t></para>
+
+</refsect2>
+
+<refsect2>
+        <title>ADS KERBEROS PAC SAVE [impersonate=string] [local_service=string] [filename=string]</title>
+
+<para>
+        Active Directory KDC への認証中に Kerberos PAC を要求する。
+        PAC はファイルに保存される。
+</para>
+
+<para>
+        PAC を保存するファイル名は、<replaceable>filename=STRING</replaceable>
+        オプションで設定できる。
+</para>
+
+<para>例: <userinput>net ads kerberos pac save -U user%password filename=/tmp/pacstore</userinput></para>
+
+</refsect2>
+<refsect2>
 <title>SAM CREATEBUILTINGROUP &lt;NAME&gt;</title>
 
 <!-- 原文 samba-4.6.7
@@ -5157,7 +5334,7 @@ Requests an offline domain join by providing file-based provisioning data. This 
 
 <para>
 	例:
-	net offlinejoin requestodj -U administrator%secret loadfile=provisioning.txt
+	net offlinejoin requestodj loadfile=provisioning.txt
 </para>
 
 </refsect3>
@@ -5714,7 +5891,7 @@ net witness force-response   json 入力に基づいて AsyncNotify 応答を強
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.23.0 - 4.23.0 に対応する。</para>
+	<para>このマニュアルページは Samba 4.24.0 - 4.24.0 に対応する。</para>
 
         <para>このドキュメントの Samba 3.0.0 対応の翻訳は
 	<itemizedlist>
@@ -5724,7 +5901,7 @@ net witness force-response   json 入力に基づいて AsyncNotify 応答を強
        によって行なわれた。</para>
 
 	<para>Samba 3.0.23 - Samba 3.0.24 対応の翻訳は、たかはしもとのぶ (monyo@samba.gr.jp) によって行なわれた。</para>
-	<para>Samba 3.2.4 - 4.23.0 対応の翻訳は、
+	<para>Samba 3.2.4 - 4.24.0 対応の翻訳は、
 	  <itemizedlist>
 	    <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
 	    <listitem><para>matsuand(michio_matsuyama@yahoo.co.jp)</para></listitem>
