@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE refentry PUBLIC "-//Samba-Team//DTD DocBook V4.2-Based Variant V1.0//EN" "http://www.samba.org/samba/DTD/samba-doc">
+<refentry id="vfs_aio_ratelimit.8">
+
+<refmeta>
+	<refentrytitle>vfs_aio_ratelimit</refentrytitle>
+	<manvolnum>8</manvolnum>
+	<refmiscinfo class="source">Samba</refmiscinfo>
+	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
+	<refmiscinfo class="version">&doc.version;</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+	<refname>vfs_aio_ratelimit</refname>
+	<refpurpose>Samba用の非同期I/Oレートリミットの実装</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+	<cmdsynopsis>
+		<command>vfs objects = aio_ratelimit</command>
+	</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+	<title>説明</title>
+
+	<para>この VFS モジュールは
+	<citerefentry><refentrytitle>samba</refentrytitle>
+	<manvolnum>7</manvolnum></citerefentry> システムの一部である。</para>
+
+	<para><command>aio_ratelimit</command> VFSモジュールは、非同期 I/O 操作に
+	上限を適用することで、特定の共有に対する実行時のレート制限を有効にする。
+	管理者は、この制限を 1 秒あたりの操作数または 1 秒あたりのバイト数と
+	して定義できる。これらの制限の 1 つを超えると、現在の I/O 負荷に基づいて
+	遅延値(マイクロ秒)が計算され、非同期 I/O 操作に追加され、
+	暗黙のスループット上限が生成される。
+	</para>
+
+	<para>
+	設定可能なバースト許容値は、バースト乗数を介してサポートされ、
+	長期的な上限を実施しながら、定常状態のレートを超える短期バーストを
+	可能にする。レートリミッタの状態は定期的にローカル TDB に保持されるため、
+	クライアントの再接続と smbd の再起動にわたって一貫して制限を適用できる。
+	</para>
+
+	<para>
+	このモジュールは非同期 VFS READ/WRITE 操作のみで動作する。
+	</para>
+
+	<para>このモジュールはスタック可能である。</para>
+</refsect1>
+
+<refsect1>
+	<title>設定</title>
+
+	<para>そのままの使用法:</para>
+
+<programlisting>
+	<smbconfsection name="[share]"/>
+	<smbconfoption name="path">/path/to/share</smbconfoption>
+	<smbconfoption name="vfs objects">aio_ratelimit</smbconfoption>
+</programlisting>
+
+</refsect1>
+
+<refsect1>
+	<title>オプション</title>
+
+	<variablelist>
+		<varlistentry>
+		<term>aio_ratelimit:read_iops_limit = count</term>
+		<listitem>
+		<para>
+		  遅延を挿入するまでの 1 秒当たりのREAD操作の上限。
+		  0 は制限がないことを意味する。
+		</para>
+		<para>既定値: 0, Max: 1000000</para>
+		<para>例: aio_ratelimit:read_iops_limit = 1000</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>aio_ratelimit:read_bw_limit = count</term>
+		<listitem>
+		<para>
+		  遅延を挿入する前のREAD帯域幅の上限(バイト/秒)。
+		  0 は制限がないことを意味する。サイズ接尾辞(K, M, G, T)が
+		  サポートされる。
+		</para>
+		<para>既定値: 0, Max: 1T</para>
+		<para>例: aio_ratelimit:read_bw_limit = 2M</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>aio_ratelimit:read_burst_mult = value</term>
+		<listitem>
+		<para>
+			READ操作のバースト乗数。10 分の 1 で表現する(例:15=1.5x)。
+			トークンバケット容量をレート制限の倍数として定義し、
+			定常状態のレートを超える短期間のバーストを許可する。
+		</para>
+		<para>既定値: 15 (1.5x), Max: 100 (10x)</para>
+		<para>例: aio_ratelimit:read_burst_mult = 20</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>aio_ratelimit:write_iops_limit = count</term>
+		<listitem>
+		<para>
+		  遅延を挿入するまでの1秒当たりの書込み操作の上限。
+		  0 は制限がないことを意味する。
+		</para>
+		<para>既定値: 0, Max: 1000000</para>
+		<para>例: aio_ratelimit:write_iops_limit = 1000</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>aio_ratelimit:write_bw_limit = count</term>
+		<listitem>
+		<para>
+		  遅延を挿入する前のWRITE帯域幅の上限(バイト/秒)。
+		  0 は制限がないことを意味する。サイズ接尾辞(K, M, G, T)が
+		  サポートされる。
+		</para>
+		<para>既定値: 0, Max: 1T</para>
+		<para>例: aio_ratelimit:write_bw_limit = 1M</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>aio_ratelimit:write_burst_mult = value</term>
+		<listitem>
+		<para>
+		  10分の1で表される書き込み操作のバースト乗数(例:15=1.5x)。
+		  トークンバケット容量をレート制限の倍数として定義し、
+		  定常状態のレートを超える短期間のバーストを許可する。
+		</para>
+		<para>既定値: 15 (1.5x), Max: 100 (10x)</para>
+		<para>例: aio_ratelimit:write_burst_mult = 15</para>
+		</listitem>
+		</varlistentry>
+
+	</variablelist>
+</refsect1>
+
+<refsect1>
+	<title>バースト時の動作</title>
+
+	<para>
+	<command>read_burst_mult</command>および<command>write_burst_mult</command>
+	パラメータは、設定されたレート制限に関連するレートリミッタの最大
+	バーストキャパシティを制御する。有効バーストキャパシティは、
+	次のように計算される。<emphasis>rate_limit * (burst_mult / 10)</emphasis>。
+	</para>
+	<para>
+	  たとえば、<command>read_iops_limit = 1000</command>と
+	  <command>read_burst_mult = 15</command>では、バースト容量は
+	  1000*1.5=1500 IOPSである。
+	</para>
+	<para>
+	  これにより、設定された長期的な制限を適用しながら、定常状態のレートを
+	  超える短期的なI/Oバーストが可能になる。
+	</para>
+
+	<para>
+	  適切なバースト乗数は、ワークロードの特性によって異なる。非同期 I/O
+	  リクエストが大きいワークロードや変化しやすいワークロードでは、
+	  早すぎるスロットリングを回避するために、より高いバースト値が必要に
+	  なる場合がある。一方、より小さいワークロードや待機時間の影響を
+	  受けやすいワークロードでは、より低い値が有効な場合がある。
+	</para>
+
+	<note>
+	<para>
+	<command>read_burst_mult</command>と<command>write_burst_mult</command>の
+	パラメータは、長期的な平均スループットを変化させず、それぞれ
+	<command>read_iops_limit</command>/<command>read_bw_limit</command>と
+	<command>write_iops_limit</command>/<command>write_bw_limit</command>
+	によって制限されたままである。より高いバースト値は、初期の加速と
+	アイドル期間からの回復にのみ影響する。
+	</para>
+	</note>
+</refsect1>
+
+<refsect1>
+	<title>バージョン</title>
+
+	<para>このマニュアルページは Samba バージョン &doc.version; 用である。
+	</para>
+</refsect1>
+
+<refsect1>
+        <title>著者</title>
+
+        <para>オリジナルの Samba ソフトウェアと関連するユーティリティは、Andrew
+        Tridgell によって作成された。現在 Samba は Samba Team に
+        よって、Linuxカーネルの開発と同様のオープンソースプロジェクト
+        として開発が行なわれている。</para>
+
+</refsect1>
+
+<refsect1>
+        <title>日本語訳</title>
+        <para>このドキュメントは、Samba 4.24.0 - 4.24.0 に対応する。</para>
+    <para>このドキュメントの翻訳は
+                <itemizedlist>
+                        <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
+                </itemizedlist>
+        によって行なわれた。</para>
+</refsect1>
+
+</refentry>
