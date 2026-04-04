@@ -24,7 +24,7 @@
 		<arg choice="opt">-W myworkgroup</arg>
 		<arg choice="opt">-U user</arg>
 		<arg choice="opt">-d debuglevel</arg>
-		<arg choice="opt">--v</arg>
+		<arg choice="opt">-V</arg>
 	</cmdsynopsis>
 </refsynopsisdiv>
 
@@ -185,58 +185,10 @@
 
 <refsect2>
 	<title>computer</title>
-	<para>コンピュータアカウントの管理。</para>
+	<para>コンピュータアカウントの管理</para>
 </refsect2>
 
 
-<!-- Samba-4.14.0
-<refsect3>
-        <title>computer add <replaceable>computername</replaceable> [options]</title>
-        <para>Add a new computer to the Active Directory Domain.</para>
-        <para>The new computer name specified on the command is the
-        sAMAccountName, with or without the trailing dollar sign.</para>
-
-	<variablelist>
-	<varlistentry>
-	<term>- -computerou=COMPUTEROU</term>
-	<listitem><para>
-	DN of alternative location (with or without domainDN counterpart) to
-	default CN=Computers in which new computer object will be created.
-	E.g. 'OU=OUname'.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -description=DESCRIPTION</term>
-	<listitem><para>
-	The new computer's description.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -ip-address=IP_ADDRESS_LIST</term>
-	<listitem><para>
-	IPv4 address for the computer's A record, or IPv6 address for AAAA record,
-	can be provided multiple times.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -service-principal-name=SERVICE_PRINCIPAL_NAME_LIST</term>
-	<listitem><para>
-	Computer's Service Principal Name, can be provided multiple times.
-	</para></listitem>
-	</varlistentry>
-
-	<varlistentry>
-	<term>- -prepare-oldjoin</term>
-	<listitem><para>
-	Prepare enabled machine account for oldjoin mechanism.
-	</para></listitem>
-	</varlistentry>
-	</variablelist>
-</refsect3>
--->
 <refsect3>
         <title>computer add <replaceable>computername</replaceable> [options]</title>
 	<para>Active Directory ドメイン中に新しいコンピュータを追加する。</para>
@@ -284,15 +236,6 @@
 	</variablelist>
 </refsect3>
 
-<!-- Samba-4.14.0
-<refsect3>
-        <title>computer create <replaceable>computername</replaceable> [options]</title>
-        <para>Add a new computer. This is a synonym for the
-        <command>samba-tool computer add</command> command and is available
-        for compatibility reasons only. Please use
-        <command>samba-tool computer add</command> instead.</para>
-</refsect3>
--->
 <refsect3>
         <title>computer create <replaceable>computername</replaceable> [options]</title>
         <para>新しいコンピュータを追加する。これは
@@ -300,38 +243,13 @@
         提供されている。かわりに
         <command>samba-tool computer add</command> を使用して欲しい。</para>
 </refsect3>
-<!-- Samba-4.9.0
-<refsect3>
-	<title>computer delete <replaceable>computername</replaceable> [options]</title>
-	<para>Delete an existing computer account.</para>
-	<para>The computer name specified on the command is the
-	sAMAccountName, with or without the trailing dollar sign.</para>
-</refsect3>
--->
+
 <refsect3>
 	<title>computer delete <replaceable>computername</replaceable> [options]</title>
 	<para>存在しているコンピュータアカウントを削除する。</para>
 	<para>コマンドで指定されたコンピュータ名は sAMAccountName で、ドル記号がついている場合も無い場合もある。</para>
 </refsect3>
 
-<!-- Samba-4.11.0
-<refsect3>
-	<title>computer edit <replaceable>computername</replaceable></title>
-	<para>Edit a computer AD object.</para>
-	<para>The computer name specified on the command is the
-	sAMAccountName, with or without the trailing dollar sign.</para>
-
-	<variablelist>
-	<varlistentry>
-	<term>- -editor=EDITOR</term>
-	<listitem><para>
-	Specifies the editor to use instead of the system default, or 'vi' if no
-	system default is set.
-	</para></listitem>
-	</varlistentry>
-	</variablelist>
-</refsect3>
--->
 <refsect3>
 	<title>computer edit <replaceable>computername</replaceable></title>
 	<para>コンピュータの AD オブジェクトを編集する。</para>
@@ -349,39 +267,6 @@
 	</variablelist>
 </refsect3>
 
-
-<!-- Samba-4.9.0
-<refsect3>
-	<title>computer list</title>
-	<para>List all computers.</para>
-</refsect3>
-
-<refsect3>
-	<title>computer move <replaceable>computername</replaceable> <replaceable>new_parent_dn</replaceable> [options]</title>
-	<para>This command moves a computer account into the specified
-	organizational unit or container.</para>
-	<para>The computername specified on the command is the
-	sAMAccountName, with or without the trailing dollar sign.</para>
-	<para>The name of the organizational unit or container can be
-	specified as a full DN or without the domainDN component.</para>
-</refsect3>
-
-<refsect3>
-	<title>computer show <replaceable>computername</replaceable> [options]</title>
-	<para>Display a computer AD object.</para>
-	<para>The computer name specified on the command is the
-	sAMAccountName, with or without the trailing dollar sign.</para>
-
-	<variablelist>
-	<varlistentry>
-	<term>- -attributes=USER_ATTRS</term>
-	<listitem><para>
-	Comma separated list of attributes, which will be printed.
-	</para></listitem>
-	</varlistentry>
-	</variablelist>
-</refsect3>
--->
 <refsect3>
 	<title>computer list</title>
 	<para>コンピュータの一覧を表示する。</para>
@@ -411,12 +296,132 @@
 	</variablelist>
 </refsect3>
 
-<!-- Samba-4.11.0
 <refsect2>
-	<title>contact</title>
-	<para>Manage contacts.</para>
+        <title>computer keytrust</title>
+        <para>コンピューターの主要な資格情報リンクを管理する。</para>
+        <para>これにより、msDS-KeyCredentialLink属性を設定、記述、または削除で
+	きる。</para>
 </refsect2>
--->
+
+
+<refsect3>
+<title>computer keytrust add <replaceable>computername</replaceable>  <replaceable>public-key-or-certificate</replaceable>[options]</title>
+<para>key-credential-link を追加する。これは、バイナリフィールドに公開キーを保持するリンク属性である。
+</para>
+<para>
+  2番目の引数は、PEMまたはDER形式の2048ビットRSAキー(またはそのキーを含む証明
+  書)を参照するファイル名である。既定では、エンコード形式は自動的に検出されるが、
+  <constant>--encoding</constant>オプションで上書きすることができる。
+  <constant>--force</constant>オプションを使用して非2048ビットキーを追加す
+  ることはできるが、他のタイプの公開キーはサポートされていない。
+</para>
+
+<variablelist>
+<!--Options-->
+          <varlistentry>
+            <term>--link-target=DN</term>
+            <listitem><para>この DN へのリンク(既定値: コンピュータの DN)</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--encoding=ENCODING</term>
+            <listitem><para><constant>pem</constant>,<constant>der</constant>,
+	    または  <constant>auto</constant>のキーフォーマット。
+	    既定値は <constant>auto</constant>で、これは、あらゆる状況で正しい
+	    形式を検出する可能性がある。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--force</term>
+            <listitem><para>失敗しそうな操作を進める</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<title>computer keytrust delete <replaceable>computername</replaceable> [options]</title>
+<para>key-credential-link を削除する。
+</para>
+<para>削除するリンクは、いくつかの方法で選択できる。<constant>--all</constant>は、
+コンピュータのすべてのキー資格情報リンクを削除する(多くの場合、1つだけ)。
+<constant>--link-target</constant>オプションは、リンクのターゲットとなる DN に
+基づいてキー資格情報リンクを選択する。<constant>--fingerprint</constant>オプションは、
+キーフィンガープリントに基づいて削除するリンクを選択する。これは、DER でエンコード
+されたキーマテリアルの SHA256 であり、コロンで区切られた16 進数のペアとして表現
+される。リンクとそのフィンガープリントのリストを取得するには、
+<constant>computer keytrust view</constant>を参照のこと。
+</para>
+
+<para>一つ以上の<constant>--link-target</constant>,<constant>--fingerprint</constant>, と
+<constant>--all</constant> が使われた場合、それらのいずれかに一致するリンクは削除される。
+</para>
+
+<para><constant>--dry-run</constant>オプションは、リンクが削除されるのを防ぎ、
+代わりにそれが省略された場合に何が起こるかを示す。
+</para>
+
+<variablelist>
+<!--Options-->
+          <varlistentry>
+            <term>--link-target=DN</term>
+            <listitem><para>このキー資格情報リンク(DN)を削除する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--fingerprint=HH:HH:..</term>
+            <listitem><para>このキーフィンガープリントを持つ資格情報リンクを削除する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--all</term>
+            <listitem><para>全てのキー資格情報リンクを削除する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-n, --dry-run</term>
+            <listitem><para>何もしないが、何が行われることを表示する</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+
+<title>computer keytrust view <replaceable>computername</replaceable> [options]</title>
+
+<para>コンピュータの主要な資格情報リンクを表示する。これは、リンクのフィンガープリントと
+<title>computer keytrust delete</title>のターゲット DN を検索するために使用できる。
+
+<constant>--verbose</constant>には、より多くの、おそらく役に立たない情報が含まれている。
+</para>
+
+<variablelist>
+<!--Options-->
+          <varlistentry>
+            <term>-h, --help</term>
+            <listitem><para>このヘルプメッセージを表示して終了する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-v, --verbose</term>
+            <listitem><para>詳細表示を行う</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>computer generate-csr <replaceable>computername</replaceable>
+        <replaceable>subject_name</replaceable>
+        <replaceable>private_key_filename</replaceable>
+        <replaceable>output_filename</replaceable> [options]</title>
+        <para>コンピュータのPEMエンコードされた証明書署名要求を生成する。</para>
+
+        <variablelist>
+        <!--Options-->
+          <varlistentry>
+            <term>--private-key-encoding</term>
+            <listitem><para>秘密鍵が使用するエンコードを指定する。既定値は 'auto' である。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--private-key-pass</term>
+            <listitem><para>秘密鍵を復号するためのパスワードを提供する。</para></listitem>
+          </varlistentry>
+        </variablelist>
+</refsect3>
+
+
 <refsect2>
 	<title>contact</title>
 	<para>contact の管理</para>
@@ -6592,6 +6597,131 @@ json_input の例:
 </refsect3>
 
 <refsect2>
+        <title>user keytrust</title>
+        <para>ユーザのキー資格情報リンクを管理する。</para>
+        <para>これにより、msDS-KeyCredentialLink属性を設定、記述、または削除できる。</para>
+</refsect2>
+
+
+<refsect3>
+<title>user keytrust add <replaceable>username</replaceable>  <replaceable>public-key-or-certificate</replaceable>[options]</title>
+<para>key-credential-linkを追加する。これは、バイナリフィールドに公開キーを保持するリンク属性である。</para>
+<para>
+  2番目の引数は、PEM または DER 形式の 2048ビット RSA キー(またはそのキーを含む証明書)を
+  参照するファイル名である。既定では、エンコード形式は自動的に検出されるが、
+  <constant>--encoding</constant>オプションで上書きすることができる。
+  <constant>--force</constant>オプションを使用して非 2048 ビットキーを追加することは
+  できるが、他のタイプの公開キーはサポートされていない。
+</para>
+
+<variablelist>
+<!--Options-->
+          <varlistentry>
+            <term>--link-target=DN</term>
+            <listitem><para>この DN へのリンク(既定値: ユーザの DN)</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--encoding=ENCODING</term>
+            <listitem><para>キー形式で <constant>pem</constant>,<constant>der</constant>,
+	    または <constant>auto</constant>。既定値は <constant>auto</constant> で、
+	    これは全ての環境下で正しいフォーマットを検出する。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--force</term>
+            <listitem><para>失敗しそうな操作を進める</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+
+<title>user keytrust delete <replaceable>username</replaceable> [options]</title>
+<para>キー資格情報リンクを削除する。
+</para>
+<para>削除するリンクは、いくつかの方法で選択できる。<constant>--all</constant>は、
+ユーザーのすべてのキー資格情報リンクを削除する(多くの場合、1つだけ)。
+<constant>--link-target</constant>オプションは、リンクのターゲットとなる DN に基づいて
+キー資格情報リンクを選択する。<constant>--fingerprint</constant>オプションは、
+キーフィンガープリントに基づいて削除するリンクを選択する。これは、DER でエンコード
+されたキーマテリアルの SHA256 であり、コロンで区切られた16進数のペアとして表現される。
+リンクとそのフィンガープリントのリストを取得するには、
+<constant>user keytrust view</constant>を参照のこと。
+</para>
+
+<para>複数の
+<constant>--link-target</constant>,<constant>--fingerprint</constant>, と
+<constant>--all</constant> が使われた場合、それらに一致したリンクは削除される。
+</para>
+
+<para><constant>--dry-run</constant>オプションは、リンクが削除されるのを防ぎ、代わりにそれが省略された場合に何が起こるかを示す。
+</para>
+
+<variablelist>
+<!--Options-->
+          <varlistentry>
+            <term>--link-target=DN</term>
+            <listitem><para>このキー資格情報リンク(DN)を削除する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--fingerprint=HH:HH:..</term>
+            <listitem><para>このキーフィンガープリントを持つ資格情報リンクを削除する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--all</term>
+            <listitem><para>全ての資格情報リンクを削除する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-n, --dry-run</term>
+            <listitem><para>何もしないが、何が行われるかを表示する</para></listitem>
+          </varlistentry>
+</variablelist>
+
+</refsect3>
+
+<refsect3>
+
+<title>user keytrust view <replaceable>username</replaceable> [options]</title>
+
+<para>ユーザーのキー資格情報リンクを表示する。これは、リンクのフィンガープリントおよび
+<title>user keytrust delete</title>のターゲット DN の検索に使用できる。
+
+<constant>--verbose</constant>では、おそらく役に立たない情報がもっと含まれている。
+</para>
+
+<variablelist>
+<!--Options-->
+          <varlistentry>
+            <term>-h, --help</term>
+            <listitem><para>このヘルプメッセージを表示して終了する</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>-v, --verbose</term>
+            <listitem><para>詳細を表示する</para></listitem>
+          </varlistentry>
+</variablelist>
+</refsect3>
+
+<refsect3>
+        <title>user generate-csr <replaceable>username</replaceable>
+        <replaceable>subject_name</replaceable>
+        <replaceable>private_key_filename</replaceable>
+        <replaceable>output_filename</replaceable> [options]</title>
+        <para>Generate a PEM‐encoded Certificate Signing Request for a user.</para>
+
+        <variablelist>
+        <!--Options-->
+          <varlistentry>
+            <term>--private-key-encoding</term>
+            <listitem><para>秘密鍵が使用するエンコードを指定する。既定値は 'auto' である。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>--private-key-pass</term>
+            <listitem><para>秘密鍵を復号化するためのパスワードを提供する。</para></listitem>
+          </varlistentry>
+        </variablelist>
+</refsect3>
+
+<refsect2>
 	<title>vampire [options] <replaceable>domain</replaceable></title>
 <!-- 原文 samba-4.7.0
 	<para>Join and synchronise a remote AD domain to the local server.
@@ -6775,9 +6905,9 @@ json_input の例:
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.23.0 - 4.23.0 に対応する。</para>
+	<para>このマニュアルページは Samba 4.24.0 - 4.24.0 に対応する。</para>
 
-	<para>Samba 4.0.0 - 4.23.0  対応の翻訳は、
+	<para>Samba 4.0.0 - 4.24.0  対応の翻訳は、
 	<itemizedlist>
 	<listitem><para>太田俊哉(ribbon@samba.gr.jp)</para></listitem>
 	<listitem><para>matsuand(michio_matsuyama@yahoo.co.jp)</para></listitem>
