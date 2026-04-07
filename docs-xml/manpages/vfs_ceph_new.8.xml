@@ -180,6 +180,122 @@
 
                 </listitem>
                 </varlistentry>
+
+                <varlistentry>
+                <term>ceph_new:fscrypt = [ disabled | none | keybridge ]</term>
+                <listitem>
+                <para>
+                        FSCrypt スタイルの暗号化(サブ)ボリュームサポートを有効
+			にするように CephFS クライアントを構成する。有効にすると、
+			暗号化は空の共有に自動的に適用され、その共有への今後の
+			接続には同じキーマテリアルを持つ FSCrypt が必要になる。
+                </para>
+
+                <itemizedlist>
+                        <listitem><para><constant>disabled</constant> (既定値)
+                        - FSCrypt サポートが無効。
+                        </para></listitem>
+
+                        <listitem><para><constant>none</constant> - 
+                        <constant>disabled</constant> のエイリアス。
+                        </para></listitem>
+
+                        <listitem><para><constant>keybridge</constant> - 
+                        キー情報を取得するためのkeybridge RPC APIを使用して、
+			CepFS FSCrypt サポートを有効にする。このオプションを
+			設定するためには
+                        <constant>ceph_new:keybridge socket</constant>,
+                        <constant>ceph_new:keybridge scope</constant>, と
+                        <constant>ceph_new:keybridge name</constant>
+                        を指定することが必要である。
+                        </para></listitem>
+                </itemizedlist>
+                </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                <term>ceph_new:keybridge socket = type:path</term>
+                <listitem>
+                <para>
+                  指定されたソケットをリッスンする KeyBridge サーバーと
+		  通信するための CepFS FSCrypt サポートを構成する。
+		  KeyBridge サーバーは、varlink KeyBridge プロトコルを使用して、
+		  1 つまたは複数の鍵配布サービス (KMIPなど) から鍵データを取得する。
+                </para>
+
+                <para>
+                        許可されている唯一のタイプは<constant>unix</constant>である。
+			pathの 値は、キーブリッジサーバ用の Unix ドメインソケット
+			へのパスである。
+                        例: unix:/run/keybridge/keybridge.sock
+                </para>
+
+                <para>
+                        指定された場合、このオプションは
+                        <constant>ceph_new:keybridge scope</constant> と
+                        <constant>ceph_new:keybridge name</constant>
+                        オプションを指定することが必要である。
+                </para>
+                </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                <term>ceph_new:keybridge scope = scope</term>
+                <listitem>
+                <para>
+                  KeyBridge API リクエストのスコープ値を設定する。
+		  スコープはキーのコンテキストを識別し、通常は特定の
+		  バックエンドにマッピングされる。使用可能なスコープ値は
+		  KeyBridge サーバーの構成によって異なる。
+                  例: "kmip.testing".
+                </para>
+
+                <para>
+                        指定された場合、このオプションは
+                        <constant>ceph_new:keybridge socket</constant> と
+                        <constant>ceph_new:keybridge name</constant>
+                        オプションを指定することが必要である。
+                </para>
+                </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                <term>ceph_new:keybridge name = name</term>
+                <listitem>
+                <para>
+                  KeyBridge API 要求の名前の値を設定する。これは
+		  KeyBridge サーバーがこの共有の暗号化を「ロック解除」するために
+		  使用する、スコープ内のキーの名前または識別子である。
+                  例: "volume1".
+                </para>
+
+                <para>
+                        指定された場合、このオプションは
+                        <constant>ceph_new:keybridge socket</constant> と
+                        <constant>ceph_new:keybridge scope</constant>
+                        オプションを指定することが必要である。
+                </para>
+                </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                <term>ceph_new:keybridge kind = [ B64 | VALUE ]</term>
+                <listitem>
+                <para>
+                  KeyBridge API 要求のデータ・フィールドの種類を設定する。
+		  KeyBridge サーバーは、Base64 でエンコードされた文字列
+		  (B64) またはプレーン・テキスト (VALUE) を使用してデータを
+		  交換できる。スコープに応じて、サーバーはなんらかの形式で
+		  キー情報をフェッチできる。データの種類を手動で選択する
+		  ときにはこのオプションを使用する。
+                </para>
+
+                <para>
+                        指定しない場合は B64 が使われる。
+                </para>
+                </listitem>
+                </varlistentry>
+
 	</variablelist>
 
 </refsect1>
@@ -203,7 +319,7 @@
 </refsect1>
 <refsect1>
 	<title>日本語訳</title>
-	<para>このドキュメントは、Samba 4.23.0 - 4.23.0 に対応する。</para>
+	<para>このドキュメントは、Samba 4.24.0 - 4.24.0 に対応する。</para>
 	<para>このドキュメントの翻訳は
 		<itemizedlist>
 			<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
