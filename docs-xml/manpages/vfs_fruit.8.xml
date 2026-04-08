@@ -659,13 +659,6 @@
 	  <varlistentry>
 	    <term>fruit:delete_empty_adfiles = yes | no</term>
 	    <listitem>
-<!-- Samba-4.9.2
-	      <para>Whether to delete empty AppleDouble files. Empty means that
-	      the resource fork entry in the AppleDouble files is of size 0, or
-	      the size is exactly 286 bytes and the content matches a special
-	      boilerplate resource fork created my macOS.</para>
-	      <para>The default is <emphasis>no</emphasis>.</para>
--->	      
 	      <para>空の、AppleDouble ファイルを削除するかを制御する。空とは
 	      AppleDouble ファイル中のリソースフォークエントリのサイズが 0 か、
 	      MacOS が作成するある特殊な内容の  286 バイトの
@@ -677,18 +670,6 @@
 	  <varlistentry>
 	    <term>fruit:zero_file_id = yes | no</term>
 	    <listitem>
-<!-- Samba 4.17.0
-              <para>Whether to return zero to queries of on-disk file
-              identifier if the client has negotiated AAPL.</para>
-              <para>Mac applications and / or the Mac SMB client code expect the
-              on-disk file identifier to have the semantics of HFS+ Catalog Node
-              Identifier (CNID). Samba provides File-IDs based on a file's inode
-              number which gets recycled across file creation and deletion and
-              can therefore not be used for Mac client. Returning a file identifier of
-              zero causes the Mac client to stop using and trusting the file id
-              returned from the server.</para>
-              <para>The default is <emphasis>yes</emphasis>.</para>
--->
 	      <para>クライアントによる AAPL ネゴシエート
               後に、ディスク上のファイル識別子の問い合わせに対してゼロを返すか
               どうかを指定する。</para>
@@ -704,20 +685,6 @@
 	    </listitem>
 	  </varlistentry>
 	  
-<!-- samba-4.19.0
-          <varlistentry>
-            <term>fruit:convert_adouble = yes | no</term>
-            <listitem>
-              <para>Whether an attempt shall be made to convert ._ AppleDouble
-              sidecar files to native streams (xattrs when using
-              vfs_streams_xattr). The main use case for this conversion is
-              transparent migration from a server config without streams support
-              where the macOS client created those AppleDouble sidecar
-              files.</para>
-              <para>The default is <emphasis>yes</emphasis>.</para>
-            </listitem>
-          </varlistentry>
--->
           <varlistentry>
             <term>fruit:convert_adouble = yes | no</term>
             <listitem>
@@ -751,6 +718,61 @@
             </listitem>
           </varlistentry>
 
+          <varlistentry>
+            <term>fruit:veto_localized = yes | no</term>
+            <listitem>
+
+              <para><parameter>fruit:veto_localized</parameter>が
+	      <parameter>yes</parameter>に設定されている場合、vfs_fruitは
+	      <emphasis>.localized</emphasis>のファイルまたはディレクトリへの
+	      アクセスを自動的に拒否する。これらは、Mac OS がフォルダ名に対して
+	      ローカライズされた翻訳を提供できるようにするために作成できる
+	      (通常は、<emphasis>Desktop</emphasis>、<emphasis>Music</emphasis>などの
+	      ローカライズされたバージョンに対して)。
+	      非常に大きなディレクトリがリストされている場合、Mac クライアントは、
+	      そのディレクトリリスト内のすべてのエントリに対して、.localizedファイルの
+	      存在を照会することがある。クラスタ化されたファイルシステムと
+	      組み合わせると、ディレクトリリスト全体のパフォーマンスに大きな影響を
+	      与える可能性がある。潜在的なフォルダ名の変換が望ましくない場合、
+	      このオプションを使用すると、サーバがクエリのためにファイルシステム層に
+	      行かないようにすることで、追加のネットワークオーバーヘッドを回避できる。
+	      </para>
+              <para>既定値は<emphasis>no</emphasis>である</para>
+
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>fruit:posix_opens = yes | no</term>
+            <listitem>
+
+              <para><parameter>fruit:posix_opens</parameter>が<parameter>yes</parameter>に
+	      設定されている場合、vfs_fruit は内部的にすべてのファイルシステム
+	      セマンティクスを変換し、Windows の動作ではなく POSIX の動作を使用する。
+	      Mac はファイルシステムセマンティクスに関してWindows よりも POSIX に
+	      近いので、これは多くのコーナーケースでアクセスセマンティクスを改善する。
+	      </para>
+              <para>既定値は<emphasis>yes</emphasis>である</para>
+
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>fruit:ignore_zero_aces = yes | no</term>
+            <listitem>
+
+              <para><parameter>fruit:ignore_zero_ACEs</parameter>が有効になっている
+	      場合、ネットワーク経由で送信された ACL に ACE が含まれていないと、
+	      ファイルシステムの権限を変更しようとしても失敗する。これは
+	      クライアントの動作としては完全に有効であるが、管理者が権限を
+	      修正しない限り、その後はファイルにアクセスできなくなる。</para>
+              <para>この問題な動作は、最新の macOS バージョンで報告されており、
+	      この新しいオプションを使用すると回避できる。</para>
+              <para>既定値は<emphasis>yes</emphasis>である。</para>
+
+            </listitem>
+          </varlistentry>
+
 	</variablelist>
 </refsect1>
 
@@ -781,7 +803,7 @@
 </refsect1>
 <refsect1>
     <title>日本語訳</title>
-    <para>このマニュアルページは Samba 4.23.0 - 4.23.0 に対応する。</para>
+    <para>このマニュアルページは Samba 4.24.0 - 4.24.0 に対応する。</para>
     <para>このドキュメントの翻訳は
     <itemizedlist>
         <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
