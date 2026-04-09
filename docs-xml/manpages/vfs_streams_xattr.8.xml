@@ -71,6 +71,38 @@
 	    </listitem>
 	  </varlistentry>
 
+          <varlistentry>
+            <term>streams_xattr:max xattrs per stream = NUM</term>
+            <listitem>
+              <para>1つの xattr のサイズが inode ごとの xattrs の全体サイズ
+	      よりも制限されているファイルシステムでは、このパラメータを
+	      2 から 16 の間の数に設定すると、smbd は 1つの xattr に収まる
+	      サイズよりも大きなストリームを格納できる。たとえば、Linux は
+	      xattr ごとに 64 KBの制限があるが、XFS は inode ごとに
+	      それよりも多く格納できる。</para>
+              <para>単一の xatt rのサイズは、smb.confパラメータ
+	      <command>smbd max xattr size</command>によって制限される。
+	      </para>
+              <para>これは、代替データストリームごとに16 xattrs に制限される。</para>
+              <para>既定値は <command>1</command> であり、
+	      この機能が導入される前の規定の動作と互換がある。
+	      </para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>streams_xattr:ext_prefix = STRING</term>
+            <listitem>
+              <para>ストリームのオーバーフロー xattr を格納するときに
+	      使用される名前接頭辞。既定値は、文字列 "Ext" が追加された
+	      <command>streams_xattr:prefix</command>である。
+	      <command>streams_xattr:prefix</command>が "." で終了する場合、
+	      "Ext" は "." の前に挿入される。</para>
+              <para>オーバーフロー xattr には、"user.DosStreamExt.0.ADS-NAME" に
+	      続くパターンに従って名前が付けられる。</para>
+            </listitem>
+          </varlistentry>
+
 	</variablelist>
 
 </refsect1>
@@ -97,8 +129,8 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.8.0 - 4.23.0 に対応する。</para>
-        <para>このドキュメントの Samba 4.2.0 - 4.23.0 対応の翻訳は
+	<para>このマニュアルページは Samba 4.24.0 - 4.24.0 に対応する。</para>
+        <para>このドキュメントの Samba 4.2.0 - 4.24.0 対応の翻訳は
 	<itemizedlist>
 		<listitem><para>たかはしもとのぶ (monyo@samba.gr.jp)</para></listitem>
 		<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
