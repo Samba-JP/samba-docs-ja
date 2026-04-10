@@ -158,71 +158,6 @@
 	<listitem><para>5: 匿名による認証と承認の成功</para></listitem>
     </itemizedlist>
 
-<!-- Samba-4.14.5
-    <para>Changes to the AD DC <command moreinfo="none">sam.ldb</command>
-    database are logged under the <parameter>dsdb_audit</parameter>
-    and a JSON representation is logged under
-    <parameter>dsdb_json_audit</parameter>.</para>
-
-    <para>Group membership changes to the AD DC <command
-    moreinfo="none">sam.ldb</command> database are logged under the
-    <parameter>dsdb_group_audit</parameter> and a JSON representation
-    is logged under
-    <parameter>dsdb_group_json_audit</parameter>.</para>
-
-    <para>Log levels for <parameter>dsdb_audit</parameter>,
-    <parameter>dsdb_json_audit</parameter>,
-    <parameter>dsdb_group_audit</parameter>,
-    <parameter>dsdb_group_json_audit</parameter> and
-    <parameter>dsdb_json_audit</parameter> are:</para>
-    <itemizedlist>
-        <listitem><para>5: Database modifications</para></listitem>
-        <listitem><para>5: Replicated updates from another DC</para></listitem>
-	</itemizedlist>
-
-    <para>Password changes and Password resets in the AD DC are logged
-    under <parameter>dsdb_password_audit</parameter> and a JSON
-    representation is logged under the
-    <parameter>dsdb_password_json_audit</parameter>.  Password changes
-    will also appears as authentication events via
-    <parameter>auth_audit</parameter> and
-    <parameter>auth_audit_json</parameter>.</para>
-
-    <para>Log levels for <parameter>dsdb_password_audit</parameter> and
-    <parameter>dsdb_password_json_audit</parameter> are:</para>
-    <itemizedlist>
-        <listitem><para>5: Successful password changes and resets</para></listitem>
-    </itemizedlist>
-
-    <para>Transaction rollbacks and prepare commit failures are logged under
-    the <parameter>dsdb_transaction_audit</parameter> and a JSON representation is logged under the
-    <parameter>dsdb_transaction_json_audit</parameter>. </para>
-
-    <para>Log levels for <parameter>dsdb_transaction_audit</parameter> and
-    <parameter>dsdb_transaction_json</parameter> are:</para>
-
-    <itemizedlist>
-        <listitem><para>5: Transaction failure (rollback)</para></listitem>
-        <listitem><para>10: Transaction success (commit)</para></listitem>
-    </itemizedlist>
-
-    <para>Transaction roll-backs are possible in Samba, and whilst
-    they rarely reflect anything more than the failure of an
-    individual operation (say due to the add of a conflicting record),
-    they are possible.  Audit logs are already generated and sent to
-    the system logs before the transaction is complete.  Logging the
-    transaction details allows the identification of password and
-    <command moreinfo="none">sam.ldb</command> operations that have
-    been rolled back, and so have not actually persisted.</para>
-
-    <warning><para> Changes to <command
-    moreinfo="none">sam.ldb</command> made locally by the <command
-    moreinfo="none">root</command> user with direct access to the
-    database are not logged to the system logs, but to the
-    administrator's own console.  While less than ideal, any user able
-    to make such modifications could disable the audit logging in any
-    case. </para></warning>
--->
     <para>AD DC <command moreinfo="none">sam.ldb</command> データベースへの変更は、
     <parameter>dsdb_audit</parameter> 配下に記録され、JSON 形式のものは、
     <parameter>dsdb_json_audit</parameter> 配下に記録される。</para>
@@ -242,7 +177,8 @@
         <listitem><para>5: 他の DC からの複製された更新</para></listitem>
     </itemizedlist>
 
-    <para>AD DC 中におけるパスワードの変更とパスワードのリセットは、
+    <para>AD DC 中におけるパスワードの変更、パスワードのリセット および
+    特定の認証に関連する属性の変更は、
     <parameter>dsdb_password_audit</parameter> 配下に記録され、JSON 形式のものは
     <parameter>dsdb_password_json_audit</parameter> に記録される。パスワードの変更は、
     <parameter>auth_audit</parameter> と
@@ -251,8 +187,21 @@
     <para><parameter>dsdb_password_audit</parameter> と
     <parameter>dsdb_password_json_audit</parameter> のログレベルは以下の通り。</para>
     <itemizedlist>
-        <listitem><para>5: パスワード変更とリセットが成功</para></listitem>
+        <listitem><para>5: パスワード変更とリセット、および認証関連の属性変更が成功</para></listitem>
     </itemizedlist>
+
+    <para>以下の属性変更は記録される:</para>
+    <itemizedlist>
+        <listitem><para>altSecurityIdentities</para></listitem>
+        <listitem><para>dNSHostName</para></listitem>
+        <listitem><para>msDS-AdditionalDnsHostName</para></listitem>
+        <listitem><para>msDS-KeyCredentialLink</para></listitem>
+        <listitem><para>servicePrincipalName</para></listitem>
+    </itemizedlist>
+    <para><parameter>dsdb_password_json_audit</parameter> ログでは、
+    "action" フィールドの値が "Auth info change" になっている。
+    パスワードの変更とリセットは、このフィールドの値が
+    "change" と "reset" になっている。</para>
 
     <para>トランザクションロールバックとコミット準備の失敗は、
     <parameter>dsdb_transaction_audit</parameter> 配下に記録され、JSON 形式のものは、
