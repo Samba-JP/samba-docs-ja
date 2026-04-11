@@ -1,0 +1,19 @@
+<samba:parameter name="elasticsearch:default_fields"
+                 context="G"
+                 type="string"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+  <description>
+    <para>
+      特別な属性 "*" で検索する Spotlight クエリを受信したときにクエリ
+      する Elasticsearch の既定値の属性。これは、Finder から検索する
+      ときに macOS クライアントによって使用される既定値である。
+    </para>
+    <para>
+      このオプションは、カンマで区切られた Elasticsearch 属性のリストを
+      想定しており、各属性は二重引用符で囲む必要がある。
+    </para>
+  </description>
+
+  <value type="default">"file.filename", "content"</value>
+  <value type="example">"foo", "bar"</value>
+</samba:parameter>
