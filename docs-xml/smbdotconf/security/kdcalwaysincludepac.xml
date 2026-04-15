@@ -1,0 +1,19 @@
+<samba:parameter name="kdc always include pac"
+                 type="boolean"
+                 context="G"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+    <para>
+      このオプションは、クライアントから受信した PA-PAC-REQUEST を上書き
+      する。有効にすると(既定値)、PAC は常に Kerberos 応答に含まれる。
+	</para>
+
+    <para>
+      このオプションは現在、組み込み Heimdal KDCが 使用されている
+      場合にのみ適用される。
+    </para>
+
+</description>
+
+<value type="default">yes</value>
+</samba:parameter>
