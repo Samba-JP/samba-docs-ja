@@ -1,0 +1,26 @@
+<samba:parameter name="certificate backdating compensation"
+                 context="G"
+                 type="integer"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+  <para>
+     <smbconfoption name="strong certificate binding enforcement">
+       compatibility </smbconfoption>との
+       Certificate Based Kerberos Authentication(PKINIT)を実行する場合
+    </para>
+    <para>
+      このパラメーターは、証明書の発行日からユーザーのアカウントが
+      作成されるまでの分数を指定する。
+    </para>
+
+    <para>詳細については
+        <ulink url="https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16">
+            KB5014754: Certificate-based authentication changes on Windows
+            domain controllers を参照のこと。
+        </ulink>
+    </para>
+
+</description>
+
+<value type="default">0</value>
+</samba:parameter>
