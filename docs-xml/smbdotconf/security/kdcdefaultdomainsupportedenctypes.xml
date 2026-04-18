@@ -42,5 +42,9 @@
 
 </description>
 
-<value type="default">0<comment>現在ソフトウェアがサポートしている物に対応: arcfour-hmac-md5 aes256-cts-hmac-sha1-96-sk</comment></value>
+<value type="default">0<comment>現在ソフトウェアがサポートしている物に対応:
+AESキーが使用可能な場合(ドメインの機能レベルが 2008 以上)、これは
+aes128-cts-hmac-sha1-96 aes256-cts-hmac-sha1-96である。それ以外の場合は、
+arcfour-hmac-md5 aes256-cts-hmac-sha1-96-skである。
+</comment></value>
 </samba:parameter>
