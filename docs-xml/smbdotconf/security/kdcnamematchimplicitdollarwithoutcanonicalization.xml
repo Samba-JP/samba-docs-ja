@@ -1,0 +1,37 @@
+<samba:parameter name="kdc name match implicit dollar without canonicalization"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+  <description>
+    <para>
+      このオプションは、AS要求で名前の正規化を要求しないクライアント
+      (通常は従来の UNIX Kerberos クライアントを意味し、
+    </para>
+
+    <para>
+      KDC は、AS 要求内の名前と完全には一致しない場合がある。たとえば、
+      大文字と小文字を区別しない比較を使用したり、名前を
+      ユーザープリンシパル名に変換したりするが、'canonicalize'
+      オプションフラグを設定しない限り、実際に一致したプリンシパルは
+      クライアントに通知されない。
+    </para>
+    <para>
+      Active Directory ドメインでは、KDC の既定値の動作は、指定された
+      名前に '$' がなく、まだ一致していない場合に、'$' 文字を追加する
+      ことである。これにより、'foo' はマシンアカウント 'foo$' と一致する
+      ことができる。攻撃者が任意のマシンアカウントを作成できる場合
+      (権限の低い操作である可能性がある)、UNIX ユーザーの名前を模倣して
+      チケットを取得できることがある。これは 'dollar ticket attack' として
+      知られている。
+    </para>
+    <para>
+      このオプションを 'no' に設定すると、canonicalize フラグが設定
+      されていない限り、KDC は追加された '$' を使用して照合を試みない。
+      これにより、AD 対応クライアントは通常どおり正規化を使用して接続
+      できるが、従来の UNIX クライアントは dollar ticket attack に
+      公開されない。
+    </para>
+</description>
+
+<value type="default">yes</value>
+</samba:parameter>
