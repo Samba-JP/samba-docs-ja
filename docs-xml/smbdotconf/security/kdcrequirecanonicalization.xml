@@ -1,0 +1,35 @@
+<samba:parameter name="kdc require canonicalization"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+  <description>
+    <para>
+      Kerberos クライアントが正規化フラグを使用するように要求する。
+    </para>
+
+    <para>
+      Kerberos 正規化フラグ (RFC 6806を参照) を使用しないクライアントは、
+      要求した名前の TGT を取得する。この名前は、Samba データベース内の
+      名前と正確に一致しない場合がある。たとえば、クライアントが 'root' の
+      チケットを要求し、データベースに 'ROOT$' というコンピュータがある場合、
+      KDC は AD Kerberos の標準一致ルールを使用して 'root' のチケットを
+      発行する。Kerberos に対応しているが AD には対応していない
+      メンバサーバは、このチケットをローカルの root ユーザーに対して有効な
+      チケットとして受け入れる場合がある。このオプションは、正規化フラグの
+      ない要求の受け入れを拒否することで、この問題を回避する。
+    </para>
+    <para>
+      これは、(Windowsクライアントのように)予想されるすべてのクライアントが
+      正規化を要求し、この問題によって混乱する可能性のあるメンバサーバが
+      ある場合に適したオプションである。通常、これは、MIT Kerberos ドメインに
+      あると予想される UNIX サーバを意味する。
+    </para>
+    <para>
+      "kdc name match implicit dollar without canonicalization" オプションも
+      参照のこと。これは、カノニカライズフラグを使用しない Kerberos クライアントを
+      想定している場合に役立つ。
+    </para>
+</description>
+
+<value type="default">no</value>
+</samba:parameter>
