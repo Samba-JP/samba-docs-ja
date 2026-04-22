@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2026/04/21
+						2026/04/22
 						日本Sambaユーザー会
 
 
@@ -129,7 +129,7 @@ manpages、html、htmlman が実行可能になります。これ以外にも ma
 ======================================================================
 XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)については、記載を省略しています。
 
-2026/04/21 Ver 4.24.0-1 4.24.0 対応
+2026/04/22 Ver 4.24.0-1 4.24.0 対応
 	   net.8.xml,samba-tool.8.xml,smb.conf.5.xml,
 	   vfs_ceph_new.8.xml,vfs_fruit.8.xml,
 	   vfs_full_audit.8.xml,vfs_streams_xattr.8.xml,
@@ -147,7 +147,8 @@ XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)につ
 	   security/kdccertbackdating.xml,
 	   security/kdccertbindingenforcement.xml,
 	   security/kdcnamematchimplicitdollarwithoutcanonicalization.xml,
-	   security/kdcrequirecanonicalization.xml
+	   security/kdcrequirecanonicalization.xml,
+	   security/krb5acceptorreportcanonicalclientname.xml
 	   追加
 	   himmelblaud/himmelblaudhelloenabled.xml,
 	   himmelblaud/himmelblaudhsmpinpath.xml,
