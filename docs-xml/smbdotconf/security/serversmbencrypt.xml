@@ -1,6 +1,7 @@
 <samba:parameter name="server smb encrypt"
 		 context="S"
 		 type="enum"
+		 function="_server_smb_encrypt"
 		 enumlist="enum_smb_encryption_vals"
 		 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
 <description>
@@ -83,7 +84,7 @@
 		</varlistentry>
 
 		<varlistentry>
-		<term><emphasis>SMB2 以降に対する影響</emphasis></term>
+		<term><emphasis>SMB3.0 とそれ以降に対する影響</emphasis></term>
 		<listitem>
 		<para>
 		本来の SMB トランスポート暗号化は、SMB バージョン 3.0以降で有効
