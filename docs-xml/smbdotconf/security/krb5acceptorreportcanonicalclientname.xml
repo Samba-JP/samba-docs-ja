@@ -1,0 +1,21 @@
+<samba:parameter name="krb5 acceptor report canonical client name"
+                 type="boolean"
+                 context="G"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+    <para>
+        このオプションは、受信した Kerberos チケットに対して Kerberos アクセプタに提供
+	されるクライアント名に影響する。'yes' に設定されている場合、チケット
+	内のクライアント名は正規のクライアント名 (sAMAccountName) に置き換え
+	られる。それ以外の場合は、変更されない。
+	</para>
+
+    <para>
+      このオプションは現在、組み込みの Heimdal KDC が使用されている場合に
+      のみ適用される。
+    </para>
+
+</description>
+
+<value type="default">yes</value>
+</samba:parameter>
