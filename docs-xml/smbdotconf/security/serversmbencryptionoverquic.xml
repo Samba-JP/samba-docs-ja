@@ -1,0 +1,45 @@
+<samba:parameter name="server smb encryption over quic"
+		 context="G"
+		 type="boolean"
+		 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+  <para>
+    このパラメータは、トランスポートが QUIC を介して暗号化されているにも
+    かかわらず、SMB サーバが SMB レベルの暗号化を必要とするかどうかを制御する。
+  </para>
+  <para>
+    <parameter>server smb encrypt</parameter>は、SMB3.0 で導入された暗号化
+    メカニズムの使用を制御する。
+    <parameter>server smb encryption over quic</parameter> の値が
+    <emphasis>no</emphasis><emphasis>かつ</emphasis>
+    クライアントが検証済みの QUIC (したがってTLS)接続を介して接続している場合、
+    サーバはパラメータ<parameter>server smb encrypt</parameter>の要件を無視し、
+    QUIC 接続内のすべての SMB レベルのパケットを信頼できる方法で暗号化された
+    ものとして受け入れる。これにより、コストのかかる二重暗号化が回避される。
+  </para>
+  <para>
+    <parameter>server smb encryption over quic</parameter>が既定値
+    <emphasis>yes</emphasis>になっている場合、クライアントが通常の TCP で
+    接続する場合、またはクライアントが使用する QUIC 接続が信頼できる
+    ことを示さない場合は、
+    <parameter>server smb encrypt</parameter>の要件が適用される。
+  </para>
+  <para>
+    QUIC レイヤの暗号化は、サーバによって提示された TLS レベルの認証に
+    基づいていることに注意。SMB レイヤの暗号化は、個々のユーザセッションに
+    基づいているため、基本的には、Windows セッションへのログオンに使用され
+    るユーザのパスワードや同等の資格情報など、初期ユーザ資格情報に
+    基づいている。これは、
+    <parameter>server smb encryption over quic</parameter>パラメータに
+    関するセキュリティ評価に影響を与える可能性がある。
+  </para>
+  <para>
+    Windows には、<command>Set-SmbServerConfiguration</command>
+    PowerShell コマンドレットの
+    <parameter>DisableSmbEncryptionOnSecureConnection</parameter>
+    スイッチを使用した同様の SMB サーバ設定がある。
+  </para>
+</description>
+
+<value type="default">yes</value>
+</samba:parameter>
