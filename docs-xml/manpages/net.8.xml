@@ -2799,24 +2799,6 @@ net ads kerberos kinit -P --use-krb5-ccache=MEMORY:net
 </refsect2>
 
 <refsect2>
-        <title>ADS KERBEROS PAC SAVE [impersonate=string] [local_service=string] [filename=string
-<member>11 PAC_TYPE_CONSTRAINED_DELEGATION</member>
-<member>12 PAC_TYPE_UPN_DNS_INFO</member>
-<member>13 PAC_TYPE_CLIENT_CLAIMS_INFO</member>
-<member>14 PAC_TYPE_DEVICE_INFO</member>
-<member>15 PAC_TYPE_DEVICE_CLAIMS_INFO</member>
-<member>16 PAC_TYPE_TICKET_CHECKSUM</member>
-<member>17 PAC_TYPE_ATTRIBUTES_INFO</member>
-<member>18 PAC_TYPE_REQUESTER_SID</member>
-<member>19 PAC_TYPE_FULL_CHECKSUM</member>
-</simplelist>
-
-<para>例: <userinput>net ads kerberos pac dump -P impersonate=anyuser@MY.REALM.COM</userinpu
-t></para>
-
-</refsect2>
-
-<refsect2>
         <title>ADS KERBEROS PAC SAVE [impersonate=string] [local_service=string] [filename=string]</title>
 
 <para>
