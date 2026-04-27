@@ -336,6 +336,7 @@
 </variablelist>
 </refsect3>
 
+<refsect3>
 <title>computer keytrust delete <replaceable>computername</replaceable> [options]</title>
 <para>key-credential-link を削除する。
 </para>
