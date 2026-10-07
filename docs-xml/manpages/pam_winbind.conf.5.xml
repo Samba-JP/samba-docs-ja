@@ -13,7 +13,7 @@
 
 <refnamediv>
 	<refname>pam_winbind.conf</refname>
-	<refpurpose>Winbindのための、PAMモジュール設定ファイル</refpurpose>
+	<refpurpose>Winbindのための、PAM モジュール設定ファイル</refpurpose>
 </refnamediv>
 
 <refsect1>
@@ -23,7 +23,7 @@
         <manvolnum>7</manvolnum></citerefentry> システムの一部である。</para>
 
 	<para>
-	pam_winbind.conf は、pam_winbind PAMモジュールのための設定ファイルである。
+	pam_winbind.conf は、pam_winbind PAM モジュールのための設定ファイルである。
 	詳細については、
 	<citerefentry><refentrytitle>pam_winbind</refentrytitle><manvolnum>8</manvolnum></citerefentry>
 	を参照。
@@ -34,8 +34,8 @@
 	<title>概要</title>
 
 	<para>
-	  pam_winbind.conf設定ファイルは昔ながらのini形式の設定ファイルである。
-	  ここには、種々のオプションが定義される、1つのセクション(global)のみがある。
+	  pam_winbind.conf 設定ファイルは昔ながらの ini 形式の設定ファイルである。
+	  ここには、種々のオプションが定義される、1つのセクション (global) のみがある。
 	</para>
 </refsect1>
 
@@ -43,31 +43,35 @@
 	<title>オプション</title>
 	<para>
 
-		pam_winbindは、PAM設定ファイル中で設定されるか、
-		<filename>/etc/security/pam_winbind.conf</filename>に設定される、
-		いくつかのオプションをサポートする。PAM設定ファイルで定義した
-		オプションは、pam_winbind.conf設定ファイルのものよりも優先される。
+		pam_winbindは、PAM 設定ファイル中で設定されるか、
+		<filename>/etc/security/pam_winbind.conf</filename> に設定される、
+		いくつかのオプションをサポートする。PAM 設定ファイルで定義した
+		オプションは、pam_winbind.conf 設定ファイルのものよりも優先される。
 
 		<variablelist>
 
 		<varlistentry>
 		<term>debug = yes|no</term>
-		<listitem><para>syslogにデバッグ出力を行う。既定値は"no"である。</para></listitem>
+		<listitem><para>syslog にデバッグ出力を行う。既定値は "no" である。</para></listitem>
 		</varlistentry>
 
 		<varlistentry>
 		<term>debug_state = yes|no</term>
-		<listitem><para>syslogに詳細なPAMステートデバッグ情報を出力する。既定値は"no"である。</para></listitem>
+		<listitem><para>syslog に詳細な PAM ステートデバッグ情報を出力する。
+		既定値は "no" である。</para></listitem>
 		</varlistentry>
 
 		<varlistentry>
 		<term>require_membership_of = [SID or NAME]</term>
 		<listitem><para>
-		    もしも、このオプションが設定された場合、pam_winbindは、もしもユーザーが
-		    与えられたSIDかNAMEのメンバーである場合のみ成功する。SIDはグループSID、
-		    aliasSIDかユーザーSIDのどれかである。また、SIDの代わりにNAMEを与える
-		    事も可能である。その名前は<parameter>MYDOMAIN\\mygroup</parameter>か
-		    <parameter>MYDOMAIN\\myuser</parameter>という形式でなければならない。
+		    もしも、このオプションが設定された場合、pam_winbind は、もしもユーザーが
+		    与えられた SID か NAME のメンバーである場合のみ成功する。
+		    SID はグループSID、aliasSID かユーザー SID のどれかである。
+		    また、SID の代わりに NAME を与える事も可能である。その名前は
+		    <parameter>MYDOMAIN\\mygroup</parameter> か
+		    <parameter>MYDOMAIN\\myuser</parameter> という形式でなければならない
+		    (ここで、'\' 文字は <parameter>winbind separator</parameter> parameter の
+		    値に対応する)。
 		    pam_winbindはこの場合、内部的にSIDを検索する。NAMEは空白を含んでは
 		    ならないことに注意。そのため、SIDのみを使うことを推奨する。
 		    <command>wbinfo --user-sids=SID</command>を使うことでSIDの一覧から
@@ -76,19 +80,19 @@
 		  </para>
 		  <para>
 		    このオプションはパスワード認証の時にのみ動作し、パスワードが何らかの
-		    理由で不要な場合は(たとえば SSHキーベースのログイン)、アクセスを制限しない。
+		    理由で不要な場合は (たとえば SSHキーベースのログイン)、アクセスを制限しない。
 		</para></listitem>
 		</varlistentry>
 
 		<varlistentry>
 		<term>try_first_pass = yes|no</term>
 		<listitem><para>
-		    既定値では、pam_winbindは以前のモジュールから認証トークンを得ようと
+		    既定では、pam_winbind は以前のモジュールから認証トークンを得ようと
 		    する。もしもトークンがなければ、ユーザーに対して古いパスワードを
-		    問い合わせする。このオプションを使うと、pam_winbindは、もしも以前の
+		    問い合わせする。このオプションを使うと、pam_winbind は、もしも以前の
 		    モジュールからの認証トークンがない場合にエラーとして異常終了する。
-		    もしも最初のパスワードが無効であれば、PAMはパスワード要求を出す。
-		    既定値は"no"である。
+		    もしも最初のパスワードが無効であれば、PAM はパスワード要求を出す。
+		    既定値は "no" である。
 		</para></listitem>
 		</varlistentry>
 
@@ -96,12 +100,12 @@
 		<term>krb5_auth = yes|no</term>
 		<listitem><para>
 
-		    pam_winbindは、winbinddがActive Directoryドメインコントローラーと
-		    通信している時にKerberosを認証に使うことが出来る。Kerberos認証は
-		    成功しない(例えば、クロックのずれ)場合があり、その場合はwinbindd
-		    はMSRPCを使ったsamlogon認証に切り替える。このパラメーターが、
-		    <parameter>winbind refresh tickets</parameter>と一緒に使われた
-		    場合、winbindは必要に応じてTicket Granting Ticket(TGT)をリフレッシュ
+		    pam_winbind は、winbindd が Active Directoryドメインコントローラーと
+		    通信している時に Kerberos を認証に使うことが出来る。Kerberos 認証は
+		    成功しない (例えば、クロックのずれ)場合があり、その場合は winbindd
+		    は MSRPC を使った samlogon 認証に切り替える。このパラメーターが、
+		    <parameter>winbind refresh tickets</parameter> と一緒に使われた
+		    場合、winbind は必要に応じてTicket Granting Ticket (TGT) をリフレッシュ
 		    することによって最新の状態に更新する。
 
 		</para></listitem>
@@ -111,63 +115,95 @@
 		<term>krb5_ccache_type = [type]</term>
 		<listitem><para>
 
-		    pam_winbindが、<parameter>krb5_auth</parameter>オプションを有効に
-		    することでkerberos認証を使うとするように設定されている場合、
-		    認証キャッシュ中に、受け取ったTicket Granting Ticket(TGT)を格納
-		    することが出来る。認証キャッシュのタイプはこのオプションで制御できる。
-		    サポートされている値は、<parameter>KCM</parameter> または 
-		    <parameter>KEYRING</parameter>
-		    (システムのKerberosライブラリとカーネルがサポートする時)、
-		    <parameter>FILE</parameter>と
-		    <parameter>DIR</parameter>(システムの Kerberos ライブラリで DIR
-		    タイプがサポートされている場合)である。タイプが FILE の場合、
-		    UID がユーザーの ID に変更された、/tmp/krb5cc_UID 形式での認証
-		    キャッシュが作成され、タイプが DIR の場合には、ディレクトリを
-		    指定しなければならない。UID はユーザ ID の数値で置き換わる。
-<!-- Samba-4.12.0
-               The UID directory is being created. The path up to
-               the directory should already exist. Check the details of the
-               Kerberos implmentation.
--->
-                    UID ディレクトリは作成される。ディレクトリまでのパスはすでに
-		    存在していなければならない。Kerberos 実装の詳細を参照のこと。
-		  </para>
+		<parameter>krb5_auth</parameter> オプションを有効にして、pam_winbind が
+                kerberos 認証を行うように設定された場合、Winbindd は TGT
+                (Ticket Granting Ticket) を資格情報キャッシュ中に保持する。
+                資格情報キャッシュのタイプは、このオプションで制御できる。</para>
 
-		    <para>KEYRINGタイプを使う場合、サポートされるメカニズムは
-		    <quote>KEYRING:persistent:UID</quote>で、これは、ユーザ ID
-		    単位ごとの認証を格納するために、Linux カーネル keyring を使う。
-<!-- Samba-4.12.0
-                The KEYRING has its limitations. As it is secure kernel memory,
-                for example bulk storage of credentils is for not possible.
--->
-                    KEYRING には固有の制限がある。安全なカーネルメモリのように、
-                    たとえば大半の認可情報領域を安全にする事はできない。</para>
-		    
-		    <para>KCMタイプを使う場合、サポートされるメカニズムは
-		    <quote>KCM:UID</quote>で、KEYRINGと同様に、ユーザID単位ごとの
-		    認証を格納するために、Kerberos 資格情報マネージャを使う。
-		    これは、Kerberos 資格情報マネージャを提供する、最新のLinux
-		    ディストリビューションにおける推奨される選択肢である。もしも
-		    それがない場合は、最もセキュアで、ありきたりな方法である
-		    KEYRINGを推奨する。</para>
+		<para>次の単純なタイプ名がサポートされている (これらは、
+                ユーザーの UID を持つ既定値パスを生成する):</para>
 
-		    <para>個別のファイルパスを定義することと、数字のユーザIDを変換
-		    するために、"%u"を使うことも可能である。
-		    例は以下の通り:</para>
-
-              <variablelist>
-                <varlistentry>
-                    <term>krb5_ccache_type = DIR:/run/user/%u/krb5cc</term>
-                      <listitem><para>これは指定されたディレクトリに、認証キャッシュを作成する。</para></listitem>
-                </varlistentry>
-                 <varlistentry>
-                    <term>krb5_ccache_type = FILE:/tmp/krb5cc_%u</term>
-                      <listitem><para>これは、認証キャッシュファイルを作成する。</para></listitem>
-                 </varlistentry>
+		 <variablelist>
+                        <varlistentry>
+                                <term>DEFAULT</term>
+                                <listitem><para>システムの
+				<filename>krb5.conf</filename>設定ファイルに
+				指定されている、既定値の資格情報キャッシュ位置を
+				使用する。(<quote>default_ccache_name</quote>)。
+				このオプションを使用すると、Kerberos の構成で
+				資格情報キャッシュの場所を集中管理できる。
+				<filename>krb5.conf</filename> 中の
+                                <quote>%{uid}</quote> パターンは、ユーザの
+				UID に置き換えられる。</para></listitem>
+                        </varlistentry>
+                        <varlistentry>
+                                <term>KCM</term>
+                                <listitem><para>Kerberos 資格情報マネージャを使用する
+				(<quote>KCM:&lt;UID&gt;</quote> を生成する)。
+				これは、Kerberos 資格情報マネージャを提供する
+				最新の Linux ディストリビューションで推奨される
+				選択肢である。</para></listitem>
+                        </varlistentry>
+                        <varlistentry>
+                                <term>KEYRING</term>
+                                <listitem><para>Linux kernel keyring を使用する。
+                                (<quote>KEYRING:persistent:&lt;UID&gt;</quote>
+				を生成する)。KEYRINGには制限がある。セキュアな
+				カーネルメモリであるため、たとえば資格情報の
+				バルクストレージはできない。これは、KCM が利用
+				できない場合に適したフォールバックである。</para></listitem>
+                        </varlistentry>
+                        <varlistentry>
+                                <term>FILE</term>
+                                <listitem><para>ファイルベースの認証情報キャッシュを使用する
+				(<quote>FILE:/tmp/krb5cc_&lt;UID&gt;</quote>
+				を生成する)。
+                                </para></listitem>
+                        </varlistentry>
+                        <varlistentry>
+                                <term>WRFILE</term>
+                                <listitem><para>書き込みのみモードで、ファイル
+				ベースの認証情報キャッシュを使用する
+				(<quote>WRFILE:/tmp/krb5cc_&lt;UID&gt;</quote>
+				を生成する)。
+                                </para></listitem>
+                        </varlistentry>
                 </variablelist>
-	        <para>ログオンが成功した後に、チケットキャッシュなしでKerberos認証を行う
-	        ために、空のままにしておくこと。この設定は既定値では空である。 
-        	</para></listitem>
+
+                <para>明示的な接頭辞を使用してカスタムパスを指定することもできる。
+		次の接頭辞が認識される:
+                <parameter>KEYRING:type</parameter>,
+                <parameter>DIR:/path</parameter>,
+                <parameter>FILE:/path</parameter>, and
+                <parameter>WRFILE:/path</parameter>.
+                数字のユーザ ID に置き換えるため、 <quote>%u</quote> あるいは
+		<quote>%{uid}</quote> パターンを使うこともできる。以下は例である:</para>
+
+                <variablelist>
+                        <varlistentry>
+                                <term>krb5_ccache_type = KEYRING:session:%u</term>
+                                        <listitem><para>これにより、資格情報
+					キャッシュにセッション鍵リングが使用さ
+					れる。</para></listitem>
+                        </varlistentry>
+			<varlistentry>
+				<term>krb5_ccache_type = DIR:/run/user/%u/krb5cc</term>
+					<listitem><para>これは、指定されたディレクトリ中に認証情報キャッシュファイルを作成する。</para></listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>krb5_ccache_type = FILE:/tmp/krb5cc_%u</term>
+					<listitem><para>これは、認証情報キャッシュファイルを作成する。</para></listitem>
+			</varlistentry>
+                        <varlistentry>
+                                <term>krb5_ccache_type = WRFILE:/var/lib/sss/ccache/ccache_%u</term>
+                                        <listitem><para>これは書き込みのみの認証情報
+					キャッシュファイルを作成する。</para></listitem>
+                        </varlistentry>
+		</variablelist>
+
+		<para>空にした場合、ログオン成功後に、チケットキャッシュなしで Kerberos 認証を行う。
+		この設定は既定値で 空 である。</para>
+		</listitem>
 		</varlistentry>
 
 		<varlistentry>
@@ -175,31 +211,31 @@
 		<listitem><para>
 		    Winbindは、<parameter>winbind offline logon</parameter>が有効な
 		    時に、キャッシュされた認証情報を使ってログオンすることを許可する。
-		    PAMモジュールからこの機能を使うために、このオプションは設定されねば
-		    ならない。既定値は"no"である。
+		    PAM モジュールからこの機能を使うために、このオプションは設定されねば
+		    ならない。既定値は "no" である。
 		</para></listitem>
 		</varlistentry>
 
 		<varlistentry>
 		<term>silent = yes|no</term>
 		<listitem><para>
-		    どんなメッセージも出さない。既定値は"no"である。
+		    どんなメッセージも出さない。既定値は "no" である。
 		</para></listitem>
 		</varlistentry>
 
 		<varlistentry>
 		<term>mkhomedir = yes|no</term>
 		<listitem><para>
-		    動的にユーザーのホームディレクトリを作成する。オプションはPAM session
-		    ブロックで有効である。既定値は"no"である。
+		    動的にユーザーのホームディレクトリを作成する。オプションは
+		    PAM session ブロックで有効である。既定値は "no" である。
 		</para></listitem>
 		</varlistentry>
 
 		<varlistentry>
 		<term>warn_pwd_expire = days</term>
 		<listitem><para>
-		    パスワードが満了する前にpam_passwordが警告を発する時刻を日単位で
-		    指定する。既定値は14日である。
+		    パスワードが満了する前に pam_password が警告を発する時刻を日単位で
+		    指定する。既定値は 14日である。
 		</para></listitem>
 		</varlistentry>
 
@@ -257,8 +293,8 @@
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.16.0 - 4.24.0 に対応する。</para>
-	<para>Samba 3.5.0 - 4.24.0 対応の翻訳は、太田俊哉 (ribbon@samba.gr.jp) によって行なわれた。</para>
+	<para>このマニュアルページは Samba 4.25.0 - 4.25.0 に対応する。</para>
+	<para>Samba 3.5.0 - 4.25.0 対応の翻訳は、太田俊哉 (ribbon@samba.gr.jp) によって行なわれた。</para>
 </refsect1>
 
 </refentry>
