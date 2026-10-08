@@ -28,7 +28,7 @@
                 <arg choice="opt">-q, --quiet</arg>
                 <arg choice="opt">-v, --verbose</arg>
                 <arg choice="opt">-b, --blocksize</arg>
-                <arg choice="opt">-O, --stdout</arg>
+                <arg choice="opt">--stdout</arg>
                 <arg choice="opt">-u, --update</arg>
                 <arg choice="opt">-e, --encrypt</arg>
                 <arg choice="opt">--limit-rate=INT</arg>
@@ -111,13 +111,15 @@ smbget は SMB サーバーからファイルをダウンロードできる、wg
 	<varlistentry>
 		<term>-o, --outputfile</term>
 		<listitem><para>
-出力ファイル名として別のファイル名を指定する。-R と同時には指定できない。
+		  出力ファイル名として別のファイル名を指定する。
+		  --recursive または --stdout と同時には指定できない。
 		</para></listitem>
 	</varlistentry>
 
         <varlistentry>
                 <term>--stdout</term>
                 <listitem><para>ダウンロードしたファイルを標準出力に出力する。
+		--recursive または -o、 --outputfile と同時には指定できない。
 		</para></listitem>
         </varlistentry>
 
@@ -192,7 +194,7 @@ smbget --resume smb://rhonwyn/isos/FreeBSD5.1.iso
 # すべての ISO ファイルをダウンロード
 smbget --recursive --resume smb://rhonwyn/isos
 # データを rhonwyn にバックアップ
-smbget --recursive -resume smb://rhonwyn/
+smbget --recursive --resume smb://rhonwyn/
 </programlisting>
 
 </refsect1>
@@ -230,8 +232,8 @@ smbget --recursive -resume smb://rhonwyn/
 
 <refsect1>
 	<title>日本語訳</title>
-	<para>このマニュアルページは Samba 4.19.0 - 4.24.0 に対応する。</para>
-		<para>このドキュメントの Samba 3.2.4 - 4.24.0 対応の翻訳は
+	<para>このマニュアルページは Samba 4.25.0 - 4.25.0 に対応する。</para>
+		<para>このドキュメントの Samba 3.2.4 - 4.25.0 対応の翻訳は
 	<itemizedlist>
 		<listitem><para>堀田 倫英(hotta@net-newbie.com)</para></listitem>
 		<listitem><para>太田俊哉(ribbon@samba.gr.jp)</para></listitem>
