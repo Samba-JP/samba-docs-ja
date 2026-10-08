@@ -48,6 +48,7 @@
 		<arg choice="opt">-V|--version</arg>
 		<arg choice="opt">--libexec-rpcds</arg>
 		<arg choice="opt">--np-helper</arg>
+		<arg choice="opt">--np-only</arg>
 		<arg choice="opt">--ready-signal-fd=&lt;fd&gt;</arg>
 		<arg choice="opt">&lt;SERVICE_1&gt;</arg>
 		<arg choice="opt">&lt;SERVICE_2&gt;</arg>
@@ -173,6 +174,14 @@
 		</varlistentry>
 
 		<varlistentry>
+		 <term>--np-only</term>
+		 <listitem><para>Run <command>samba-dcerpcd</command>
+		 デーモンとして --np-helper を使用しない場合、--np-only
+		 オプションは ncacn_np サービスにのみバインドされる。
+		 </para></listitem>
+		</varlistentry>
+
+		<varlistentry>
 		<term>--ready-signal-fd=&lt;fd&gt;</term>
 		<listitem><para>このfdを使用して、サービスの準備状況を
 		<command>smbd</command> または <command>winbind</command> に
@@ -192,7 +201,7 @@
 
 <refsect1>
         <title>日本語訳</title>
-        <para>このドキュメントは、Samba 4.24.0 - 4.24.0 に対応する。</para>
+        <para>このドキュメントは、Samba 4.25.0 - 4.25.0 に対応する。</para>
     <para>このドキュメントの翻訳は
         <itemizedlist>
         <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
