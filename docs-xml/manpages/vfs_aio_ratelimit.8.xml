@@ -12,7 +12,7 @@
 
 <refnamediv>
 	<refname>vfs_aio_ratelimit</refname>
-	<refpurpose>Samba用の非同期I/Oレートリミットの実装</refpurpose>
+	<refpurpose>クラスタ全体の調整を行なう Samba 用の非同期 I/O レートリミットの実装</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -44,7 +44,12 @@
 	</para>
 
 	<para>
-	このモジュールは非同期 VFS READ/WRITE 操作のみで動作する。
+	  このモジュールは非同期 VFS READ/WRITE 操作のみで動作する。
+	  <emphasis role="bold">クラスタサポート:</emphasis>
+	  Samba でクラスタリングが有効になっている場合、クラスタ全体のレート
+	  制限は既定値によって自動的に有効になる。各共有に設定されているレート
+	  制限は、クラスタ全体のその共有に適用される。異なる共有に対する制限は、
+	  互いに独立して追跡および適用される。
 	</para>
 
 	<para>このモジュールはスタック可能である。</para>
@@ -61,6 +66,35 @@
 	<smbconfoption name="vfs objects">aio_ratelimit</smbconfoption>
 </programlisting>
 
+        <para>クラスタデプロイの例 (クラスタ全体での制限):</para>
+
+<programlisting>
+        <smbconfsection name="[global]"/>
+        <smbconfoption name="clustering">yes</smbconfoption>
+
+        <smbconfsection name="[shared-storage]"/>
+        <smbconfoption name="path">/mnt/shared</smbconfoption>
+        <smbconfoption name="vfs objects">aio_ratelimit</smbconfoption>
+        <smbconfoption name="aio_ratelimit:read_iops_limit">10000</smbconfoption>
+        <smbconfoption name="aio_ratelimit:write_bw_limit">1G</smbconfoption>
+</programlisting>
+
+        <para>10000 IOPS と 1G バンド幅 制限がクラスタ全体に適用される。</para>
+
+        <para>ノード単位の制限を行なうクラスタのデプロイ:</para>
+
+<programlisting>
+        <smbconfsection name="[global]"/>
+        <smbconfoption name="clustering">yes</smbconfoption>
+
+        <smbconfsection name="[shared-storage]"/>
+        <smbconfoption name="path">/mnt/shared</smbconfoption>
+        <smbconfoption name="vfs objects">aio_ratelimit</smbconfoption>
+        <smbconfoption name="aio_ratelimit:read_iops_limit">10000</smbconfoption>
+</programlisting>
+
+        <para>各ノードは独立して 10000 IOPS の制限が強制される。</para>
+
 </refsect1>
 
 <refsect1>
@@ -74,6 +108,12 @@
 		  遅延を挿入するまでの 1 秒当たりのREAD操作の上限。
 		  0 は制限がないことを意味する。
 		</para>
+                <para>
+		  クラスタノードでは、これは全てのノードに対して強制される
+		  <emphasis>グローバルな制限</emphasis>である。制限は
+		  自動的に、この共有上で I/O を実行しているすべての
+		  アクティブな smbd プロセスに均等に分配される。
+                </para>
 		<para>既定値: 0, Max: 1000000</para>
 		<para>例: aio_ratelimit:read_iops_limit = 1000</para>
 		</listitem>
@@ -87,6 +127,12 @@
 		  0 は制限がないことを意味する。サイズ接尾辞(K, M, G, T)が
 		  サポートされる。
 		</para>
+                <para>
+		  クラスタノードでは、これは全てのノードに対して強制される
+		  <emphasis>グローバルな制限</emphasis>である。制限は
+		  自動的に、この共有上で I/O を実行しているすべての
+		  アクティブな smbd プロセスに均等に分配される。
+                </para>
 		<para>既定値: 0, Max: 1T</para>
 		<para>例: aio_ratelimit:read_bw_limit = 2M</para>
 		</listitem>
@@ -125,6 +171,12 @@
 		  0 は制限がないことを意味する。サイズ接尾辞(K, M, G, T)が
 		  サポートされる。
 		</para>
+                <para>
+		  クラスタノードでは、これは全てのノードに対して強制される
+		  <emphasis>グローバルな制限</emphasis>である。制限は
+		  自動的に、この共有上で I/O を実行しているすべての
+		  アクティブな smbd プロセスに均等に分配される。
+                </para>
 		<para>既定値: 0, Max: 1T</para>
 		<para>例: aio_ratelimit:write_bw_limit = 1M</para>
 		</listitem>
@@ -144,6 +196,55 @@
 		</varlistentry>
 
 	</variablelist>
+</refsect1>
+
+<refsect1>
+        <title>クラスタでの動作</title>
+
+        <para>
+	  Samba クラスタリングが有効になっている場合、クラスタ全体の
+	  レート制限は既定で自動的に有効になる。設定された制限は、
+	  個々のノードではなく<emphasis>クラスタ全体に</emphasis>
+	  適用される。これは <command>--with-ratelimitd</command> が
+	  ビルド時に有効なっている <command>ratelimitd</command>
+	  デーモンを要求する。
+        </para>
+
+<programlisting>
+        <smbconfsection name="[share]"/>
+        <smbconfoption name="aio_ratelimit:read_iops_limit">1000</smbconfoption>
+</programlisting>
+
+        <para>
+	  クラスタモードが有効な場合 (クラスタリングがアクティブな場合は
+	  既定値)、モジュールはその共有上のアクティブな接続間で帯域幅を
+	  自動的に分散する。
+          たとえば、1000 IOPS 制限になっている場合は:
+        </para>
+        <itemizedlist>
+                <listitem>
+                        <para>4 つの有効な接続 → 各々 ~250 IOPS</para>
+                </listitem>
+                <listitem>
+                        <para>10 の有効な接続 → 各々 ~100 IOPS</para>
+                </listitem>
+                <listitem>
+                        <para>クラスタ全体のスループット: 自動的に 1000 IOPS に制限</para>
+                </listitem>
+        </itemizedlist>
+
+        <para>
+          分散は、接続が確立されたり閉じられたりするときに自動的に行われる。
+        </para>
+
+        <note>
+                <para>
+                  よりアクティブな接続を持つノードは、当然、より多くの総帯域幅を
+		  使用する。これにより、クラスタ全体で接続ごとの公平な割り当て
+		  が保証される。
+                </para>
+        </note>
+
 </refsect1>
 
 <refsect1>
@@ -204,7 +305,7 @@
 
 <refsect1>
         <title>日本語訳</title>
-        <para>このドキュメントは、Samba 4.24.0 - 4.24.0 に対応する。</para>
+        <para>このドキュメントは、Samba 4.25.0 - 4.25.0 に対応する。</para>
     <para>このドキュメントの翻訳は
                 <itemizedlist>
                         <listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
