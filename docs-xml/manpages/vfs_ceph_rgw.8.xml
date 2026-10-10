@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE refentry PUBLIC "-//Samba-Team//DTD DocBook V4.2-Based Variant V1.0//EN" "http://www.samba.org/samba/DTD/samba-doc">
+<refentry id="vfs_ceph_rgw.8" lang="ja">
+
+<refmeta>
+	<refentrytitle>vfs_ceph_rgw</refentrytitle>
+	<manvolnum>8</manvolnum>
+	<refmiscinfo class="source">Samba</refmiscinfo>
+	<refmiscinfo class="manual">システム管理ツール</refmiscinfo>
+	<refmiscinfo class="version">&doc.version;</refmiscinfo>
+</refmeta>
+
+
+<refnamediv>
+	<refname>vfs_ceph_rgw</refname>
+	<refpurpose>
+		ceph librgw が提供するオブジェクトストア上で smb を使用
+	</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+	<cmdsynopsis>
+		<command>vfs objects = ceph_rgw</command>
+	</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+	<title>説明</title>
+
+	<para>この VFS モジュールは
+	<citerefentry><refentrytitle>samba</refentrytitle>
+	<manvolnum>8</manvolnum></citerefentry> システムの一部である。</para>
+
+	<para>
+	  The <command>vfs_ceph_rgw</command> VFS モジュールは、
+	  ceph-rgw がホストする s3 バケットをユーザに公開する。
+	</para>
+
+	<para>
+		Ceph は、優れたパフォーマンス、信頼性、およびスケーラビリティを
+		提供するように設計された分散ネットワークファイルシステムである。
+		librgw は、アプリケーションが POSIX のようなインターフェースを
+		介して s3 bucket などのオブジェクトストアにアクセスできるように
+		する共有ライブラリである。
+	</para>
+
+	<para>
+	  このモジュールは他のモジュールと一緒にできない。
+
+	  libgw はディレクトリの改名をサポートしていない。そのため、
+	  そのため、モジュールは内部的に以下のことを保証する:
+	  <smbconfoption name="vfs mkdir use tmp name">no</smbconfoption>
+	  これは、Samba に、ディレクトリの作成時に一時的な名前を使用せず、
+	  指定された名前に変更する。
+
+	  librgw はランダム書き込みをサポートしていないため、
+	  非同期 io 書き込みメソッドは実装していない。したがって、
+	  モジュールは内部的に次のことを保証する。
+	  <smbconfoption name="aio write size">0</smbconfoption>
+	  これは、は常に同期書き込みメソッドを使用する。
+
+	</para>
+
+</refsect1>
+
+<refsect1>
+	<title>設定</title>
+
+	<para>
+	  <command>vfs_ceph_rgw</command> は、基礎となる
+	  共有パスが s3 bucket 名であることを要求する。
+	</para>
+
+	<programlisting>
+		<smbconfsection name="[share]"/>
+		<smbconfoption name="vfs objects">ceph_rgw</smbconfoption>
+		<smbconfoption name="path">/</smbconfoption>
+	</programlisting>
+
+	<para>
+	  <command>vfs_ceph_rgw</command> はファイルシステムのマウントを必要と
+	  しないため、共有 <command>/</command> はバケットのルートとして扱わ
+	  れ、'/'に設定する必要がある。その他のパスは無視される。
+
+	  ctdb によって Samba が管理される ctdb クラスタでは、ローカル共有
+	  パスのチェックを無効にするように
+	  <command>CTDB_SAMBA_SKIP_SHARE_CHECK=yes</command> を設定する必要が
+	  ありる。そうしないと、ctdb は正常な状態にならない。
+	</para>
+
+</refsect1>
+
+<refsect1>
+	<title>グローバルオプション</title>
+
+	<para>次のオプションは、グローバル smb.conf セクションで設定する必要が
+	あり、共有ごとに設定した場合は有効にならない。librgw はプロセスごとに
+	1回しか初期化できないため、これらのパラメータはすべての共有で共有
+	される。</para>
+
+	<variablelist>
+
+		<varlistentry>
+		<term>ceph_rgw:id = name</term>
+		<listitem>
+		<para>
+		  librgw が使用する Ceph クライアント名の
+		  クライアント ID 部分。(必須)
+		</para>
+		<para>
+			例: ceph_rgw:id = admin
+		</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>ceph_rgw:config_file = path</term>
+		<listitem>
+		<para>
+			使用する ceph 設定ファイルを指定する。
+			既定値:
+			/etc/ceph/ceph.conf
+		</para>
+		<para>
+			例: ceph_rgw:config_file =
+			/etc/ceph/ceph.conf
+		</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>ceph_rgw:keyring_file = path</term>
+		<listitem>
+		<para>
+		  使用する ceph キーリングファイルを指定する。
+		  (必須)
+		</para>
+		<para>
+			例: ceph_rgw:keyring_file =
+			/etc/ceph/ceph.client.admin.keyring
+		</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>ceph_rgw:debug = boolean</term>
+		<listitem>
+		<para>
+			librgw のデバッグログを制御する。
+			既定値: off
+		</para>
+		<para>
+			例: ceph_rgw:debug = on
+		</para>
+		</listitem>
+		</varlistentry>
+
+	</variablelist>
+
+</refsect1>
+
+<refsect1>
+	<title>オプション</title>
+
+	<para>共有ごとに以下のオプションが設定できる。</para>
+
+	<variablelist>
+
+		<varlistentry>
+		<term>ceph_rgw:user_id = name</term>
+		<listitem>
+		<para>
+			bucket オーナのユーザ ID.
+			(必須)
+		</para>
+		<para>
+			例: ceph_rgw:user_id = samba
+		</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>ceph_rgw:access_key = key</term>
+		<listitem>
+		<para>
+		  user_id オプションで指定された bucket オーナ用の
+		  アクセスキー。(必須)
+		</para>
+		<para>
+			例: ceph_rgw:access_key = samba-key
+		</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>ceph_rgw:secret_access_key = key</term>
+		<listitem>
+		<para>
+		  user_id オプションで指定された bucket オーナ用の
+		  秘密アクセスキー。(必須)
+		</para>
+		<para>
+		  例: ceph_rgw:secret_access_key = samba-secret-key
+		</para>
+		</listitem>
+		</varlistentry>
+
+		<varlistentry>
+		<term>ceph_rgw:bucket = bucket name</term>
+		<listitem>
+		<para>
+			共有としてエクスポートするための bucket 名。
+			(必須)
+		</para>
+		<para>
+			例: ceph_rgw:bucket = video4k
+		</para>
+		</listitem>
+		</varlistentry>
+
+	</variablelist>
+
+</refsect1>
+
+<refsect1>
+	<title>設定例</title>
+
+	<para>
+	  このモジュールを使用するように Samba を設定するには、
+	  動作中の ceph クラスタにアクセスする必要がある。次のサンプルは、
+	  既存の ceph rgw オブジェクトストア用の動作中 の Samba 設定を
+	  提供し、それには bucket 内に既存のユーザ、bucket、および
+	  オブジェクトがある。
+
+		<orderedlist continuation="restarts" inheritnum="ignore" numeration="arabic">
+		<listitem><para>
+			Install librgw-devel package
+		</para></listitem>
+		<listitem><para>
+			clone samba sources
+		</para></listitem>
+		<listitem><para>
+			configure samba as compile with option "--enable-cephrgw" along with
+			usual configuration options. Compile and install.
+		</para></listitem>
+		<listitem>
+		<para>
+			smb.confを編集して、次の共有定義を含める。
+			注意: パスは '/' に設定しなければならない。その他のパ
+			スは無視される。
+		</para>
+		<para>
+			<programlisting>
+			<smbconfsection name="[global]"/>
+			<smbconfoption name="ceph_rgw:id">admin</smbconfoption>
+			<smbconfoption name="ceph_rgw:config_file">/etc/ceph/ceph.conf</smbconfoption>
+			<smbconfoption name="ceph_rgw:keyring_file">/etc/ceph/ceph.client.admin.keyring</smbconfoption>
+
+			<smbconfsection name="[share]"/>
+			<smbconfoption name="comment">rgw bucket</smbconfoption>
+			<smbconfoption name="path">/</smbconfoption>
+			<smbconfoption name="read only">no</smbconfoption>
+			<smbconfoption name="inherit permissions">yes</smbconfoption>
+			<smbconfoption name="vfs objects">ceph_rgw</smbconfoption>
+			<smbconfoption name="ceph_rgw:bucket">my-bucket</smbconfoption>
+			<smbconfoption name="ceph_rgw:user_id">user1</smbconfoption>
+			<smbconfoption name="ceph_rgw:access_key">user1passwd</smbconfoption>
+			<smbconfoption name="ceph_rgw:secret_access_key">user1passwd</smbconfoption>
+			</programlisting>
+		</para>
+		</listitem>
+		<listitem><para>
+			Start samba server
+		</para></listitem>
+		</orderedlist>
+	</para>
+</refsect1>
+
+<refsect1>
+	<title>バージョン</title>
+
+	<para>
+		このマニュアルページは Samba バージョン &doc.version; 用である。
+	</para>
+</refsect1>
+
+<refsect1>
+	<title>著者</title>
+
+	<para>オリジナルの Samba ソフトウェアと関連するユーティリティは、Andrew
+	Tridgell によって作成された。現在 Samba は Samba Team に
+	よって、Linux カーネルの開発と同様のオープンソースプロジェクト
+	として開発が行なわれている。</para>
+
+</refsect1>
+<refsect1>
+	<title>日本語訳</title>
+	<para>このドキュメントは、Samba 4.25.0 - 4.25.0 に対応する。</para>
+	<para>このドキュメントの翻訳は
+		<itemizedlist>
+			<listitem><para>太田俊哉 (ribbon@samba.gr.jp)</para></listitem>
+		</itemizedlist>
+        によって行なわれた。</para>
+</refsect1>
+
+</refentry>
