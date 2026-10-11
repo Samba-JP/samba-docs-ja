@@ -1,0 +1,20 @@
+<samba:parameter name="continuous availability"
+                 context="S"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+    <para>
+      この真偽値パラメータは、共有が継続的に使用可能であるかどうかを制御し、
+      透過的フェイルオーバーを有効にする。
+    </para>
+    <para>
+      このオプションとその使用方法の詳細については、
+      <smbconfoption name="persistent handles"/> の説明を確認のこと。
+    </para>
+    <para>
+      警告:この機能はまだ実験的であると考えられていることに注意。
+    </para>
+</description>
+
+<value type="default">no</value>
+</samba:parameter>

@@ -1,0 +1,94 @@
+<samba:parameter name="persistent handles"
+                 context="G"
+                 type="boolean"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+    <para>
+      この真偽値パラメータは、Samba が永続的ハンドルをサポートするか
+      どうかを制御する。
+    </para>
+
+    <para>
+      <smbconfoption name="persistent handles"/> オプションを使用すると、
+      Samba による SMB3 永続ハンドルのサポートが有効になる。これは、
+      SMB クライアントが、サーバーの再起動または停止時に有効なファイルハンドルを
+      保持できるようにするメカニズムである。有効にすると、Samba は関連する
+      すべてのファイルハンドル状態を永続的なディスク上のデータベースに格納し、
+      クライアントの再接続時にハンドルを再構築できるようにする。
+    </para>
+    <para>
+      永続ハンドルは、
+      Note that persistent handles are only enabled if
+      <smbconfoption name="kernel oplocks">no</smbconfoption>,
+      <smbconfoption name="kernel share modes">no</smbconfoption>, と
+      <smbconfoption name="posix locking">no</smbconfoption>,
+      すなわち、共有が CIFS/SMB2 のみのアクセス用に構成されており、ローカルの
+      UNIX プロセスまたは NFS 操作との相互運用機能がサポートされていない
+      場合にのみ有効であることに注意。
+    </para>
+    <para>
+      永続ハンドルは、サーバ側に障害が発生した場合でも、I/O 操作が有効で
+      あることをアプリケーションが期待する、継続的可用性 (CA) ワークロードの
+      基本的な構成要素である。
+    </para>
+    <para>
+      このオプションは、Samba がグローバルサーバー機能
+      <constant>SMB2_CAP_PERSISTENT_HANDLES</constant> と永続ハンドルが
+      内部的に有効であることを通知するかどうかを制御する。クライアントが
+      特定の共有で永続ハンドルを実際に使用するには、共有ごとのオプション
+      <smbconfoption name="continuous availability"/> も設定する必要がある。
+    </para>
+    <para>
+      典型的な使用例は以下の通り:
+    </para>
+    <itemizedlist>
+      <listitem>
+	<para>SMB3 を介して VM ディスクをホストおよびアクセス</para>
+      </listitem>
+      <listitem>
+	<para>データベースまたはクラスタ化されたアプリケーションストレージ</para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      この機能を有効にすると、パフォーマンスに重大な影響がある:
+    </para>
+    <itemizedlist>
+      <listitem>
+	<para>すべてのファイルハンドルの状態は、揮発性メモリやクラスタ化された
+	データベースに格納されるだけでなく、ディスク上に保持される必要がある。
+	その結果、ハンドルの作成、更新、およびクローズイベントごとに
+	同期 I/O が増加する。</para>
+      </listitem>
+      <listitem>
+	<para>特に負荷が高い場合、open、lease、およびhandle update操作の
+	待ち時間が非常に長くなる。</para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      継続的可用性を必要としない環境では、このオプションを無効のままに
+      しておくと便利である。
+    </para>
+    <para>
+      推奨する設定方法:
+    </para>
+    <itemizedlist>
+      <listitem>
+	<para><smbconfoption name="persistent handles"/> を使用可能にするのは、
+	SMB3 の継続的な使用可能セマンティクスが必要な場合のみである。</para>
+      </listitem>
+      <listitem>
+	<para>次に、永続的ハンドルをサポートする必要がある特定の共有で
+	<smbconfoption name="continuous availability"/> を有効にする。</para>
+      </listitem>
+      <listitem>
+	<para> CA のセマンティクスよりもパフォーマンスが優先される
+	汎用ファイルサーバのワークロードでは、このオプションを無効のまにする。</para>
+      </listitem>
+    </itemizedlist>
+    <para>
+    警告:この機能はまだ実験的であると考えられていることに注意。
+    </para>
+</description>
+
+<value type="default">no</value>
+</samba:parameter>
