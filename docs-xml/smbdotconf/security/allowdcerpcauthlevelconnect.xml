@@ -1,6 +1,7 @@
 w<samba:parameter name="allow dcerpc auth level connect"
                  context="G"
                  type="boolean"
+		 deprecated="1"
                  xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
 <description>
         <para>このオプションは、DCERPC サービスが、認証を提供するが、
@@ -20,9 +21,11 @@ w<samba:parameter name="allow dcerpc auth level connect"
 	drsuapi と backupkey プロトコルは DCERPC_AUTH_LEVEL_PRIVACY を必要とする。
 	dnsserver プロトコルは DCERPC_AUTH_LEVEL_INTEGRITY を必要とする。
 	</para>
+	<para>このオプションは使うべきではない。これは CVE-2016-2118 に関連して
+	いる。将来のリリースでは削除される予定である。
+d in future releases.</para>
 </description>
 
 <value type="default">no</value>
-<value type="example">yes</value>
 
 </samba:parameter>

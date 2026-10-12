@@ -1,0 +1,42 @@
+<samba:parameter name="persistent handles durability"
+                 context="G"
+                 type="enum"
+                 enumlist="enum_ph_durability_vals"
+                 xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+<description>
+    <para>
+      このパラメータは、SMB3 永続ハンドルが存続すると予想される停止の度合いを
+      選択する。これは、<smbconfoption name="persistent handles"/> が有効で、
+      Samba がクラスタ化されている場合にのみ有効である。
+    </para>
+
+    <para>
+      既定値である <emphasis>full_outage</emphasis> を使用すると、Samba は
+      さらに、2番目の永続的な ctdb データベースに、ハンドル状態の永続的な
+      バックアップコピーを保持する。ハンドルは、計画的か計画外かにかかわらず、
+      すべてのノードが同時に停止しても存続する。クラスタ全体がシャットダウン
+      されて再起動されるメンテナンス期間中では、揮発性データベースが失われ
+      るが、クラスタが復帰ときにハンドル状態はバックアップから復元される。
+    </para>
+
+    <para>
+      <emphasis>partial_outage</emphasis> では、そのバックアップデータベースは
+      使用されなd。クラスタのすべてのノードでハンドルの状態が保持されるため、
+      ハンドルは、ノードのクラッシュ、ローリング再起動および 1つを除くすべての
+      ノードの損失を含む、少なくとも 1つのノードが実行中のままになる停止には
+      対応する。すべてのノードが同時に停止した場合、ハンドルは失われる。
+    </para>
+
+    <para>
+      バックアップデータベースにはコストがかかる。永続ハンドルの状態を変更する
+      たびに、追加のクラスタ全体のトランザクションというコストがかかり、
+      そのトランザクションはすべてのノードの安定したストレージに書き込まれるため、
+      ノードごとに fsync が必要になる。クラスタの完全なシャットダウンを維持
+      するためにハンドルを必要としないサイトは、
+      <emphasis>partial_outage</emphasis> を設定してそのコストを回避できる。
+    </para>
+</description>
+
+<value type="default">full_outage</value>
+<value type="example">partial_outage</value>
+</samba:parameter>
