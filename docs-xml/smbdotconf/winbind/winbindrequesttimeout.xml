@@ -9,6 +9,18 @@
        ここで指定した秒数よりも長くクライアント接続要求が処理状態
        (ハングアップ)になっている時に、切断するまで待つ秒数を指定する。
        </para>
+
+       <para>winbind クライアントはシステム上のローカルなプログラムで、
+       winbindd にユーザーやグループの情報を問い合わせたり、ユーザーを
+       認証したりする。一般的な例は以下の通り
+       <citerefentry><refentrytitle>wbinfo</refentrytitle>
+       <manvolnum>1</manvolnum></citerefentry>,
+       <citerefentry><refentrytitle>smbd</refentrytitle>
+       <manvolnum>8</manvolnum></citerefentry>,
+       <citerefentry><refentrytitle>pam_winbind</refentrytitle>
+       <manvolnum>8</manvolnum></citerefentry>, and
+       <citerefentry><refentrytitle>nss_winbind</refentrytitle>
+       <manvolnum>8</manvolnum></citerefentry>.</para>
 </description>
 
 <value type="default">60</value>
