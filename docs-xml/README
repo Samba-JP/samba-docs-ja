@@ -1,6 +1,6 @@
 		Sambaドキュメントの日本語訳版について
 
-						2026/10/08
+						2026/10/15
 						日本Sambaユーザー会
 
 
@@ -129,11 +129,19 @@ manpages、html、htmlman が実行可能になります。これ以外にも ma
 ======================================================================
 XMLのパラメータや原文 typo のみの修正(翻訳に影響なし)については、記載を省略しています。
 
-2026/10/08 Ver 4.25.0-1 4.25.0 対応
+2026/10/15 Ver 4.25.0-1 4.25.0 対応
 	   net.8.xml,pam_winbind.8.xml,pam_winbind.conf.5.xml,
-	   samba-dcerpcd.8.xml
+	   samba-dcerpcd.8.xml,smbget.1.xml, vfs_aio_ratelimit.8.xml,
+	   vfs_full_audit.8.xml,
+	   printing/printcommand.xml,security/allowdcerpcauthlevelconnect.xml,
+	   security/checkpasswordscript.xml,vfs/vfsmkdirusetmpname.xml,
+	   winbind/winbindreconnectdelay.xml,winbind/winbindrequesttimeout.xml
 	   変更
+	   vfs_ceph_rgw.8.xml,
+	   misc/automountfstypes.xml,protocol/continuousavailability.xml,
+	   protocol/persistenthandles.xml,protocol/persistenthandlesdurability.xml
 	   追加
+	   tuning/getwdcache.xml
 	   削除
 
 ======================================================================

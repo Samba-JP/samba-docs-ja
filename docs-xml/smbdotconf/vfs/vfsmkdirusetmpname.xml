@@ -19,8 +19,8 @@
 
 	<para>
 	このオプションは、一時ディレクトリ名の使用を制御する列挙型である。
-	これを<constant>yes</constant> に設定すると、ディレクトリ名の前に
-	'.::TMPNAME:D:$SERVERID:'が付く($SERVERIDは現在のプロセスの一意の識別子)。
+	これを<constant>yes</constant> に設定すると、一時ディレクトリ名は
+	'.::TMPNAME:D:$SERVERID:' という形式になる($SERVERIDは現在のプロセスの一意の識別子)。
 	</para>
 
 	<para>

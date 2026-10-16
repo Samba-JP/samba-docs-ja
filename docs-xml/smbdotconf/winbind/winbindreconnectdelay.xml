@@ -3,9 +3,12 @@
 		 type="integer"
                  xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
 <description>
-	<para>このパラメーターは<citerefentry><refentrytitle>winbindd</refentrytitle>
-	<manvolnum>8</manvolnum></citerefentry>デーモンがドメインコントローラー
-	に接続できない場合に再接続要求を行う間隔を秒単位で指定する。
+  <para>
+    このパラメータは、オフラインとマークされたドメインのドメインコントローラへの
+    ping 試行間で    <citerefentry><refentrytitle>winbindd</refentrytitle>
+    <manvolnum>8</manvolnum></citerefentry> デーモンが待機する秒数を指定する。
+    ドメインがオフラインの場合、winbindd は定期的にドメインコントローラへの接
+    続を試行し、ドメインコントローラが再び使用可能になったかどうかを確認する。
 	</para>
 	
 	
